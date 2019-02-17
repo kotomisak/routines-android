@@ -3,6 +3,9 @@ package cz.kotox.routines.di
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
 import cz.kotox.routines.AppOnScreenNavApplication
 import cz.kotox.routines.core.di.Injectable
 import dagger.android.AndroidInjection
@@ -59,9 +62,9 @@ object AppInjector {
 		if (activity is HasSupportFragmentInjector) {
 			AndroidInjection.inject(activity)
 		}
-		(activity as? androidx.fragment.app.FragmentActivity)?.supportFragmentManager?.registerFragmentLifecycleCallbacks(
-			object : androidx.fragment.app.FragmentManager.FragmentLifecycleCallbacks() {
-				override fun onFragmentPreCreated(fm: androidx.fragment.app.FragmentManager, f: androidx.fragment.app.Fragment, savedInstanceState: Bundle?) {
+		(activity as? FragmentActivity)?.supportFragmentManager?.registerFragmentLifecycleCallbacks(
+			object : FragmentManager.FragmentLifecycleCallbacks() {
+				override fun onFragmentPreCreated(fm: FragmentManager, f: Fragment, savedInstanceState: Bundle?) {
 					if (f is Injectable) {
 						AndroidSupportInjection.inject(f)
 					}

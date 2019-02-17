@@ -26,6 +26,6 @@ interface AppComponent {
 		fun build(): AppComponent
 	}
 
-	fun inject(codeCoverageApplication: AppOnScreenNavApplication)
+	fun inject(appOnScreenNavApplication: AppOnScreenNavApplication)
 
 }
