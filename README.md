@@ -1,5 +1,5 @@
 # routines-android
-Reusable scalable decoupled blocks useful for building android app.
+Reusable scalable decoupled blocks useful for building Android app.
 
 # Licence
 Feel free to use this code, add star if you like it or find it useful.
@@ -8,7 +8,7 @@ Thus licence is set as [MIT](LICENSE) .  Enjoy!
 
 # The idea behind
 Every time I play with some specific feature or programming approach, such feature was always either thrown or implanted to some app without future.  
-This time, there is an idea to bundle such feature/approach to separated module/app template - and to be reusable in case you want to use it in some app.
+This time, there is an idea to bundle such feature/approach to separated module or app_template - and to be reusable in case you want to use it for some specific app.
 
 # Steps to build this project
 - Use Android Studio 3.5 Canary4 and newer
@@ -16,11 +16,11 @@ This time, there is an idea to bundle such feature/approach to separated module/
 - rename files in *extras/keystore* folder to have names just as this: *routines.properties* / *routines.jks*
 
 # Structure
-This project contains apps and modules.  
-It does not matter which architecture (MVVM/MVI/...) or framework (Android native/Flutter/...) is used for it.
-Modules should be reusable in provided apps.
-Every app/module should have it's own README.MD to describes detailed info about it (and it's usage).
-All mentioned has common external dependency versions defined in root build.gradle
+This project contains apps and modules.   
+It does not matter which architecture (MVVM/MVI/...) or framework (Android native/Flutter/...) is used for it.  
+Modules should be reusable in provided apps.  
+Every app/module should have it's own README.MD to describes detailed info about it (and it's usage).  
+All mentioned has common external dependency versions defined in root build.gradle  
 
 	
 ## Apps
