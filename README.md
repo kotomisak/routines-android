@@ -12,7 +12,7 @@ Every time I play with some specific feature or programming approach, such featu
 This time, there is an idea to bundle such feature/approach to separated module or app_template - and to be reusable in case you want to use it for some specific app.
 
 # Steps to build this project
-- Use Android Studio 3.5 Canary4 and newer
+- Use Android Studio 3.5 Canary4 or newer
 - copy files from folder *extras/keystore_sample* to folder *extras/keystore* 
 - rename files in *extras/keystore* folder to have names just as this: *routines.properties* / *routines.jks*
 
