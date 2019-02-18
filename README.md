@@ -13,8 +13,8 @@ This time, there is an idea to bundle such feature/approach to separated module 
 
 # Steps to build this project
 - Use Android Studio 3.5 Canary4 or newer
-- copy files from folder *extras/keystore_sample* to folder *extras/keystore* 
-- rename files in *extras/keystore* folder to have names just as this: *routines.properties* / *routines.jks*
+- copy files from folder **extras/keystore_sample** to folder **extras/keystore** 
+- rename files in **extras/keystore** folder to have names just as this: **routines.properties** / **routines.jks**
 
 # Structure
 This project contains apps and modules.   
@@ -47,5 +47,5 @@ Is a set of supporting directories
 ### graphics
 Simple graphics to be used as base for launcher icon or banner for playstore.  
 ### keystore_sample
-Sample keystore with sample keystore content to be quickly used as development keystore for the project (see _Steps to build this project_ chapter)  
+Sample keystore with sample keystore content to be quickly used as development keystore for the project (see [Steps to build project](#Steps to build this project) chapter)  
 
