@@ -22,7 +22,7 @@ Modules should be reusable in provided apps.
 Every app/module should have it's own README.MD to describes detailed info about it (and it's usage).
 All mentioned has common external dependency versions defined in root build.gradle
 
-
+	
 ## Apps
 Every app is the minimal template to start create application of such type.
 
@@ -34,6 +34,12 @@ It's something like app just with screens and navigation using on screen navigat
 Modules are rather small UI/logic features to be reusable across all app templates of this project.
 Every module should be covered with UNIT/UI testing.
 
+### module-core
+Low level module containing really basic code (without feature dependencies) to be reusable across all other modules.
+
+
+### module-test-utils
+Low level test module containing really basic test code (without feature dependencies) to be reusable across all other test modules.
 
 ## Extras
 Is a set of supporting directories
