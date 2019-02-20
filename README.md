@@ -59,9 +59,9 @@ Let's start with UI testing of those applicationn parts, where UI is changing it
 Thank's God **Kotlin** is not only first class citizen in Android, but it's also official language to be used in Google.
 Thus despite many complains about maturity in comparison to Java, Kotlin has million cons over the Java from my point of view.
 
-In therms of hybrid apps development I prefer **Flutter** over Cordova/PhoneGap/ReactNative/...
-Even I don't like much **Dart** there is amazing idea in rendering engine over other mentioned. 
-And there is also type safety with Dart in comparison to Javascript, thus there is no other choice right now.
+In therms of hybrid apps development I prefer **Flutter** over Cordova/PhoneGap/ReactNative/...  
+Even when I don't like much **Dart** there is amazing idea in rendering engine over other mentioned.   
+And there is also type safety with Dart in comparison to Javascript, thus there is no other choice right now.  
 
 ## 2.7 Frameworks
 Frameworks are good to help with non-trivial features.  
