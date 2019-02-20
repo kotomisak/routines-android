@@ -115,7 +115,7 @@ Is a set of supporting directories
 ### graphics
 Simple graphics to be used as base for launcher icon or banner for playstore.  
 ### keystore_sample
-Sample keystore with sample keystore content to be quickly used as development keystore for the project. See [Steps to build project](#3.-Steps-to-build-this-project) chapter 
+Sample keystore with sample keystore content to be quickly used as development keystore for the project. See [Steps to build project](3.-Steps-to-build-this-project) chapter 
 
 # 5. Licence
 Feel free to use this code, add star if you like it or find it useful.  
