@@ -113,7 +113,7 @@ Low level test module containing really basic test code (without feature depende
 ## 4.3 Extras
 Is a set of supporting directories  
 ### graphics
-Simple graphics to be used as base for launcher icon or banner for playstore.  
+Simple graphics (prepared by Gimp) to be used as base for launcher icon or banner for playstore.  
 ### keystore_sample
 Sample keystore with sample keystore content to be quickly used as development keystore for the project. See [Steps to build project](#3-steps-to-build-this-project) chapter 
 
