@@ -9,7 +9,7 @@ This time, there is an idea to bundle such feature/approach to separated module 
 
 Diversity of approaches in Android development is awesome.
 There is many different architectures with their pros and cons.
-Let's mention just of them, those closest to my mind.
+Let's mention just those of them, which are closest to my mind.
 
 ## 2.1 Architecture
 MVx approach is good way how to achieve app closest to clean architecture.
