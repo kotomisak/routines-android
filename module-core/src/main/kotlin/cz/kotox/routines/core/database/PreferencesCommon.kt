@@ -1,7 +1,6 @@
 package cz.kotox.routines.core.database
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.SharedPreferences
 import cz.kotox.routines.core.OpenForMocking
 import javax.inject.Inject
@@ -10,7 +9,7 @@ import javax.inject.Singleton
 @Singleton
 @OpenForMocking
 class PreferencesCommon @Inject constructor(
-	val context: Context,
+	//val context: Context,
 	private val sharedPreferences: SharedPreferences
 ) {
 	companion object {

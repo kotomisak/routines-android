@@ -19,6 +19,7 @@
 buildscript {
 
 	ext {
+		project_directory = "${rootProject.projectDir}"
 
 		versions = [
 				'min_sdk'                  : 21,
@@ -35,13 +36,18 @@ buildscript {
 				'androidx_recyclerview'    : '1.1.0-beta01',
 				'androidx_gridlayout'      : '1.0.0',
 				'androidx_browser'         : '1.0.0',
-				'androidx_media'           : '1.1.0-rc01',
+				'androidx_media'           : '1.2.0-alpha01',
 				'androidx_lifecycle'       : '2.2.0',
 				'androidx_core_testing'    : '2.1.0-rc01',
 				'androidx_jetifier'        : '1.0.0-beta05',
 				'androidx_biometric'       : '1.0.0-beta01',
 				'androidx_preference'      : "1.1.0",
 				'androidx_databinding'     : '4.0.0-alpha09',
+
+				'ktx_core'                 : '1.0.2',
+				'ktx_fragment'             : '1.1.0-rc03',
+				'ktx_lifecycle'            : '2.2.0',
+				'ktx_collection'           : '1.1.0',
 
 				'rx_rxandroid'             : '2.1.1',
 				'rx_rxjava'                : '2.2.11',
@@ -81,9 +87,10 @@ buildscript {
 	}
 	dependencies {
 		classpath "com.android.tools.build:gradle:${versions.android_gradle}"
+		classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
 		classpath "org.jetbrains.kotlin:kotlin-allopen:${versions.kotlin}"
 		classpath "androidx.navigation:navigation-safe-args-gradle-plugin:${versions.android_navigation}"
-		classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
+		classpath "com.android.tools.build.jetifier:jetifier-processor:${versions.androidx_jetifier}"
 		// NOTE: Do not place your application dependencies here; they belong
 		// in the individual module build.gradle files
 	}
@@ -94,9 +101,6 @@ allprojects {
 		google()
 		maven {url 'https://maven.fabric.io/public'}
 		jcenter()
-		maven {
-			url "http://dl.bintray.com/kotlin/kotlin-eap"
-		}
 	}
 }
 

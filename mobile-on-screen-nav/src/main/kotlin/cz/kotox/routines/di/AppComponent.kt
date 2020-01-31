@@ -5,25 +5,27 @@ import cz.kotox.routines.UserInitializer
 import cz.kotox.routines.core.arch.ApplicationInterfaceContract
 import cz.kotox.routines.core.di.BaseComponent
 import cz.kotox.routines.core.di.BaseFeatureComponent
-import cz.kotox.routines.core.di.FeatureCoreModule
 import cz.kotox.routines.core.di.UserScope
 import cz.kotox.routines.core.entity.AppVersion
 import dagger.BindsInstance
 import dagger.Component
 import dagger.Module
 import dagger.Subcomponent
-import dagger.android.AndroidInjectionModule
-import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [
-	AndroidInjectionModule::class,
-	AndroidSupportInjectionModule::class,
-	FeatureCoreModule::class,
-	ViewModelModule::class,
-	AppOnScreenNavDaggerModule::class
-])
+@Component(
+	modules = [
+		BaseModule::class,
+		UserComponentModule::class,
+//		FeatureCoreModule::class,
+		ViewModelModule::class,
+		AppOnScreenNavDaggerModule::class
+	],
+	dependencies = [
+		BaseComponent::class
+	]
+)
 interface AppComponent {
 	@Component.Builder
 	interface Builder {
@@ -45,6 +47,13 @@ interface AppComponent {
 
 }
 
+@Module(subcomponents = [UserComponent::class])
+object UserComponentModule
+
+@Subcomponent(modules = [
+// feature modules
+	MobileModule::class
+])
 @UserScope
 interface UserComponent : BaseFeatureComponent {
 	@Subcomponent.Builder
@@ -54,7 +63,4 @@ interface UserComponent : BaseFeatureComponent {
 
 	fun userInitializer(): UserInitializer
 }
-
-@Module(subcomponents = [UserComponent::class])
-object UserComponentModule
 

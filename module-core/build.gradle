@@ -28,15 +28,28 @@ android {
 dependencies {
 	implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-	// Arch
+	api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${versions.kotlin}"
+
+	// androidx
+	api "androidx.constraintlayout:constraintlayout:${versions.androidx_constraintlayout}"
+	api "androidx.appcompat:appcompat:${versions.androidx_appcompat}"
+	api "androidx.cardview:cardview:${versions.androidx_cardview}"
+	api "androidx.recyclerview:recyclerview:${versions.androidx_recyclerview}"
+	api "androidx.gridlayout:gridlayout:${versions.androidx_gridlayout}"
+	api "androidx.browser:browser:${versions.androidx_browser}"
+	api "androidx.media:media:${versions.androidx_media}"
 	api "androidx.lifecycle:lifecycle-extensions:${versions.androidx_lifecycle}"
 	kapt "androidx.lifecycle:lifecycle-compiler:${versions.androidx_lifecycle}"
 
-	implementation "com.google.android.material:material:${versions.material_design}"
-	implementation "androidx.cardview:cardview:${versions.androidx_cardview}"
-	implementation "androidx.recyclerview:recyclerview:${versions.androidx_recyclerview}"
-	implementation "androidx.preference:preference:${versions.androidx_preference}"
-	implementation "androidx.constraintlayout:constraintlayout:${versions.androidx_constraintlayout}"
+	api "androidx.core:core-ktx:${versions.ktx_core}"
+	api "androidx.fragment:fragment-ktx:${versions.ktx_fragment}"
+	api "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.ktx_lifecycle}"
+	api "androidx.lifecycle:lifecycle-reactivestreams-ktx:${versions.ktx_lifecycle}"
+	api "androidx.collection:collection-ktx:${versions.ktx_collection}"
+
+	api "com.google.android.material:material:${versions.material_design}"
+
+	api "androidx.preference:preference:${versions.androidx_preference}"
 
 	api "androidx.databinding:databinding-runtime:${versions.androidx_databinding}"
 	api "androidx.databinding:databinding-adapters:${versions.androidx_databinding}"

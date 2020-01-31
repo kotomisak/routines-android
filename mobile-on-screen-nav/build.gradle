@@ -79,23 +79,23 @@ android {
         abortOnError false
     }
 
-    applicationVariants.all {variant ->
-
-        //exclude test utils from any generated apk variant
-        variant.getCompileConfiguration().exclude module: 'module-test-utils'
-        variant.getRuntimeConfiguration().exclude module: 'modole-test-utils'
-        renameArtifact(variant, APK_NAME)
-
-//        def filesAuthorityValue = applicationId + ".fileprovider"
-//        variant.buildConfigField "String", "FILES_AUTHORITY", "\"${filesAuthorityValue}\""
-//        variant.getMergedFlavor().manifestPlaceholders = [filesAuthority: filesAuthorityValue]
-    }
+//    applicationVariants.all {variant ->
+//
+//        //exclude test utils from any generated apk variant
+//        variant.getCompileConfiguration().exclude module: 'module-test-utils'
+//        variant.getRuntimeConfiguration().exclude module: 'modole-test-utils'
+//        renameArtifact(variant, APK_NAME)
+//
+////        def filesAuthorityValue = applicationId + ".fileprovider"
+////        variant.buildConfigField "String", "FILES_AUTHORITY", "\"${filesAuthorityValue}\""
+////        variant.getMergedFlavor().manifestPlaceholders = [filesAuthority: filesAuthorityValue]
+//    }
 
 }
 
 dependencies {
 
     implementation project(':module-core')
-    implementation project(':module-test-utils')
+//    implementation project(':module-test-utils')
 
 }

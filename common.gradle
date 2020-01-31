@@ -152,14 +152,13 @@ allprojects {
 	 * [tests] 		- becasuse dependencies in tests don't work :(
 	 */
 	dependencies {
+		// Jetifier
+		kapt "com.android.tools.build.jetifier:jetifier-core:${versions.androidx_jetifier}"
 
 		// Common Navigation
 		// Don't forget to apply plugin androidx.navigation.safeargs for every module with navigation (solved in common too)
 		implementation "androidx.navigation:navigation-fragment-ktx:${versions.android_navigation}"
 		implementation "androidx.navigation:navigation-ui-ktx:${versions.android_navigation}"
-
-		// Common Kotlin
-		implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}"
 
 		// Common Dagger (minimal dagger dependency to generate classes across all modules)
 		kapt "com.google.dagger:dagger-compiler:${versions.dagger}"
@@ -181,7 +180,7 @@ allprojects {
 		androidTestImplementation "org.mockito:mockito-android:${versions.mockito}"
 
 		// Common test objects
-		testImplementation project(':module-test-utils')
+//		testImplementation project(':module-test-utils')
 
 	}
 }
