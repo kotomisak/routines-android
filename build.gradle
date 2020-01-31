@@ -32,10 +32,10 @@ buildscript {
 				'material_design'          : '1.2.0-alpha04',
 				'androidx_appcompat'       : '1.1.0-rc01',
 				'androidx_cardview'        : '1.0.0',
-				'androidx_constraintlayout': '1.1.3',    // 2.0.0 has breaking changes that break some of our layouts
+				'androidx_constraintlayout': '2.0.0-beta4',
 				'androidx_recyclerview'    : '1.1.0-beta01',
 				'androidx_gridlayout'      : '1.0.0',
-				'androidx_browser'         : '1.0.0',
+				'androidx_browser'         : '1.2.0',
 				'androidx_media'           : '1.2.0-alpha01',
 				'androidx_lifecycle'       : '2.2.0',
 				'androidx_core_testing'    : '2.1.0-rc01',

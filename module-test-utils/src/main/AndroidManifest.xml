@@ -4,7 +4,7 @@
 
 	<application>
 		<activity
-			android:name="cz.kotox.routines.testutils.SingleFragmentActivity"
+			android:name="cz.kotox.template.testutils.SingleFragmentActivity"
 			android:label="@string/app_name"
 			android:theme="@style/AppTheme">
 			<intent-filter>

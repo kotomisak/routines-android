@@ -1,0 +1,7 @@
+apply from: "$project_directory/module-core/library.gradle"
+
+dependencies {
+	implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+	implementation project(':module-core')
+}
