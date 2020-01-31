@@ -15,3 +15,4 @@
  */
 
 include 'module-core',':module-test-utils', ':mobile-on-screen-nav'
+include ':module-core-media'
