@@ -1,0 +1,10 @@
+apply from: "$project_directory/module-core/library.gradle"
+
+dependencies {
+	implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+	implementation project(':module-core')
+	implementation project(':module-core-media')
+
+	implementation "com.arthenica:mobile-ffmpeg-https-gpl:4.3.1.LTS"
+}

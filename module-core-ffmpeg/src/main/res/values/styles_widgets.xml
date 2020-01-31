@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<style name="Theme.Kotox.Light.Dialog.Alert"
+		parent="@style/Theme.MaterialComponents.Light.Dialog.Alert">
+
+	</style>
+
+
+</resources>

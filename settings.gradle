@@ -17,4 +17,5 @@
 include ':module-core',
 		':module-core-arch',
 		':module-core-media',
+		':module-core-ffmpeg',
 		':mobile-template'
