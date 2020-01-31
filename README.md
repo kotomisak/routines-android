@@ -112,4 +112,4 @@ Sample keystore with sample keystore content to be quickly used as development k
 Feel free to use this code, add star if you like it or find it useful.  
 Create an ISSUE when there will be something wrong!  
 Thus licence is set as [MIT](LICENSE) .  
-Enjoy! 
+Enjoy! MJ
