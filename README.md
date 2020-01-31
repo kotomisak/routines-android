@@ -1,9 +1,18 @@
-# routines-android
-Reusable scalable decoupled blocks useful for building Android app.
+# kotox-android
+All kotox related android apps with all the kotox related reusable modules.
  
-# 1. The idea behind
+# 0. Steps to build (start with) project  
+Practical guide how to use this repo first:
+
+- Use the latest Stable or beta Android Studio version
+- copy files from folder **extras/keystore_sample** to folder **extras/keystore** 
+- rename files in **extras/keystore** folder to have names just as this: **routines.properties** / **routines.jks**
+
+# 1. MonoRepo idea
 Every time I play with some specific feature or programming approach, such feature was always either thrown or implanted to some app without future.  
-This time, there is an idea to bundle such feature/approach to separated module or app_template - and to be reusable in case you want to use it for some specific app.
+Monorepo is an idea to bundle such feature/approach to separated module or app_template - and to be reusable in case you want to use it for some specific app.
+All those features will be at one place and updated across the time.
+All apps will be also here and dependent on reusable modules.
 
 # 2. What I follow in development
 
@@ -43,7 +52,7 @@ In case of core stuff (like networking, persistence which is not as much feature
 those too as much as possible.
 
 ## 2.4 Data structure
-Avoid using server defined schemas as data structures.
+Avoid using schemas defined by server as data structures.
 
 ## 2.5 Testing
 100% test coverage is not wanted, since it will slow down code writing and CI machine too.  
@@ -70,21 +79,14 @@ But they can die for many reasons, which leads me to
 - use frameworks they part of support library over third party libraries  
   
 That means for example:
-- use **Coroutines** over *RxJava*
+- use **Coroutines** over *RxJava* 
 - use **Moshi** over *Gson*
 - use **Retrofit** over *Volley*
 - use **bindings** over *Kotlin Android Extensions*
 - use **Kotlin files to bind view's behaviour** over *databinding in XML*
 
 
-# 3. Steps to build this project
-- Use Android Studio 3.5 Canary4 or newer
-- copy files from folder **extras/keystore_sample** to folder **extras/keystore** 
-- rename files in **extras/keystore** folder to have names just as this: **routines.properties** / **routines.jks**
-
-
-
-# 4. Structure
+# 3. Structure
 This project contains apps and modules.   
 It does not matter which architecture (MVVM/MVI/...) or framework (Android native/Flutter/...) is used for it.  
 Modules should be reusable in provided apps.  
@@ -92,32 +94,21 @@ Every app/module should have it's own README.MD to describes detailed info about
 All mentioned has common external dependency versions defined in root build.gradle  
 
 	
-## 4.1 Apps
+## 3.1 Apps
 Every app is the minimal template to start create application of such type.  
 
 ### mobile-on-screen-nav
 Is an application with simplest structure.  It means without UI navigation like drawer or bottom navigation is.  
 It's something like app just with screens and navigation using on screen navigation elements.  
 
-## 4.2 Modules
-Modules are rather small UI/logic features to be reusable across all app templates of this project.  
-Every module should be covered with UNIT/UI testing.  
-
-### module-core
-Low level module containing really basic code (without feature dependencies) to be reusable across all other modules.  
-
-
-### module-test-utils
-Low level test module containing really basic test code (without feature dependencies) to be reusable across all other test modules.  
-
-## 4.3 Extras
+## 3.2 Extras
 Is a set of supporting directories  
 ### graphics
 Simple graphics (prepared by Gimp) to be used as base for launcher icon or banner for playstore.  
 ### keystore_sample
 Sample keystore with sample keystore content to be quickly used as development keystore for the project. See [Steps to build project](#3-steps-to-build-this-project) chapter 
 
-# 5. Licence
+# 4. Licence
 Feel free to use this code, add star if you like it or find it useful.  
 Create an ISSUE when there will be something wrong!  
 Thus licence is set as [MIT](LICENSE) .  
