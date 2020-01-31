@@ -18,105 +18,114 @@
 
 buildscript {
 
-    ext {
+	ext {
+		project_directory = "${rootProject.projectDir}"
 
-        min_sdk_version = 21
-        sdk_version = 28
-        build_tools_version = '28.0.3'
-        kotlin_version = '1.3.21'
-        android_binding_version = '1.3.3'
-        android_gradle_version = '3.5.0-alpha04'
-        android_support_version = '28.0.0'
-        android_play_services_version = '11.0.1'
-        android_constraint_layout_version = '1.1.3'
-        android_arch_version = '1.1.1'
-        android_support_test_version = '1.0.1'
-        android_navigation_version = "1.0.0-alpha06"
+		versions = [
+				'min_sdk'                  : 21,
+				'sdk'                      : 28,
+				'kotlin'                   : '1.3.61',
+				'android_gradle'           : '3.6.0-rc01',
 
-        android_material_version = "1.1.0-alpha03"
-        androidx_lifecycle_version = "2.1.0-alpha02"
-        androidx_cardview_version = "1.0.0"
-        androidx_recyclerview_version = "1.1.0-alpha02"
-        androidx_preference_version = "1.1.0-alpha03"
-        androidx_constraintlayout_version = "1.1.3"
-        androidx_databinding_version = "3.5.0-alpha04"
+				'android_play_services'    : '11.0.1',
+				'android_navigation'       : '2.2.0',
+				'material_design'          : '1.2.0-alpha04',
+				'androidx_appcompat'       : '1.1.0-rc01',
+				'androidx_cardview'        : '1.0.0',
+				'androidx_constraintlayout': '1.1.3',    // 2.0.0 has breaking changes that break some of our layouts
+				'androidx_recyclerview'    : '1.1.0-beta01',
+				'androidx_gridlayout'      : '1.0.0',
+				'androidx_browser'         : '1.0.0',
+				'androidx_media'           : '1.2.0-alpha01',
+				'androidx_lifecycle'       : '2.2.0',
+				'androidx_core_testing'    : '2.1.0-rc01',
+				'androidx_jetifier'        : '1.0.0-beta05',
+				'androidx_biometric'       : '1.0.0-beta01',
+				'androidx_preference'      : "1.1.0",
+				'androidx_databinding'     : '4.0.0-alpha09',
 
-        jsr250api_version = "1.0"
-        okhttp_version = '3.8.1'
-        retrofit_version = '2.3.0'
-        moshi_version = '1.6.0'
-        moshi_converter_version = '2.4.0'
+				'ktx_core'                 : '1.0.2',
+				'ktx_fragment'             : '1.1.0-rc03',
+				'ktx_lifecycle'            : '2.2.0',
+				'ktx_collection'           : '1.1.0',
 
-        leakcanary_version = '1.5.4'
-        dagger_version = '2.21'
-        espresso_version = '3.0.2-beta1'
-        junit_version = '4.12'
-        mockito_version = '2.22.0'
-        powermock_version = '2.0.0-beta.5'//https://github.com/powermock/powermock/wiki/Mockito#supported-versions
-        stetho_version = '1.5.0'
-        glide_version = '4.4.0'
-        crashlytics_version = '2.9.4@aar'
-        fabric_version = '1.25.4'
-        jacoco_version = '0.8.1'
+				'rx_rxandroid'             : '2.1.1',
+				'rx_rxjava'                : '2.2.11',
+				'rx_rxkotlin'              : '2.4.0',
+				'rx_rxrelay'               : '2.1.0',
 
-        runner_version = "1.0.2-beta1"
-        rules_version = "1.0.2-beta1"
-    }
-    repositories {
-        google()
-        maven {url 'https://maven.fabric.io/public'}
-        jcenter()
-        maven {
-            url "http://dl.bintray.com/kotlin/kotlin-eap"
-        }
-        maven {
-            url 'http://dl.bintray.com/kotlin/kotlin-eap'
-        }
-    }
-    dependencies {
-        classpath "com.android.tools.build:gradle:$android_gradle_version"
-        classpath "org.jetbrains.kotlin:kotlin-allopen:$kotlin_version"
-        classpath "android.arch.navigation:navigation-safe-args-gradle-plugin:$android_navigation_version"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "io.fabric.tools:gradle:$fabric_version"
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
-    }
+				'okhttp'                   : '4.0.1',
+				'retrofit'                 : '2.6.0',
+				'moshi'                    : '1.6.0',
+				'moshi_converter'          : '2.4.0',
+
+				'leakcanary'               : '2.0-beta-2',
+				'dagger'                   : '2.24',
+				'espresso'                 : '3.0.2-beta1',
+				'junit'                    : '4.12',
+				'junit5'                   : '5.5.1',
+				'mockito'                  : '3.0.0',
+				'powermock'                : '2.0.2',    //https://github.com/powermock/powermock/wiki/Mockito#supported-versions
+				'glide'                    : '4.9.0',
+				'crashlytics'              : '2.10.1',
+				'firebase_analytics'       : '17.2.0',
+				'jacoco'                   : '0.8.4',
+				'timber'                   : '4.7.1'
+		]
+
+	}
+	repositories {
+		google()
+		maven {url 'https://maven.fabric.io/public'}
+		jcenter()
+		maven {
+			url "http://dl.bintray.com/kotlin/kotlin-eap"
+		}
+		maven {
+			url 'http://dl.bintray.com/kotlin/kotlin-eap'
+		}
+	}
+	dependencies {
+		classpath "com.android.tools.build:gradle:${versions.android_gradle}"
+		classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
+		classpath "org.jetbrains.kotlin:kotlin-allopen:${versions.kotlin}"
+		classpath "androidx.navigation:navigation-safe-args-gradle-plugin:${versions.android_navigation}"
+		classpath "com.android.tools.build.jetifier:jetifier-processor:${versions.androidx_jetifier}"
+		// NOTE: Do not place your application dependencies here; they belong
+		// in the individual module build.gradle files
+	}
 }
 
 allprojects {
-    repositories {
-        google()
-        maven {url 'https://maven.fabric.io/public'}
-        jcenter()
-        maven {
-            url "http://dl.bintray.com/kotlin/kotlin-eap"
-        }
-    }
+	repositories {
+		google()
+		maven {url 'https://maven.fabric.io/public'}
+		jcenter()
+	}
 }
 
 task clean(type: Delete) {
-    delete rootProject.buildDir
+	delete rootProject.buildDir
 }
 
 def getLocalProperty(String propertyName) {
-    println "propertyName>>> ${propertyName}"
-    def propsFile = rootProject.file('local.properties')
-    if (propsFile.exists()) {
-        def props = new Properties()
-        props.load(new FileInputStream(propsFile))
+	println "propertyName>>> ${propertyName}"
+	def propsFile = rootProject.file('local.properties')
+	if (propsFile.exists()) {
+		def props = new Properties()
+		props.load(new FileInputStream(propsFile))
 
-        //Attempt to load property from local.properties
-        def localProperty = props[propertyName]
-        if (localProperty!=null) return localProperty
-    }
+		//Attempt to load property from local.properties
+		def localProperty = props[propertyName]
+		if (localProperty != null) return localProperty
+	}
 
-    //Attempt to load property from environment variable
-    def envProperty = System.getenv(propertyName)
-    if (envProperty!=null) return envProperty
+	//Attempt to load property from environment variable
+	def envProperty = System.getenv(propertyName)
+	if (envProperty != null) return envProperty
 
-    def systemProperty = System.properties[propertyName]
-    if (systemProperty!=null) return envProperty
+	def systemProperty = System.properties[propertyName]
+	if (systemProperty != null) return envProperty
 
-    throw IllegalStateException("Missing local|env|system property ${propertyName}")
+	throw IllegalStateException("Missing local|env|system property ${propertyName}")
 }

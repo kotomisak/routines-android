@@ -28,26 +28,46 @@ android {
 dependencies {
 	implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-	// Arch
-	api "androidx.lifecycle:lifecycle-extensions:$androidx_lifecycle_version"
-	kapt "androidx.lifecycle:lifecycle-compiler:$androidx_lifecycle_version"
+	api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${versions.kotlin}"
 
-	implementation "com.google.android.material:material:$android_material_version"
-	implementation "androidx.cardview:cardview:$androidx_cardview_version"
-	implementation "androidx.recyclerview:recyclerview:$androidx_recyclerview_version"
-	implementation "androidx.preference:preference:$androidx_preference_version"
-	implementation "androidx.constraintlayout:constraintlayout:$androidx_constraintlayout_version"
+	// androidx
+	api "androidx.constraintlayout:constraintlayout:${versions.androidx_constraintlayout}"
+	api "androidx.appcompat:appcompat:${versions.androidx_appcompat}"
+	api "androidx.cardview:cardview:${versions.androidx_cardview}"
+	api "androidx.recyclerview:recyclerview:${versions.androidx_recyclerview}"
+	api "androidx.gridlayout:gridlayout:${versions.androidx_gridlayout}"
+	api "androidx.browser:browser:${versions.androidx_browser}"
+	api "androidx.media:media:${versions.androidx_media}"
+	api "androidx.lifecycle:lifecycle-extensions:${versions.androidx_lifecycle}"
+	kapt "androidx.lifecycle:lifecycle-compiler:${versions.androidx_lifecycle}"
 
-	api "androidx.databinding:databinding-runtime:$androidx_databinding_version"
-	api "androidx.databinding:databinding-adapters:$androidx_databinding_version"
+	api "androidx.core:core-ktx:${versions.ktx_core}"
+	api "androidx.fragment:fragment-ktx:${versions.ktx_fragment}"
+	api "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.ktx_lifecycle}"
+	api "androidx.lifecycle:lifecycle-reactivestreams-ktx:${versions.ktx_lifecycle}"
+	api "androidx.collection:collection-ktx:${versions.ktx_collection}"
+
+	api "com.google.android.material:material:${versions.material_design}"
+
+	api "androidx.preference:preference:${versions.androidx_preference}"
+
+	api "androidx.databinding:databinding-runtime:${versions.androidx_databinding}"
+	api "androidx.databinding:databinding-adapters:${versions.androidx_databinding}"
+
+	// rxjava
+	api "io.reactivex.rxjava2:rxkotlin:${versions.rx_rxkotlin}"
+	api "io.reactivex.rxjava2:rxandroid:${versions.rx_rxandroid}"
+	api "io.reactivex.rxjava2:rxjava:${versions.rx_rxjava}"
+	api "com.jakewharton.rxrelay2:rxrelay:${versions.rx_rxrelay}"
 
 	// Dagger (extended dependency on top of minimal dependency from common.gradle)
-	api "com.google.dagger:dagger:$dagger_version"
-	api "com.google.dagger:dagger-android:$dagger_version"
-	api "com.google.dagger:dagger-android-support:$dagger_version"
-	compileOnly "javax.annotation:jsr250-api:$jsr250api_version"
+	// Dagger
+	api "com.google.dagger:dagger:${versions.dagger}"
+	api "com.google.dagger:dagger-android:${versions.dagger}"
+	api "com.google.dagger:dagger-android-support:${versions.dagger}"
+	compileOnly 'javax.annotation:jsr250-api:1.0'
 
 	//Moshi (general movement from gson to moshi)
-	implementation "com.squareup.moshi:moshi:$moshi_version"
-	implementation "com.squareup.retrofit2:converter-moshi:$moshi_converter_version"
+	implementation "com.squareup.moshi:moshi:${versions.moshi}"
+	implementation "com.squareup.retrofit2:converter-moshi:${versions.moshi_converter}"
 }

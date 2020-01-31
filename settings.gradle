@@ -14,4 +14,6 @@
  * limitations under the License.
  */
 
-include 'module-core',':module-test-utils', ':mobile-on-screen-nav'
+include ':module-core',
+		':module-core-media',
+		':mobile-on-screen-nav'
