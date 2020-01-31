@@ -31,11 +31,12 @@ Anyway, it's one of those good options, I would not have a problem to work with.
 
 ### 2.1.2 MVVM
 I have  been using this approach for years. I know it's pros and cons.
-I like this style of writing.
+I prefer to use this for apps where state of the app is not composed by many actions at one time.
+When using MVVM I try NOT to use databinding (code in XML), but just generated binding itself.
 
 ### 2.1.3 MVI
-I like this style of writing unidirectional app flow without unwanted side effects.
-I hope I will have more apps written this way.
+I like this style of writing unidirectional event based app flow.
+I prefer to use this for apps where there is a lot of external events/inputs updating the state of the app.
 
 ## 2.2 Dependency injection
 Even though there is bunch of nice looking service locators **Koin**, **Kodein**, **...** I still prefer to use full dependency injection 
