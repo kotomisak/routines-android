@@ -9,10 +9,8 @@ Practical guide first:
 - In proper mobile-appname directory, rename files in **extras/appname** folder to have names just as this: **appname.properties** / **appname.jks**
 
 # 1. MonoRepo idea
-Every time I play with some specific feature or programming approach, such feature was always either thrown or implanted to some app without future.  
-Monorepo is an idea to bundle such feature/approach to separated module or app_template - and to be reusable in case you want to use it for some specific app.
-All those features will be at one place and updated across the time.
-All apps will be also here and dependent on reusable modules.
+
+Described here https://jenicek.dev/2020/01/31/monorepo/  
 
 # 2. What I follow in development
 
