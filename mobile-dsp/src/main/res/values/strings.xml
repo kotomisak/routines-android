@@ -11,18 +11,9 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<navigation
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
-	android:id="@+id/mobile_navigation"
-	app:startDestination="@id/launcher_home">
+<resources>
 
-	<fragment
-		android:id="@+id/launcher_home"
-		android:name="cz.kotox.dsp.ui.MainFragment"
-		android:label="@string/home"
-		tools:layout="@layout/main_fragment">
 
-	</fragment>
-
-</navigation>
+	<string name="home">home</string>
+	<string name="title_settings">SettingsX</string>
+</resources>

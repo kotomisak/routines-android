@@ -40,22 +40,22 @@ allprojects {
 			vectorDrawables.useSupportLibrary = true
 		}
 
-		signingConfigs {
-			release {
-				// passwords and alias are obtained via askForPasswords task
-				storeFile file("../${project.property('keystore.file')}")
-				storePassword ""
-				keyAlias ""
-				keyPassword ""
-			}
-			debug {
-				// passwords and alias are obtained via askForPasswords task
-				storeFile file("../${project.property('keystore.file')}")
-				storePassword ""
-				keyAlias ""
-				keyPassword ""
-			}
-		}
+//		signingConfigs {
+//			release {
+//				// passwords and alias are obtained via askForPasswords task
+//				storeFile file("../${project.property('keystore.file')}")
+//				storePassword ""
+//				keyAlias ""
+//				keyPassword ""
+//			}
+//			debug {
+//				// passwords and alias are obtained via askForPasswords task
+//				storeFile file("../${project.property('keystore.file')}")
+//				storePassword ""
+//				keyAlias ""
+//				keyPassword ""
+//			}
+//		}
 
 		flavorDimensions "env"
 
@@ -185,47 +185,10 @@ allprojects {
 	}
 }
 
-task askForPasswords {
-
-	def storePass
-	def keyAlias
-	def keyPass
-
-	def keystorePropertiesFile = new File((String) project.property("keystore.properties"))
-
-	if (project.hasProperty("keystore.properties") && keystorePropertiesFile.exists()) {
-		println "Loading keystore passwords from property file..."
-		Properties properties = new Properties()
-		properties.load(new FileInputStream(keystorePropertiesFile))
-		storePass = properties['keystore.store.password']
-		println("storePass[$storePass]")
-		keyAlias = properties['keystore.key.alias']
-		println("keyAlias[$keyAlias]")
-		keyPass = properties['keystore.key.password']
-		println("keyPass[$keyPass]")
-	} else {
-		throw IllegalStateException("Missing keystore.properties file!")
-	}
-
-	android.signingConfigs.release.storePassword = storePass
-	android.signingConfigs.release.keyAlias = keyAlias
-	android.signingConfigs.release.keyPassword = keyPass
-
-	android.signingConfigs.debug.storePassword = storePass
-	android.signingConfigs.debug.keyAlias = keyAlias
-	android.signingConfigs.debug.keyPassword = keyPass
-
-}
-
-ext.renameArtifact = {variant, apkName ->
-	variant.outputs.all {
-		output ->
-			def date = new Date().format('yyyyMMdd')
-			outputFileName = "${apkName}-${project.name}-${variant.versionName}-${variant.versionCode}-${date}-${variant.name}.apk"
-	}
-}
-
-tasks.whenTaskAdded {
-	theTask ->
-		theTask.dependsOn "askForPasswords"
-}
+//ext.renameArtifact = {variant, apkName ->
+//	variant.outputs.all {
+//		output ->
+//			def date = new Date().format('yyyyMMdd')
+//			outputFileName = "${apkName}-${project.name}-${variant.versionName}-${variant.versionCode}-${date}-${variant.name}.apk"
+//	}
+//}

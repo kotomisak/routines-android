@@ -11,18 +11,14 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<navigation
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
-	android:id="@+id/mobile_navigation"
-	app:startDestination="@id/launcher_home">
+<resources>
 
-	<fragment
-		android:id="@+id/launcher_home"
-		android:name="cz.kotox.dsp.ui.MainFragment"
-		android:label="@string/home"
-		tools:layout="@layout/main_fragment">
+	<!-- Base application theme. -->
+	<style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+		<!-- Customize your theme here. -->
+		<item name="colorPrimary">@color/colorPrimary</item>
+		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+		<item name="colorAccent">@color/colorAccent</item>
+	</style>
 
-	</fragment>
-
-</navigation>
+</resources>
