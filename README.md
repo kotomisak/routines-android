@@ -87,25 +87,17 @@ That means for example:
 
 # 3. Structure
 This project contains apps and modules.   
-It does not matter which architecture (MVVM/MVI/...) or framework (Android native/Flutter/...) is used for it.  
-Modules should be reusable in provided apps.  
+It does not matter which architecture (MVVM/MVI/...) is used for it.  
+Modules should be reusable across any available app.  
 Every app/module should have it's own README.MD to describes detailed info about it (and it's usage).  
-All mentioned has common external dependency versions defined in root build.gradle  
 
-	
-## 3.1 Apps
-Every app is the minimal template to start create application of such type.  
 
-### mobile-on-screen-nav
-Is an application with simplest structure.  It means without UI navigation like drawer or bottom navigation is.  
-It's something like app just with screens and navigation using on screen navigation elements.  
-
-## 3.2 Extras
-Is a set of supporting directories  
+## 3.1 Extras
+Is a set of supporting directories for every app
 ### graphics
 Simple graphics (prepared by Gimp) to be used as base for launcher icon or banner for playstore.  
 ### keystore_sample
-Sample keystore with sample keystore content to be quickly used as development keystore for the project. See [Steps to build project](#3-steps-to-build-this-project) chapter 
+Sample keystore with sample keystore content to be quickly used as development keystore for the project.
 
 # 4. Licence
 Feel free to use this code, add star if you like it or find it useful.  
