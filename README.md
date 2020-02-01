@@ -1,5 +1,5 @@
 # kotox-android
-All kotox related android apps with all the kotox related reusable modules.
+Monorepo with all MJ's apps and ideas.
  
 # 0. Steps to build (run) the app  
 Practical guide first:
