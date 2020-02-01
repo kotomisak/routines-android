@@ -1,12 +1,12 @@
 # kotox-android
 All kotox related android apps with all the kotox related reusable modules.
  
-# 0. Steps to build (start with) project  
-Practical guide how to use this repo first:
+# 0. Steps to build (run) the app  
+Practical guide first:
 
 - Use the latest Stable or beta Android Studio version
-- copy files from folder **extras/keystore_sample** to folder **extras/keystore** 
-- rename files in **extras/keystore** folder to have names just as this: **routines.properties** / **routines.jks**
+- In proper mobile-appname directory, copy files from folder **extras/appname_sample** to folder **extras/appname** 
+- In proper mobile-appname directory, rename files in **extras/keystore** folder to have names just as this: **appname.properties** / **appname.jks**
 
 # 1. MonoRepo idea
 Every time I play with some specific feature or programming approach, such feature was always either thrown or implanted to some app without future.  
