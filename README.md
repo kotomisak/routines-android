@@ -6,7 +6,7 @@ Practical guide first:
 
 - Use the latest Stable or beta Android Studio version
 - In proper mobile-appname directory, copy files from folder **extras/appname_sample** to folder **extras/appname** 
-- In proper mobile-appname directory, rename files in **extras/keystore** folder to have names just as this: **appname.properties** / **appname.jks**
+- In proper mobile-appname directory, rename files in **extras/appname** folder to have names just as this: **appname.properties** / **appname.jks**
 
 # 1. MonoRepo idea
 Every time I play with some specific feature or programming approach, such feature was always either thrown or implanted to some app without future.  
