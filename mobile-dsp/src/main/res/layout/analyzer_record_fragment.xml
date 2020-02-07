@@ -69,7 +69,7 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:enabled="false"
-				android:hint="min pitch"
+				android:hint="@string/min_pitch"
 				app:suffixText="Hz"
 				tools:text="2">
 
@@ -93,7 +93,7 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:enabled="false"
-				android:hint="max pitch"
+				android:hint="@string/max_pitch"
 				app:suffixText="Hz"
 				tools:text="2">
 				<com.google.android.material.textfield.TextInputEditText
@@ -117,7 +117,7 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:enabled="false"
-				android:hint="Freq"
+				android:hint="@string/freq"
 				app:suffixText="Hz"
 				tools:text="2">
 
@@ -143,8 +143,7 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:enabled="false"
-				android:hint="Amplitude"
-				app:suffixText="Hz"
+				android:hint="@string/amplitude"
 				tools:text="2">
 
 				<com.google.android.material.textfield.TextInputEditText
@@ -160,7 +159,7 @@
 			android:id="@+id/navigate_processing_bt"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
-			android:text="Process"
+			android:text="@string/process"
 			app:layout_constraintBottom_toBottomOf="parent"
 			app:layout_constraintEnd_toEndOf="@id/keyline_end"
 			app:layout_constraintStart_toStartOf="@id/keyline_start" />

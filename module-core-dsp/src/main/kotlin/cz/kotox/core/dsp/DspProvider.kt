@@ -84,23 +84,27 @@ class DspProvider @Inject constructor() {
 		sendSample: (sample: VoiceSample) -> Unit
 	) = PitchDetectionHandler { pitchDetectionResult, audioEvent ->
 		val pitchInHz = pitchDetectionResult.pitch
-		Timber.i(">>> HANDLER pitch[$pitchInHz]Hz, probability[${pitchDetectionResult.probability}] RMS[${audioEvent.rms}] EVENT time[${audioEvent.timeStamp}], ALGORITHM[$pitchAlgorithm]")
 		val amplitude = computeAmplitude(audioEvent, voiceAnalysisSettings, envelopeFollower)
-		val frequency = computeFrequency(pitchDetectionResult, currentPitchList.map { it.pitch })
+		Timber.i(">>> HANDLER pitch[$pitchInHz]Hz, amplitude[${amplitude}], probability[${pitchDetectionResult.probability}] RMS[${audioEvent.rms}] EVENT time[${audioEvent.timeStamp}], ALGORITHM[$pitchAlgorithm]")
 
-		if (useProbability) {
-			if (pitchDetectionResult.probability > probabilityThreshold) {
 
-				Timber.i(">>> HANDLER2 pitch[$pitchInHz]Hz, RMS[${audioEvent.rms}], dbSPL[${audioEvent.getdBSPL()}]dB")
-				Timber.i(">>> HANDLER2b pitch[$pitchInHz]Hz, freq[${frequency}], amplitude[${amplitude}]")
-				Timber.i(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
-				sendSample(VoiceSample(pitchInHz, audioEvent.timeStamp, amplitude
-					?: 0f, frequency ?: 0f))
+		if (amplitude != null && amplitude > voiceAnalysisSettings.noiseLevelThreshold) {
+			val frequency = computeFrequency(pitchDetectionResult, currentPitchList.map { it.pitch })
 
+			if (useProbability) {
+				if (pitchDetectionResult.probability > probabilityThreshold) {
+
+					Timber.i(">>> HANDLER2 pitch[$pitchInHz]Hz, RMS[${audioEvent.rms}], dbSPL[${audioEvent.getdBSPL()}]dB")
+					Timber.i(">>> HANDLER2b pitch[$pitchInHz]Hz, freq[${frequency}], amplitude[${amplitude}]")
+					Timber.i(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+					sendSample(VoiceSample(pitchInHz, audioEvent.timeStamp, amplitude
+						?: 0f, frequency ?: 0f))
+
+				}
+			} else {
+				sendSample(VoiceSample(pitchInHz, audioEvent.timeStamp, amplitude ?: 0f, frequency
+					?: 0f))
 			}
-		} else {
-			sendSample(VoiceSample(pitchInHz, audioEvent.timeStamp, amplitude ?: 0f, frequency
-				?: 0f))
 		}
 	}
 

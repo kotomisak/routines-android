@@ -30,6 +30,8 @@ class VoiceAnalysisSettings {
 	var onsetMinInterOnsetInterv = 0.25
 	var onsetSilenceThreshold = -55.0
 
+	//Noice threshold related to amplitude computation
+	val noiseLevelThreshold = 0.01f
 	/**
 	 *
 	 * @param peakThreshold A threshold used for peak picking. Values between 0.1 and 0.8. Default is 0.3, if too many onsets are detected adjust to 0.4 or 0.5.
