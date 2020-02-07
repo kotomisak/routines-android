@@ -1,13 +1,12 @@
 package cz.kotox.core.dsp
 
 import be.tarsos.dsp.AudioDispatcher
-import be.tarsos.dsp.AudioEvent
 import be.tarsos.dsp.EnvelopeFollower
 import be.tarsos.dsp.io.android.AudioDispatcherFactory
 import be.tarsos.dsp.pitch.PitchDetectionHandler
 import be.tarsos.dsp.pitch.PitchProcessor
-import cz.kotox.core.dsp.TarsoDspUtils.computeAmplitude
-import cz.kotox.core.dsp.TarsoDspUtils.computeFrequency
+import cz.kotox.core.dsp.TarsoDspComputation.computeAmplitude
+import cz.kotox.core.dsp.TarsoDspComputation.computeFrequency
 import cz.kotox.core.dsp.model.PitchAlgorithm
 import cz.kotox.core.dsp.model.VoiceSample
 import cz.kotox.core.dsp.model.toPitchEstimationAlgorithm

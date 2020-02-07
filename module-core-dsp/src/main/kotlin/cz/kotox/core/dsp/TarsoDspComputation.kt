@@ -5,7 +5,7 @@ import be.tarsos.dsp.EnvelopeFollower
 import be.tarsos.dsp.pitch.PitchDetectionResult
 import cz.kotox.core.utility.median
 
-object TarsoDspUtils {
+object TarsoDspComputation {
 	fun computeFrequency(pitchDetectionResult: PitchDetectionResult, previousPitchList: List<Float>): Float? {
 		var frequency: Float? = pitchDetectionResult.pitch
 		if (frequency == -1.0f || frequency == null) {
