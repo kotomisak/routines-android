@@ -1,9 +1,9 @@
 package com.opkix.base.ffmpeg
 
-import com.opkix.base.ffmpeg.model.BackgroundMusicItem
-import com.opkix.base.ffmpeg.model.CanvasItem
-import com.opkix.base.ffmpeg.model.FFMPEGVideoEncoder
-import com.opkix.base.ffmpeg.model.VideoCompositionItem
+import cz.kotox.core.ffmpeg.model.BackgroundMusicItem
+import cz.kotox.core.ffmpeg.model.CanvasItem
+import cz.kotox.core.ffmpeg.model.FFMPEGVideoEncoder
+import cz.kotox.core.ffmpeg.model.VideoCompositionItem
 import cz.kotox.core.ffmpeg.command.getTextFilterParams
 import cz.kotox.core.media.VideoUtils.getVideoDimensions
 import java.io.File

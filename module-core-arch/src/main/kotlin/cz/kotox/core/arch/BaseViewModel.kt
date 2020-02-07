@@ -16,11 +16,15 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
 @OpenForMocking
-abstract class BaseViewModel : ViewModel(), NotifyObservable by BaseViewObservable() {
+abstract class BaseViewModel : ViewModel(), CoroutineScope, NotifyObservable by BaseViewObservable() {
 	val compositeDisposable = CompositeDisposable()
 
 	@SuppressLint("StaticFieldLeak")
@@ -29,13 +33,20 @@ abstract class BaseViewModel : ViewModel(), NotifyObservable by BaseViewObservab
 
 	private val liveEventsBus = LiveBus()
 
+	private val job = SupervisorJob()
+
+	override val coroutineContext: CoroutineContext
+		get() = Dispatchers.Main + job
+
 	init {
 		logWithTag(javaClass.simpleName, "init")
 	}
 
 	override fun onCleared() {
+		job.cancel()
 		logWithTag(javaClass.simpleName, "onCleared")
 		compositeDisposable.dispose()
+		super.onCleared()
 	}
 
 	/**
@@ -64,8 +75,6 @@ abstract class BaseViewModel : ViewModel(), NotifyObservable by BaseViewObservab
 	}
 
 	open val statefulTrackingScreens: Map<Int, String> = emptyMap()
-
-
 
 	fun sendEvent(event: Event) {
 		liveEventsBus.send(event)

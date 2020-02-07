@@ -14,7 +14,7 @@ import dagger.android.AndroidInjector
 import timber.log.Timber
 import javax.inject.Inject
 
-class MobileTemplateApplication : BaseApplication() {
+class MobileDspApplication : BaseApplication() {
 
 	@Inject
 	lateinit var preferencesCommon: PreferencesCommon

@@ -24,7 +24,7 @@ interface ViewModelBinder<V : BaseViewModel, B : ViewDataBinding> : LifecycleOwn
 
 		//TODO
 //		setVariable(BR.view, this@ViewModelBinder)
-//		setVariable(BR.viewModel, viewModel)
+		setVariable(BR.viewModel, viewModel)
 	}
 
 	@CallSuper

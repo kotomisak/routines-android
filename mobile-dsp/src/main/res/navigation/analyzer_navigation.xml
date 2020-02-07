@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/analyzer_navigation"
+	app:startDestination="@id/analyzer_process"
+	tools:ignore="UnusedNavigation">
+
+	<fragment
+		android:id="@+id/analyzer_process"
+		android:name="cz.kotox.dsp.ui.analyzer.record.AnalyzerRecordFragment"
+		android:label="@string/analyzer"
+		tools:layout="@layout/analyzer_record_fragment">
+		<argument
+			android:name="user_id" app:argType="integer" />
+		<action
+			android:id="@+id/navigate_to_processing"
+			app:destination="@id/analyzer_result"
+			app:enterAnim="@anim/slide_in_right"
+			app:exitAnim="@anim/slide_out_left"
+			app:popEnterAnim="@anim/slide_in_left"
+			app:popExitAnim="@anim/slide_out_right" />
+	</fragment>
+
+	<fragment
+		android:id="@+id/analyzer_result"
+		android:name="cz.kotox.dsp.ui.analyzer.result.AnalyzerResultFragment"
+		android:label="@string/analyzer"
+		tools:layout="@layout/analyzer_result_fragment" />
+
+</navigation>

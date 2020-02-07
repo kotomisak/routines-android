@@ -1,7 +1,7 @@
 package com.opkix.base.ffmpeg
 
-import com.opkix.base.ffmpeg.model.CanvasItem
-import com.opkix.base.media.model.VideoDimensions
+import cz.kotox.core.ffmpeg.model.CanvasItem
+import cz.kotox.core.media.model.VideoDimensions
 
 enum class ScaleType() {
 	FIT,

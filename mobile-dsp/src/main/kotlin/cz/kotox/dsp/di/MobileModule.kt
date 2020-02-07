@@ -2,6 +2,6 @@ package cz.kotox.dsp.di
 
 import dagger.Module
 
-@Module(includes = [MobileTemplateDaggerModule::class])
+@Module(includes = [MobileDspDaggerModule::class])
 object MobileModule
 

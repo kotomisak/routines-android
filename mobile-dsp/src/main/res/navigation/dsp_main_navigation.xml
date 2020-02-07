@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/dsp_main_navigation"
+	app:startDestination="@id/dsp_home">
+
+	<fragment
+		android:id="@+id/dsp_home"
+		android:name="cz.kotox.dsp.ui.MainFragment"
+		android:label="@string/home"
+		tools:layout="@layout/main_fragment">
+		<action
+			android:id="@+id/navigate_to_analyzer"
+			app:destination="@id/analyzer_activity" />
+	</fragment>
+
+	<activity
+		android:id="@+id/analyzer_activity"
+		android:name="cz.kotox.dsp.ui.analyzer.AnalyzerActivity"
+		android:label="@string/analyzer"
+		tools:layout="@layout/analyzer_activity">
+
+		<argument
+			android:name="user_id" app:argType="integer" />
+
+	</activity>
+
+
+</navigation>

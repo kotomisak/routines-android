@@ -16,4 +16,8 @@
 
 	<string name="home">home</string>
 	<string name="title_settings">SettingsX</string>
+
+	<string name="analyzer">analyzer</string>
+
+	<string name="confidence_title">Use confidence %.0f \%%</string>
 </resources>

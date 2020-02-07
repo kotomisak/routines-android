@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright 2017, The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,9 +18,10 @@
 	package="cz.kotox.dsp">
 
 	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.RECORD_AUDIO" />
 
 	<application
-		android:name=".MobileTemplateApplication"
+		android:name=".MobileDspApplication"
 		android:allowBackup="false"
 		android:icon="@mipmap/ic_launcher"
 		android:label="@string/app_name"
@@ -29,13 +29,17 @@
 		android:theme="@style/AppTheme"
 		tools:ignore="GoogleAppIndexingWarning">
 		<activity android:name=".ui.MainActivity">
+			<nav-graph android:value="@navigation/dsp_main_navigation" />
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 
 				<category android:name="android.intent.category.DEFAULT" />
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
+		</activity>
 
+		<activity android:name=".ui.analyzer.AnalyzerActivity">
+			<nav-graph android:value="@navigation/analyzer_navigation" />
 		</activity>
 
 	</application>

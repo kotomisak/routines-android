@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools">
+	<data>
+
+		<variable
+			name="viewModel"
+			type="cz.kotox.dsp.ui.analyzer.record.AnalyzerRecordViewModel" />
+	</data>
+
+	<androidx.constraintlayout.widget.ConstraintLayout
+		android:id="@+id/linearLayout"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		tools:ignore="MissingDefaultResource">
+
+		<!-- TODO this is temporary placeholder content for dashboard -->
+
+		<com.google.android.material.button.MaterialButton
+			android:id="@+id/change_pitch_algorithm"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:text="@{viewModel.pitchAlgorithm.toString()}"
+			app:layout_constraintEnd_toEndOf="@id/keyline_end"
+			app:layout_constraintStart_toStartOf="@id/keyline_start"
+			app:layout_constraintTop_toTopOf="parent"
+			tools:text="FFT_PITCH" />
+
+		<com.google.android.material.switchmaterial.SwitchMaterial
+			android:id="@+id/use_probability"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:checked="@{viewModel.useProbability}"
+			android:text="@{String.format(@string/confidence_title, viewModel.pitchProbabilityThreshold*100)}"
+			app:layout_constraintStart_toStartOf="@id/keyline_start"
+			app:layout_constraintTop_toBottomOf="@+id/change_pitch_algorithm"
+			app:switchPadding="@dimen/global_keyline_horizontal" />
+
+		<!--		<ImageView-->
+		<!--			android:id="@+id/ic_analyzer_process_placeholder"-->
+		<!--			android:layout_width="0dp"-->
+		<!--			android:layout_height="0dp"-->
+		<!--			android:alpha="0.05"-->
+		<!--			android:src="@drawable/ic_mic_black_24dp"-->
+		<!--			app:layout_constraintBottom_toTopOf="@+id/processing_max"-->
+		<!--			app:layout_constraintEnd_toEndOf="@id/keyline_end"-->
+		<!--			app:layout_constraintStart_toStartOf="@id/keyline_start"-->
+		<!--			app:layout_constraintTop_toBottomOf="@+id/change_pitch_algorithm" />-->
+
+		<com.anand.brose.graphviewlibrary.GraphView
+			android:id="@+id/graphView"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:fillViewport="true"
+			app:layout_constraintBottom_toTopOf="@+id/processing_max"
+			app:layout_constraintEnd_toEndOf="@id/keyline_end"
+			app:layout_constraintStart_toStartOf="@id/keyline_start"
+			app:layout_constraintTop_toBottomOf="@+id/use_probability" />
+
+		<androidx.cardview.widget.CardView
+			android:id="@+id/processing_min"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			app:layout_constraintBottom_toTopOf="@+id/freqency"
+			app:layout_constraintEnd_toEndOf="@id/keyline_middle"
+			app:layout_constraintStart_toStartOf="@id/keyline_start">
+			<com.google.android.material.textfield.TextInputLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:enabled="false"
+				android:hint="min pitch"
+				app:suffixText="Hz"
+				tools:text="2">
+
+				<com.google.android.material.textfield.TextInputEditText
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:text="@{viewModel.min}"
+					android:textAppearance="?textAppearanceBody1" />
+
+			</com.google.android.material.textfield.TextInputLayout>
+		</androidx.cardview.widget.CardView>
+
+		<com.google.android.material.card.MaterialCardView
+			android:id="@+id/processing_max"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			app:layout_constraintBottom_toTopOf="@+id/freqency"
+			app:layout_constraintEnd_toEndOf="@id/keyline_end"
+			app:layout_constraintStart_toStartOf="@id/keyline_middle">
+			<com.google.android.material.textfield.TextInputLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:enabled="false"
+				android:hint="max pitch"
+				app:suffixText="Hz"
+				tools:text="2">
+				<com.google.android.material.textfield.TextInputEditText
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:text="@{viewModel.max}"
+					android:textAppearance="?textAppearanceBody1" />
+			</com.google.android.material.textfield.TextInputLayout>
+		</com.google.android.material.card.MaterialCardView>
+
+		<com.google.android.material.card.MaterialCardView
+			android:id="@+id/freqency"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="@dimen/global_keyline_vertical"
+			android:textAlignment="center"
+			app:layout_constraintBottom_toTopOf="@+id/navigate_processing_bt"
+			app:layout_constraintEnd_toEndOf="@id/keyline_middle"
+			app:layout_constraintStart_toStartOf="@id/keyline_start">
+			<com.google.android.material.textfield.TextInputLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:enabled="false"
+				android:hint="Freq"
+				app:suffixText="Hz"
+				tools:text="2">
+
+				<com.google.android.material.textfield.TextInputEditText
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:text="@{viewModel.frequency}"
+					android:textAppearance="?textAppearanceBody1" />
+
+			</com.google.android.material.textfield.TextInputLayout>
+		</com.google.android.material.card.MaterialCardView>
+
+		<com.google.android.material.card.MaterialCardView
+			android:id="@+id/amplitude"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="@dimen/global_keyline_vertical"
+			android:textAlignment="center"
+			app:layout_constraintBottom_toTopOf="@+id/navigate_processing_bt"
+			app:layout_constraintEnd_toEndOf="@id/keyline_end"
+			app:layout_constraintStart_toStartOf="@id/keyline_middle">
+			<com.google.android.material.textfield.TextInputLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:enabled="false"
+				android:hint="Amplitude"
+				app:suffixText="Hz"
+				tools:text="2">
+
+				<com.google.android.material.textfield.TextInputEditText
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:text="@{viewModel.amplitude}"
+					android:textAppearance="?textAppearanceBody1" />
+
+			</com.google.android.material.textfield.TextInputLayout>
+
+		</com.google.android.material.card.MaterialCardView>
+		<com.google.android.material.button.MaterialButton
+			android:id="@+id/navigate_processing_bt"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:text="Process"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="@id/keyline_end"
+			app:layout_constraintStart_toStartOf="@id/keyline_start" />
+
+		<androidx.constraintlayout.widget.Guideline
+			android:id="@+id/keyline_start"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:orientation="vertical"
+			app:layout_constraintGuide_begin="@dimen/global_keyline_horizontal" />
+
+		<androidx.constraintlayout.widget.Guideline
+			android:id="@+id/keyline_end"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:orientation="vertical"
+			app:layout_constraintGuide_end="@dimen/global_keyline_horizontal" />
+
+		<androidx.constraintlayout.widget.Guideline
+			android:id="@+id/keyline_middle"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:orientation="vertical"
+			app:layout_constraintGuide_percent="0.5" />
+
+	</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

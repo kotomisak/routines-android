@@ -1,7 +1,7 @@
 package cz.kotox.core.ffmpeg.command
 
-import com.opkix.base.ffmpeg.model.VideoTextAlignment
-import com.opkix.base.ffmpeg.model.VideoTextItem
+import cz.kotox.core.ffmpeg.model.VideoTextAlignment
+import cz.kotox.core.ffmpeg.model.VideoTextItem
 
 internal fun getTextFilterParams(textItemList: List<VideoTextItem>): String {
 

@@ -1,6 +1,6 @@
 package com.opkix.base.ffmpeg
 
-import com.opkix.base.ffmpeg.model.VideoCompositionItem
+import cz.kotox.core.ffmpeg.model.VideoCompositionItem
 
 /**
  * Start counting video PTS(presentation timestamp) from zero.

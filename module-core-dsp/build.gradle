@@ -1,0 +1,9 @@
+apply from: "$project_directory/module-core/library.gradle"
+
+dependencies {
+	implementation fileTree(dir: 'libs', include: ['*.jar'])
+	implementation project(':module-core')
+	implementation project(':module-core-arch')
+
+	api files('libs/TarsosDSP-Android-2.4.jar')
+}

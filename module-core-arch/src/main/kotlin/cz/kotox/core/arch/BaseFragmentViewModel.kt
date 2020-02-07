@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import timber.log.Timber
 import javax.inject.Inject
 
 abstract class BaseFragmentViewModel<V : BaseViewModel, B : ViewDataBinding> : BaseFragment(), ViewModelBinder<V, B> {
@@ -34,13 +35,16 @@ abstract class BaseFragmentViewModel<V : BaseViewModel, B : ViewDataBinding> : B
 	}
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+		Timber.e(">>> bfvm oncreateview")
 		super.onCreateView(inflater, container, savedInstanceState)
 		binding = setupBinding(inflater)
+		Timber.e(">>> bfvm binding [$binding]")
 		return binding.root
 	}
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
+		Timber.e(">>> bfvm onviewcreated")
 		observeBaseEvents()
 	}
 }
