@@ -17,6 +17,7 @@
 	<string name="home">home</string>
 	<string name="title_settings">SettingsX</string>
 	<string name="analyzer">analyzer</string>
+	<string name="analyze_action">Start voice analysis</string>
 
 	<string name="record_confidence_title">Use confidence %.0f \%%</string>
 	<string name="record_max_pitch">max pitch</string>
@@ -27,4 +28,5 @@
 
 
 	<string name="result_finish">Finish</string>
+
 </resources>

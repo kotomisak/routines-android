@@ -21,6 +21,7 @@
 			android:id="@+id/change_pitch_algorithm"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
+			android:layout_marginTop="16dp"
 			android:text="@{viewModel.pitchAlgorithm.toString()}"
 			app:layout_constraintEnd_toEndOf="@id/keyline_end"
 			app:layout_constraintStart_toStartOf="@id/keyline_start"
@@ -52,6 +53,7 @@
 			android:id="@+id/graphView"
 			android:layout_width="0dp"
 			android:layout_height="0dp"
+			android:layout_marginBottom="24dp"
 			android:fillViewport="true"
 			app:layout_constraintBottom_toTopOf="@+id/processing_max"
 			app:layout_constraintEnd_toEndOf="@id/keyline_end"
@@ -155,14 +157,16 @@
 			</com.google.android.material.textfield.TextInputLayout>
 
 		</com.google.android.material.card.MaterialCardView>
-		<com.google.android.material.button.MaterialButton
+		<com.google.android.material.floatingactionbutton.FloatingActionButton
 			android:id="@+id/navigate_processing_bt"
-			android:layout_width="0dp"
+			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
+			android:layout_gravity="right|bottom"
+			android:layout_margin="24dp"
 			android:text="@string/record_process"
+			android:src="@drawable/ic_done_black_24dp"
 			app:layout_constraintBottom_toBottomOf="parent"
-			app:layout_constraintEnd_toEndOf="@id/keyline_end"
-			app:layout_constraintStart_toStartOf="@id/keyline_start" />
+			app:layout_constraintEnd_toEndOf="@id/keyline_end" />
 
 		<androidx.constraintlayout.widget.Guideline
 			android:id="@+id/keyline_start"
