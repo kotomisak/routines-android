@@ -44,7 +44,7 @@
 			android:id="@+id/navigate_finish_analyzer_bt"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_gravity="right|bottom"
+			android:layout_gravity="end|bottom"
 			android:layout_margin="24dp"
 			android:text="@string/result_finish"
 			android:src="@drawable/ic_done_all_black_24dp"
