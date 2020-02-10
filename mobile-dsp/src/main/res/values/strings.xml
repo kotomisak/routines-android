@@ -16,13 +16,15 @@
 
 	<string name="home">home</string>
 	<string name="title_settings">SettingsX</string>
-
 	<string name="analyzer">analyzer</string>
 
-	<string name="confidence_title">Use confidence %.0f \%%</string>
-	<string name="max_pitch">max pitch</string>
-	<string name="min_pitch">min pitch</string>
-	<string name="freq">Freq</string>
-	<string name="amplitude">Amplitude</string>
-	<string name="process">Process</string>
+	<string name="record_confidence_title">Use confidence %.0f \%%</string>
+	<string name="record_max_pitch">max pitch</string>
+	<string name="record_min_pitch">min pitch</string>
+	<string name="record_freq">Freq</string>
+	<string name="record_amplitude">Amplitude</string>
+	<string name="record_process">Process</string>
+
+
+	<string name="result_finish">Finish</string>
 </resources>

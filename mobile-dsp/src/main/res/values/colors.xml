@@ -11,8 +11,9 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<resources xmlns:tools="http://schemas.android.com/tools">
-	<color name="colorPrimary" tools:ignore="MissingDefaultResource">#3F51B5</color>
-	<color name="colorPrimaryDark">#303F9F</color>
-	<color name="colorAccent">#FF4081</color>
+<resources>
+	<color name="primaryColor">#90c697</color>
+	<color name="primaryLightColor">#c1f9c8</color>
+	<color name="primaryDarkColor">#619569</color>
+	<color name="primaryTextColor">#000000</color>
 </resources>

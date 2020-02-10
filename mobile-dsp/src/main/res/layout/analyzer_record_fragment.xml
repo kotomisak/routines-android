@@ -32,7 +32,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:checked="@{viewModel.useProbability}"
-			android:text="@{String.format(@string/confidence_title, viewModel.pitchProbabilityThreshold*100)}"
+			android:text="@{String.format(@string/record_confidence_title, viewModel.pitchProbabilityThreshold*100)}"
 			app:layout_constraintStart_toStartOf="@id/keyline_start"
 			app:layout_constraintTop_toBottomOf="@+id/change_pitch_algorithm"
 			app:switchPadding="@dimen/global_keyline_horizontal" />
@@ -69,7 +69,7 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:enabled="false"
-				android:hint="@string/min_pitch"
+				android:hint="@string/record_min_pitch"
 				app:suffixText="Hz"
 				tools:text="2">
 
@@ -93,7 +93,7 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:enabled="false"
-				android:hint="@string/max_pitch"
+				android:hint="@string/record_max_pitch"
 				app:suffixText="Hz"
 				tools:text="2">
 				<com.google.android.material.textfield.TextInputEditText
@@ -117,7 +117,7 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:enabled="false"
-				android:hint="@string/freq"
+				android:hint="@string/record_freq"
 				app:suffixText="Hz"
 				tools:text="2">
 
@@ -143,7 +143,7 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:enabled="false"
-				android:hint="@string/amplitude"
+				android:hint="@string/record_amplitude"
 				tools:text="2">
 
 				<com.google.android.material.textfield.TextInputEditText
@@ -159,7 +159,7 @@
 			android:id="@+id/navigate_processing_bt"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
-			android:text="@string/process"
+			android:text="@string/record_process"
 			app:layout_constraintBottom_toBottomOf="parent"
 			app:layout_constraintEnd_toEndOf="@id/keyline_end"
 			app:layout_constraintStart_toStartOf="@id/keyline_start" />
