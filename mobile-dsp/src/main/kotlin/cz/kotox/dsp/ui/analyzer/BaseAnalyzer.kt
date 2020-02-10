@@ -2,9 +2,11 @@ package cz.kotox.dsp.ui.analyzer
 
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import cz.kotox.core.arch.BaseFragmentViewModel
+import cz.kotox.core.arch.BaseViewModel
 
 abstract class BaseAnalyzerFragment<V : BaseAnalyzerViewModel, B : ViewDataBinding> : BaseFragmentViewModel<V, B>() {
 	companion object {
@@ -25,4 +27,10 @@ abstract class BaseAnalyzerFragment<V : BaseAnalyzerViewModel, B : ViewDataBindi
 		currentViewModel.mainViewModel = getCreateConsultationViewModel(baseActivity, viewModelFactory)
 		return currentViewModel
 	}
+}
+
+abstract class BaseAnalyzerViewModel : BaseViewModel(), LifecycleObserver {
+	lateinit var mainViewModel: AnalyzerViewModel // is inserted after constructor
+		internal set
+
 }
