@@ -17,14 +17,26 @@
 
 		<!-- TODO this is temporary placeholder content for dashboard -->
 
+		<com.google.android.material.textview.MaterialTextView
+			android:id="@+id/pitch_algorithm_title"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginEnd="16dp"
+			android:text="@string/record_pitch_algorythm_title"
+			android:textAlignment="textStart"
+			app:layout_constraintBottom_toBottomOf="@+id/change_pitch_algorithm"
+			app:layout_constraintStart_toStartOf="@id/keyline_start"
+			app:layout_constraintTop_toTopOf="@+id/change_pitch_algorithm" />
+
 		<com.google.android.material.button.MaterialButton
 			android:id="@+id/change_pitch_algorithm"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
+			android:layout_marginStart="16dp"
 			android:layout_marginTop="16dp"
 			android:text="@{viewModel.pitchAlgorithm.toString()}"
 			app:layout_constraintEnd_toEndOf="@id/keyline_end"
-			app:layout_constraintStart_toStartOf="@id/keyline_start"
+			app:layout_constraintStart_toEndOf="@+id/pitch_algorithm_title"
 			app:layout_constraintTop_toTopOf="parent"
 			tools:text="FFT_PITCH" />
 

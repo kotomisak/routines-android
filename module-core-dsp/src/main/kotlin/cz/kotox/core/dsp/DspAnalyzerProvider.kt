@@ -18,7 +18,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class DspProvider @Inject constructor() {
+class DspAnalyzerProvider @Inject constructor() {
 
 	private var audioDispatcher: AudioDispatcher? = null
 	private var currentAudioProcessor: PitchProcessor? = null
@@ -51,12 +51,14 @@ class DspProvider @Inject constructor() {
 		currentPitchList: List<VoiceSample>
 	) = callbackFlow<VoiceSample> {
 
-		stopDispatch()
+		Timber.e(">>>X call runDispatch")
+		//stopDispatch()
 		audioDispatcher = try {
 			AudioDispatcherFactory.fromDefaultMicrophone(sampleRate, audioBufferSize, bufferOverlap)
 		} catch (ise: IllegalStateException) {
 			stopDispatch()
 			ise.printStackTrace()
+			Timber.e(">>>X failure when init dispatcher !!!")
 			/**
 			 *  java.lang.IllegalStateException: startRecording() called on an uninitialized AudioRecord.
 			 *  at android.media.AudioRecord.startRecording(AudioRecord.java:1075)
@@ -102,10 +104,10 @@ class DspProvider @Inject constructor() {
 
 				}
 			} else {
-				sendSample(VoiceSample(pitchInHz, audioEvent.timeStamp, amplitude ?: 0f, frequency
+				sendSample(VoiceSample(pitchInHz, audioEvent.timeStamp, amplitude
+					?: 0f, frequency
 					?: 0f))
 			}
 		}
 	}
-
 }

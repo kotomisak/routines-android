@@ -48,6 +48,7 @@ buildscript {
 				'ktx_fragment'             : '1.1.0-rc03',
 				'ktx_lifecycle'            : '2.2.0',
 				'ktx_collection'           : '1.1.0',
+				'ktx_paging'               : '2.1.1',
 
 				'rx_rxandroid'             : '2.1.1',
 				'rx_rxjava'                : '2.2.11',

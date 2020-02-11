@@ -6,9 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.OnLifecycleEvent
 import cz.kotox.core.PreferencesCore
 import cz.kotox.core.arch.BaseViewModel
-import cz.kotox.core.arch.ObservableViewModel
 import cz.kotox.core.entity.AppVersion
-import timber.log.Timber
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(appVersion: AppVersion) : BaseViewModel(), LifecycleObserver {

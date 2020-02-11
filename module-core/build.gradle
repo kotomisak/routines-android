@@ -46,6 +46,7 @@ dependencies {
 	api "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.ktx_lifecycle}"
 	api "androidx.lifecycle:lifecycle-reactivestreams-ktx:${versions.ktx_lifecycle}"
 	api "androidx.collection:collection-ktx:${versions.ktx_collection}"
+	api "androidx.paging:paging-runtime-ktx:${versions.ktx_paging}"
 
 	api "com.google.android.material:material:${versions.material_design}"
 

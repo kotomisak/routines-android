@@ -22,8 +22,7 @@ interface ViewModelBinder<V : BaseViewModel, B : ViewDataBinding> : LifecycleOwn
 	fun setupBinding(inflater: LayoutInflater): B = inflateBindingLayout(inflater).apply {
 		lifecycleOwner = getViewLifecycleOwner()
 
-		//TODO
-//		setVariable(BR.view, this@ViewModelBinder)
+		setVariable(BR.view, this@ViewModelBinder)
 		setVariable(BR.viewModel, viewModel)
 	}
 

@@ -6,11 +6,15 @@ import cz.kotox.dsp.ui.MainActivity
 import cz.kotox.dsp.ui.MainFragment
 import cz.kotox.dsp.ui.MainViewModel
 import cz.kotox.dsp.ui.analyzer.AnalyzerActivity
-import cz.kotox.dsp.ui.analyzer.record.AnalyzerRecordFragment
-import cz.kotox.dsp.ui.analyzer.result.AnalyzerResultFragment
-import cz.kotox.dsp.ui.analyzer.result.AnalyzerResultViewModel
-import cz.kotox.dsp.ui.analyzer.record.AnalyzerRecordViewModel
 import cz.kotox.dsp.ui.analyzer.AnalyzerViewModel
+import cz.kotox.dsp.ui.analyzer.record.AnalyzerRecordFragment
+import cz.kotox.dsp.ui.analyzer.record.AnalyzerRecordViewModel
+import cz.kotox.dsp.ui.analyzer.result.AnalyzerResultFragment
+import cz.kotox.dsp.ui.analyzer.result.AnalyzerResultListFragment
+import cz.kotox.dsp.ui.analyzer.result.AnalyzerResultListViewModel
+import cz.kotox.dsp.ui.analyzer.result.AnalyzerResultPlayerFragment
+import cz.kotox.dsp.ui.analyzer.result.AnalyzerResultPlayerViewModel
+import cz.kotox.dsp.ui.analyzer.result.AnalyzerResultViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -33,24 +37,41 @@ abstract class MobileDspDaggerModule {
 	@ContributesAndroidInjector()
 	abstract fun contributeAnalyzerActivity(): AnalyzerActivity
 
-	@ContributesAndroidInjector
-	abstract fun contributeAnalyzerFragment(): AnalyzerRecordFragment
-
-	@ContributesAndroidInjector
-	abstract fun contributeAnalyzerResultFragment(): AnalyzerResultFragment
-
 	@Binds
 	@IntoMap
 	@ViewModelKey(AnalyzerViewModel::class)
 	abstract fun bindAnalyzerViewModel(analyzerViewModel: AnalyzerViewModel): ViewModel
+
+	@ContributesAndroidInjector
+	abstract fun contributeAnalyzerRecordFragment(): AnalyzerRecordFragment
 
 	@Binds
 	@IntoMap
 	@ViewModelKey(AnalyzerRecordViewModel::class)
 	abstract fun bindAnalyzerRecordViewModel(analyzerRecordViewModel: AnalyzerRecordViewModel): ViewModel
 
+	@ContributesAndroidInjector
+	abstract fun contributeAnalyzerResultFragment(): AnalyzerResultFragment
+
 	@Binds
 	@IntoMap
 	@ViewModelKey(AnalyzerResultViewModel::class)
-	abstract fun bindAnalyzerProcessViewModel(analyzerResultViewModel: AnalyzerResultViewModel): ViewModel
+	abstract fun bindAnalyzerResultViewModel(analyzerResultViewModel: AnalyzerResultViewModel): ViewModel
+
+	@ContributesAndroidInjector
+	abstract fun contributeAnalyzerResultListFragment(): AnalyzerResultListFragment
+
+	@Binds
+	@IntoMap
+	@ViewModelKey(AnalyzerResultListViewModel::class)
+	abstract fun bindAnalyzerResultListViewModel(analyzerResultViewModel: AnalyzerResultListViewModel): ViewModel
+
+	@ContributesAndroidInjector
+	abstract fun contributeAnalyzerResultPlayerFragment(): AnalyzerResultPlayerFragment
+
+	@Binds
+	@IntoMap
+	@ViewModelKey(AnalyzerResultPlayerViewModel::class)
+	abstract fun bindAnalyzerResultPlayerViewModel(analyzerResultViewModel: AnalyzerResultPlayerViewModel): ViewModel
+
 }

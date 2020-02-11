@@ -1,4 +1,4 @@
-package cz.kotox.core.arch.extension
+package cz.kotox.core.arch.ktools
 
 import android.util.Log
 import androidx.lifecycle.LifecycleOwner

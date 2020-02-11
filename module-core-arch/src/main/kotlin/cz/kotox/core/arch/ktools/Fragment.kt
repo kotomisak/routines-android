@@ -1,4 +1,4 @@
-package cz.kotox.core.arch.extension
+package cz.kotox.core.arch.ktools
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
