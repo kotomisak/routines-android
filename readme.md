@@ -8,7 +8,7 @@ More about my [code conetions](code-conventions.md) is here
 # 0. Steps to build (run) any app here  
 Practical guide first:
 
-- Use the latest Stable or beta Android Studio version
+- Use the latest beta Android Studio version
 - In proper mobile-appname directory, copy files from folder **extras/appname_sample** to folder **extras/appname** 
 - In proper mobile-appname directory, rename files in **extras/appname** folder to have names just as this: **appname.properties** / **appname.jks**
 
