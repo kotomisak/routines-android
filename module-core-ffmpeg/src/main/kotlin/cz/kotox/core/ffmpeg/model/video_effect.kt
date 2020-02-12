@@ -1,4 +1,4 @@
-package com.opkix.base.ffmpeg.model
+package cz.kotox.core.ffmpeg.model
 
 enum class VideoEffectType {
 	NONE,

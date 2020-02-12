@@ -1,4 +1,4 @@
-package com.opkix.base.ffmpeg
+package cz.kotox.core.ffmpeg.command
 
 internal fun getVideoSpeedFilter(speedMultiplier: Float): String {
 	if (speedMultiplier <= 0) return ""

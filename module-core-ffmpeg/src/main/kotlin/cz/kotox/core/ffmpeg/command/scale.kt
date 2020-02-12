@@ -1,4 +1,4 @@
-package com.opkix.base.ffmpeg
+package cz.kotox.core.ffmpeg.command
 
 import cz.kotox.core.ffmpeg.model.CanvasItem
 import cz.kotox.core.media.model.VideoDimensions

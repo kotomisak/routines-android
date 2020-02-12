@@ -6,7 +6,7 @@ import com.arthenica.mobileffmpeg.BuildConfig
 import com.arthenica.mobileffmpeg.Config
 import com.arthenica.mobileffmpeg.FFmpeg
 import com.arthenica.mobileffmpeg.Level
-import com.opkix.base.ffmpeg.getConcatFilterScaleCommand
+import cz.kotox.core.ffmpeg.command.getConcatFilterScaleCommand
 import cz.kotox.core.ffmpeg.model.BackgroundMusicItem
 import cz.kotox.core.ffmpeg.model.CanvasItem
 import cz.kotox.core.ffmpeg.model.VideoCompositionItem

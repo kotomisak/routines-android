@@ -1,6 +1,5 @@
 package cz.kotox.core.ffmpeg.model
 
-import com.opkix.base.ffmpeg.model.VideoEffectType
 import java.io.Serializable
 
 enum class VideoTextAlignment() {

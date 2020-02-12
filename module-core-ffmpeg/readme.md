@@ -1,4 +1,4 @@
-# 1. com.opkix.base.ffmpeg
+# 1. FFMpeg core
 
 Contains wrapper file as an connection to ffmpeg library.
 Contains feature oriented ffmpeg command utils to be called on the wrapper.

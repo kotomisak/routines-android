@@ -1,4 +1,4 @@
-package com.opkix.base.ffmpeg
+package cz.kotox.core.ffmpeg.command
 
 /**
  * Rotate video.

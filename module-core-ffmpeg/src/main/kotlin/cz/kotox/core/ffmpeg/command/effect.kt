@@ -1,6 +1,6 @@
-package com.opkix.base.ffmpeg
+package cz.kotox.core.ffmpeg.command
 
-import com.opkix.base.ffmpeg.model.VideoEffectType
+import cz.kotox.core.ffmpeg.model.VideoEffectType
 
 internal fun getEffectFilterParams(effectType: VideoEffectType): String {
 	return when (effectType) {
