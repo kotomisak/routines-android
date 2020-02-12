@@ -3,7 +3,7 @@ Monorepo with all MJ's apps and ideas.
 
 More about Monorepo idea is here https://jenicek.dev/2020/01/31/monorepo/     
 
-More about my [code conetions](code-conventions.md) is here   
+More about my [code conventions](code-conventions.md) is here
 
 # 0. Steps to build (run) any app here  
 Practical guide first:
