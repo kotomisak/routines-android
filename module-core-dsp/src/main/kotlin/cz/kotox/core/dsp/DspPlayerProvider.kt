@@ -15,6 +15,11 @@ import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
 
+sealed class DspPlayerResult {
+	class Success(val audioGenerator: AudioGenerator) : DspPlayerResult()
+	class Error(val exception: Exception) : DspPlayerResult()
+}
+
 /**
  * https://stackoverflow.com/questions/25956415/tarsos-dsp-android-audiotrack-plays-static-or-too-fast
  */
@@ -23,7 +28,7 @@ class DspPlayerProvider @Inject constructor() {
 
 	var androidAudioPlayer: AndroidAudioPlayer? = null
 	@ExperimentalCoroutinesApi
-	fun playFrequency() = callbackFlow<AudioGenerator> {
+	fun playFrequency() = callbackFlow<DspPlayerResult> {
 
 		Timber.d(">>> PLAY...")
 		val generator = AudioGenerator(/*1024*/12100, /*0*/6050)
@@ -44,18 +49,19 @@ class DspPlayerProvider @Inject constructor() {
 		generator.addAudioProcessor(DelayEffect(0.757, 0.4, 44100.0))
 		generator.addAudioProcessor(FlangerEffect(0.1, 0.2, 44100.0, 4.0))
 
-		//java.lang.IllegalArgumentException: The buffer size should be at least 10632 (samples) according to  AudioTrack.getMinBufferSize().
 
 		try {
 			androidAudioPlayer = AndroidAudioPlayer(generator.format)
 			generator.addAudioProcessor(AndroidAudioPlayer(generator.format))
 
-		} catch (iae: IllegalArgumentException) {
+			sendBlocking(DspPlayerResult.Success(generator))
+			generator.run()
+		} catch (iae: Exception) {
 			Timber.e(">>>X TarsosDSPAudioFormat failure!!!")
-			iae.printStackTrace()
+			//When bluetooth headsed: java.lang.IllegalArgumentException: The buffer size should be at least 10632 (samples) according to  AudioTrack.getMinBufferSize().
+			sendBlocking(DspPlayerResult.Error(iae))
 		}
-		sendBlocking(generator)
-		generator.run()
+
 	}
 
 	fun finished() {

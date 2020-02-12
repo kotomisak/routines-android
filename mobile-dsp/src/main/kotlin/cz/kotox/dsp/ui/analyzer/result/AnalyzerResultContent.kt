@@ -6,8 +6,10 @@ import android.view.View
 import androidx.lifecycle.LifecycleObserver
 import androidx.recyclerview.widget.DiffUtil
 import be.tarsos.dsp.AudioGenerator
+import cz.kotox.core.arch.ShowToastEvent
 import cz.kotox.core.arch.ktools.DataBoundAdapter
 import cz.kotox.core.dsp.DspPlayerProvider
+import cz.kotox.core.dsp.DspPlayerResult
 import cz.kotox.core.dsp.model.VoiceSample
 import cz.kotox.dsp.BR
 import cz.kotox.dsp.R
@@ -107,8 +109,18 @@ class AnalyzerResultPlayerViewModel @Inject constructor(private val dspPlayer: D
 	fun play() {
 		launch() {
 			dspPlayer.playFrequency().flowOn(Dispatchers.IO).collect {
-				audioGenerator = it
-				Timber.d(">>> PLAYER PLAY generator[${audioGenerator}]")
+				run {
+					when (it) {
+						is DspPlayerResult.Error -> {
+							ShowToastEvent(it.exception.message ?: "Unexpected issue!")
+						}
+						is DspPlayerResult.Success -> {
+							audioGenerator = it.audioGenerator
+						}
+					}
+					Timber.d(">>> PLAYER PLAY generator[${audioGenerator}]")
+				}
+
 			}
 		}
 	}
