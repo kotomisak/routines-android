@@ -10,8 +10,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.OnLifecycleEvent
 import androidx.navigation.Navigation
 import com.anand.brose.graphviewlibrary.WaveSample
+import cz.kotox.core.arch.ShowToastEvent
 import cz.kotox.core.arch.ktools.mutableLiveDataOf
 import cz.kotox.core.dsp.DspAnalyzerProvider
+import cz.kotox.core.dsp.DspAnalyzerResult
 import cz.kotox.core.dsp.model.PitchAlgorithm
 import cz.kotox.core.utility.FragmentPermissionManager
 import cz.kotox.core.utility.lazyUnsafe
@@ -169,23 +171,33 @@ class AnalyzerRecordViewModel @Inject constructor(val dspAnalyzer: DspAnalyzerPr
 		dspAnalyzer.runDispatch(useProbability, probabilityThreshold, pitchAlgorithm, mainViewModel.pitchList.toList())
 			//.onStart { delay(5000) } //just the test whether recording start when collect is invoked.
 			.flowOn(Dispatchers.IO)
-			.collect { sample ->
-				Timber.i(">>> FLOW pitch[$sample.pitch], min[${mainViewModel.pitchList.map { it.pitch }.min()}],max[${mainViewModel.pitchList.map { it.pitch }.max()}]")
+			.collect { dispatchResult ->
 
-				waveList.add(WaveSample(sample.time.toLong(), (sample.amplitude * 100).toInt()))
-
-				if (sample.pitch > 0) {
-
-					if (sample.pitch < mainViewModel.pitchList.map { it.pitch }.min() ?: sample.pitch) {
-						min.value = String.format("%.1f", sample.pitch)
+				when (dispatchResult) {
+					is DspAnalyzerResult.Error -> {
+						sendEvent(ShowToastEvent(dispatchResult.exception.message
+							?: "Unexpected issue!"))
 					}
-					if (sample.pitch > mainViewModel.pitchList.map { it.pitch }.max() ?: sample.pitch) {
-						max.value = String.format("%.1f", sample.pitch)
-					}
+					is DspAnalyzerResult.Success -> {
+						val sample = dispatchResult.voiceSample
+						Timber.i(">>> FLOW pitch[$sample.pitch], min[${mainViewModel.pitchList.map { it.pitch }.min()}],max[${mainViewModel.pitchList.map { it.pitch }.max()}]")
 
-					mainViewModel.pitchList.add(sample)
-					frequency.value = String.format("%.1f", sample.frequency)
-					amplitude.value = String.format("%.3f", sample.amplitude)
+						waveList.add(WaveSample(sample.time.toLong(), (sample.amplitude * 100).toInt()))
+
+						if (sample.pitch > 0) {
+
+							if (sample.pitch < mainViewModel.pitchList.map { it.pitch }.min() ?: sample.pitch) {
+								min.value = String.format("%.1f", sample.pitch)
+							}
+							if (sample.pitch > mainViewModel.pitchList.map { it.pitch }.max() ?: sample.pitch) {
+								max.value = String.format("%.1f", sample.pitch)
+							}
+
+							mainViewModel.pitchList.add(sample)
+							frequency.value = String.format("%.1f", sample.frequency)
+							amplitude.value = String.format("%.3f", sample.amplitude)
+						}
+					}
 				}
 			}
 	}

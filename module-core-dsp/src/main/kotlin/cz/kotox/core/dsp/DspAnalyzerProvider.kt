@@ -17,6 +17,11 @@ import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
 
+sealed class DspAnalyzerResult {
+	class Success(val voiceSample: VoiceSample) : DspAnalyzerResult()
+	class Error(val exception: Exception) : DspAnalyzerResult()
+}
+
 @Singleton
 class DspAnalyzerProvider @Inject constructor() {
 
@@ -49,7 +54,7 @@ class DspAnalyzerProvider @Inject constructor() {
 		probabilityThreshold: Float,
 		pitchAlgorithm: PitchAlgorithm,
 		currentPitchList: List<VoiceSample>
-	) = callbackFlow<VoiceSample> {
+	) = callbackFlow<DspAnalyzerResult> {
 
 		Timber.e(">>>X call runDispatch")
 		//stopDispatch()
@@ -64,13 +69,20 @@ class DspAnalyzerProvider @Inject constructor() {
 			 *  at android.media.AudioRecord.startRecording(AudioRecord.java:1075)
 			 *  at be.tarsos.dsp.io.android.AudioDispatcherFactory.fromDefaultMicrophone(Unknown Source:44)
 			 */
-			AudioDispatcherFactory.fromDefaultMicrophone(sampleRate, audioBufferSize, bufferOverlap)
+			try {
+				//re-try
+				AudioDispatcherFactory.fromDefaultMicrophone(sampleRate, audioBufferSize, bufferOverlap)
+			} catch (e: Exception) {
+				//re-try is not successful
+				sendBlocking(DspAnalyzerResult.Error(e))
+				null
+			}
 		}
 		currentAudioProcessor = PitchProcessor(
 			pitchAlgorithm.toPitchEstimationAlgorithm(),
 			sampleRate.toFloat(),
 			audioBufferSize,
-			getPitchDetectionHandler(useProbability, probabilityThreshold, pitchAlgorithm, currentPitchList) { sendBlocking(it) }
+			getPitchDetectionHandler(useProbability, probabilityThreshold, pitchAlgorithm, currentPitchList) { sendBlocking(DspAnalyzerResult.Success(it)) }
 		)
 		audioDispatcher?.addAudioProcessor(currentAudioProcessor)
 		Timber.e(">>>X running dispatcher [${audioDispatcher}]")
