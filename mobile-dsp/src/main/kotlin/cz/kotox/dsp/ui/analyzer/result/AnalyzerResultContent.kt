@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.DiffUtil
 import be.tarsos.dsp.AudioGenerator
 import cz.kotox.core.arch.ShowToastEvent
 import cz.kotox.core.arch.ktools.DataBoundAdapter
+import cz.kotox.core.arch.liveevent.Event
+import cz.kotox.core.arch.observeEvent
 import cz.kotox.core.dsp.DspPlayerProvider
 import cz.kotox.core.dsp.DspPlayerResult
 import cz.kotox.core.dsp.model.VoiceSample
@@ -68,25 +70,33 @@ class AnalyzerResultPlayerFragment : BaseAnalyzerFragment<AnalyzerResultPlayerVi
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 		binding.playBt.setOnClickListener {
-			startPlayer(it)
+			startPlayer()
 		}
 
 		binding.stopBt.isEnabled = false
 		binding.stopBt.setOnClickListener {
-			stopPlayer(it)
+			stopPlayer()
 		}
+
+		observeEvent<StopPlayerEvent> { stopPlayer() }
 	}
 
-	private fun startPlayer(it: View) {
-		it.isEnabled = false
+	@ExperimentalCoroutinesApi
+	private fun startPlayer() {
+		binding.playBt.isEnabled = false
 		viewModel.play()
 		binding.stopBt.isEnabled = true
 	}
 
-	private fun stopPlayer(it: View) {
-		it.isEnabled = false
+	private fun stopPlayer() {
+		binding.stopBt.isEnabled = false
 		viewModel.stop()
 		binding.playBt.isEnabled = true
+	}
+
+	override fun onPause() {
+		stopPlayer()
+		super.onPause()
 	}
 
 	companion object {
@@ -94,11 +104,6 @@ class AnalyzerResultPlayerFragment : BaseAnalyzerFragment<AnalyzerResultPlayerVi
 			val bundle = Bundle()
 			arguments = bundle
 		}
-	}
-
-	override fun onPause() {
-		stopPlayer(binding.stopBt)
-		super.onPause()
 	}
 }
 
@@ -112,7 +117,12 @@ class AnalyzerResultPlayerViewModel @Inject constructor(private val dspPlayer: D
 				run {
 					when (it) {
 						is DspPlayerResult.Error -> {
-							ShowToastEvent(it.exception.message ?: "Unexpected issue!")
+							Timber.e(it.exception, ">>> PLAYER PLAY ERROR:")
+							launch(Dispatchers.Main) {
+								sendEvent(StopPlayerEvent)
+								sendEvent(ShowToastEvent(it.exception.message
+									?: "Unexpected issue!"))
+							}
 						}
 						is DspPlayerResult.Success -> {
 							audioGenerator = it.audioGenerator
@@ -135,3 +145,5 @@ class AnalyzerResultPlayerViewModel @Inject constructor(private val dspPlayer: D
 		}
 	}
 }
+
+object StopPlayerEvent : Event()
