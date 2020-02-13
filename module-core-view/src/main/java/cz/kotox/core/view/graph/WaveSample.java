@@ -1,4 +1,4 @@
-package com.anand.brose.graphviewlibrary;
+package cz.kotox.core.view.graph;
 
 /**
  * Created by Anand on 25-03-2016.

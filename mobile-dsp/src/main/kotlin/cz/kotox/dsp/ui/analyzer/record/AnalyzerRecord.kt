@@ -9,7 +9,6 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.OnLifecycleEvent
 import androidx.navigation.Navigation
-import com.anand.brose.graphviewlibrary.WaveSample
 import cz.kotox.core.arch.ShowToastEvent
 import cz.kotox.core.arch.ktools.mutableLiveDataOf
 import cz.kotox.core.dsp.DspAnalyzerProvider
@@ -17,6 +16,7 @@ import cz.kotox.core.dsp.DspAnalyzerResult
 import cz.kotox.core.dsp.model.PitchAlgorithm
 import cz.kotox.core.utility.FragmentPermissionManager
 import cz.kotox.core.utility.lazyUnsafe
+import cz.kotox.core.view.graph.WaveSample
 import cz.kotox.dsp.R
 import cz.kotox.dsp.databinding.AnalyzerRecordFragmentBinding
 import cz.kotox.dsp.ui.analyzer.BaseAnalyzerFragment

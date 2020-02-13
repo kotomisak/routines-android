@@ -16,9 +16,10 @@
 
 include ':module-core',
 		':module-core-arch',
+		':module-core-view',
 		':module-core-media',
 		':module-core-ffmpeg',
 		':module-core-dsp',
 		':mobile-template',
-		':mobile-dsp',
-		':graphviewlibrary'
+		':mobile-dsp'
+

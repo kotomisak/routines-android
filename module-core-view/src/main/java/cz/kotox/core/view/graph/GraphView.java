@@ -1,24 +1,24 @@
-package com.anand.brose.graphviewlibrary;
+package cz.kotox.core.view.graph;
 
-        import android.content.Context;
-        import android.graphics.Canvas;
-        import android.graphics.Color;
-        import android.graphics.Paint;
-        import android.graphics.Path;
-        import android.graphics.RectF;
-        import android.util.AttributeSet;
-        import android.util.Log;
-        import android.view.Gravity;
-        import android.view.MotionEvent;
-        import android.view.SurfaceHolder;
-        import android.view.SurfaceView;
-        import android.view.ViewGroup;
-        import android.widget.FrameLayout;
-        import android.widget.HorizontalScrollView;
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Path;
+import android.graphics.RectF;
+import android.util.AttributeSet;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.MotionEvent;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.HorizontalScrollView;
 
-        import java.util.HashMap;
-        import java.util.List;
-        import java.util.Set;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Anand on 25-03-2016.

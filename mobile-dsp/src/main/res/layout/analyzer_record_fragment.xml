@@ -61,7 +61,7 @@
 		<!--			app:layout_constraintStart_toStartOf="@id/keyline_start"-->
 		<!--			app:layout_constraintTop_toBottomOf="@+id/change_pitch_algorithm" />-->
 
-		<com.anand.brose.graphviewlibrary.GraphView
+		<cz.kotox.core.view.graph.GraphView
 			android:id="@+id/graphView"
 			android:layout_width="0dp"
 			android:layout_height="0dp"
