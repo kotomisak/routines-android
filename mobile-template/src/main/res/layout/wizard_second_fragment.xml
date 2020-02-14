@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools">
+	<data>
+
+		<variable
+			name="viewModel"
+			type="cz.kotox.template.ui.wizard.second.WizardSecondViewModel" />
+	</data>
+	<androidx.constraintlayout.widget.ConstraintLayout
+		android:id="@+id/linearLayout"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		tools:ignore="MissingDefaultResource">
+
+		<!--		<ImageView-->
+		<!--			android:id="@+id/ic_analyzer_result_placeholder"-->
+		<!--			android:layout_width="match_parent"-->
+		<!--			android:layout_height="match_parent"-->
+		<!--			android:layout_marginStart="8dp"-->
+		<!--			android:layout_marginTop="8dp"-->
+		<!--			android:layout_marginEnd="8dp"-->
+		<!--			android:layout_marginBottom="8dp"-->
+		<!--			android:alpha="0.05"-->
+		<!--			android:src="@drawable/ic_slideshow_black_24dp"-->
+		<!--			app:layout_constraintBottom_toBottomOf="parent"-->
+		<!--			app:layout_constraintEnd_toEndOf="parent"-->
+		<!--			app:layout_constraintStart_toStartOf="parent"-->
+		<!--			app:layout_constraintTop_toTopOf="parent" />-->
+
+		<com.google.android.material.tabs.TabLayout
+			android:id="@+id/analyzer_tabs"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent" />
+
+		<androidx.viewpager.widget.ViewPager
+			android:id="@+id/analyzer_viewpager"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:layout_marginBottom="24dp"
+			app:layout_constraintBottom_toTopOf="@+id/navigate_finish_analyzer_bt"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/analyzer_tabs" />
+
+
+		<com.google.android.material.floatingactionbutton.FloatingActionButton
+			android:id="@+id/navigate_finish_analyzer_bt"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="end|bottom"
+			android:layout_margin="24dp"
+			android:text="@string/result_finish"
+			android:src="@drawable/ic_done_all_black_24dp"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="@id/keyline_end" />
+
+		<androidx.constraintlayout.widget.Guideline
+			android:id="@+id/keyline_start"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:orientation="vertical"
+			app:layout_constraintGuide_begin="@dimen/global_keyline_horizontal" />
+
+		<androidx.constraintlayout.widget.Guideline
+			android:id="@+id/keyline_end"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:orientation="vertical"
+			app:layout_constraintGuide_end="@dimen/global_keyline_horizontal" />
+
+	</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

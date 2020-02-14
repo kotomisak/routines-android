@@ -5,18 +5,12 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:orientation="vertical">
-	<androidx.appcompat.widget.Toolbar
-		android:id="@+id/toolbar"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:background="@color/colorPrimary"
-		android:theme="@style/ThemeOverlay.AppCompat.Dark" />
 	<fragment
-		android:id="@+id/my_nav_host_fragment"
+		android:id="@+id/main_nav_host_fragment"
 		android:name="androidx.navigation.fragment.NavHostFragment"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		app:navGraph="@navigation/mobile_navigation"
+		app:navGraph="@navigation/dsp_main_navigation"
 		app:defaultNavHost="true"
 		/>
 </LinearLayout>

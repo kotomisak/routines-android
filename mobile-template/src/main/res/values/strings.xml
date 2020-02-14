@@ -13,7 +13,30 @@
   -->
 <resources>
 
-
 	<string name="home">home</string>
-	<string name="title_settings">SettingsX</string>
+	<string name="title_settings">Settings</string>
+	<string name="template">wizard</string>
+	<string name="template_action_feature">Enter the wizard</string>
+
+
+	<string name="navigation_main_label">Main</string>
+	<string name="wizard_first_label">Wizard first</string>
+	<string name="wizard_second_label">Wizard second</string>
+	<string name="record_confidence_title">Use confidence %.0f \%%</string>
+	<string name="record_pitch_algorythm_title">Pitch algorithm</string>
+	<string name="record_max_pitch">max pitch</string>
+	<string name="record_min_pitch">min pitch</string>
+	<string name="record_process">Process</string>
+	<string name="record_freq">Freq</string>
+	<string name="record_amplitude">Amplitude</string>
+	<string name="record_time">Time</string>
+
+
+	<string name="result_finish">Finish</string>
+	<string name="result_sample_item_frequency">%.3f</string>
+	<string name="result_sample_item_time">%.17f</string>
+	<string name="result_freq">Freq (Hz)</string>
+	<string name="result_amplitude">Ampl.</string>
+	<string name="result_time">Time (sec)</string>
+
 </resources>

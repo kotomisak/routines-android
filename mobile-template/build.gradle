@@ -26,13 +26,13 @@ final APK_NAME = "ScreenNavigationTemplate"
 android {
     compileSdkVersion versions.sdk
     defaultConfig {
-        applicationId 'cz.kotox.routines'
+        applicationId 'cz.kotox.dsp'
         minSdkVersion versions.min_sdk
         targetSdkVersion versions.sdk
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        resValue "string", "app_name", "AppScrNav"
+        resValue "string", "app_name", "Template"
     }
 
     buildTypes {
@@ -80,24 +80,11 @@ android {
         abortOnError false
     }
 
-//    applicationVariants.all {variant ->
-//
-//        //exclude test utils from any generated apk variant
-//        variant.getCompileConfiguration().exclude module: 'module-test-utils'
-//        variant.getRuntimeConfiguration().exclude module: 'modole-test-utils'
-//        renameArtifact(variant, APK_NAME)
-//
-////        def filesAuthorityValue = applicationId + ".fileprovider"
-////        variant.buildConfigField "String", "FILES_AUTHORITY", "\"${filesAuthorityValue}\""
-////        variant.getMergedFlavor().manifestPlaceholders = [filesAuthority: filesAuthorityValue]
-//    }
-
 }
 
 dependencies {
 
     implementation project(':module-core')
     implementation project(':module-core-arch')
-//    implementation project(':module-test-utils')
 
 }

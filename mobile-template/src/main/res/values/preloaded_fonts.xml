@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<array name="preloaded_fonts" translatable="false">
+		<item>@font/karla</item>
+		<item>@font/karla_bold</item>
+		<item>@font/karla_bold_italic</item>
+		<item>@font/karla_italic</item>
+	</array>
+</resources>
