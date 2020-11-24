@@ -15,11 +15,11 @@
  */
 
 include ':core',
-		':module-core-arch',
-		':module-core-view',
-		':module-core-media',
-		':module-core-ffmpeg',
-		':module-core-dsp',
+        ':core-arch-mvvm-databinding',
+		':core-view',
+		':core-media',
+		':core-ffmpeg',
+		':core-dsp',
 		':mobile-template',
 		':mobile-dsp'
 

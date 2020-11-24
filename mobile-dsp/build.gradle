@@ -85,10 +85,10 @@ android {
 dependencies {
 
     implementation project(':core')
-    implementation project(':module-core-arch')
-    implementation project(':module-core-dsp')
+    implementation project(':core-arch-mvvm-databinding')
+    implementation project(':core-dsp')
 
-    implementation project(':module-core-view')
+    implementation project(':core-view')
 
 
 

@@ -19,10 +19,10 @@ Practical guide first:
 | **[mobile-dsp](./mobile-dsp/readme.md)**                 | Sample application showcase of digital sound processing without JNI requirement                                            |
 | **[mobiel-template](./mobile-template/readme.md)**       | Just dummy template to be used for new app                                                                                 |
 | **core**                                                 | The most core code to be available across all other modules                                                                |
-| **module-core-arch**                                     | All the boilerplate architectural code which could be extended in all other modules                                        |
-| **[module-core-dsp](./module-core-dsp/readme.md)**       | Core module wrapping [TarsoDSP](https://github.com/JorenSix/TarsosDSP) library and offering functional API outside         |
-| **[module-core-ffmpeg](./module-core-ffmpeg/readme.md)** | Core module wrapping [Tenersener](https://github.com/tanersener/mobile-ffmpeg) library and offering functional API outside |
-| **module-core-media**                                    | Core media handling module                                                                                                 |
+| **core-arch**                                            | All the boilerplate architectural code which could be extended in all other modules                                        |
+| **[core-dsp](./core-dsp/readme.md)**                     | Core module wrapping [TarsoDSP](https://github.com/JorenSix/TarsosDSP) library and offering functional API outside         |
+| **[core-ffmpeg](./core-ffmpeg/readme.md)**               | Core module wrapping [Tenersener](https://github.com/tanersener/mobile-ffmpeg) library and offering functional API outside |
+| **core-media**                                           | Core media handling module                                                                                                 |
 | **graphviewlibrary**                                     | Temporary fork of [amplitude view](https://github.com/anandBrose/AmplitudeGraphView-Android) library                       |
 
 

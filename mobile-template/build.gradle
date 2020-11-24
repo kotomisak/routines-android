@@ -85,6 +85,6 @@ android {
 dependencies {
 
     implementation project(':core')
-    implementation project(':module-core-arch')
+    implementation project(':core-arch-mvvm-databinding')
 
 }

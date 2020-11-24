@@ -12,7 +12,7 @@ Then in next steps process this voice accordingly.
 
 
 ## Dependency
-It has been using [module-core-dsp](../module-core-dsp/readme.md) as an wrapper library for sound processing.
+It has been using [core-dsp](../core-dsp/readme.md) as an wrapper library for sound processing.
 
 
 [recording-screen-ref]:./extras/screens/dsp-screen-record.png
