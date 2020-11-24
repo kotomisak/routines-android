@@ -12,8 +12,6 @@ import cz.kotox.dsp.ui.analyzer.record.AnalyzerRecordViewModel
 import cz.kotox.dsp.ui.analyzer.result.AnalyzerResultFragment
 import cz.kotox.dsp.ui.analyzer.result.AnalyzerResultListFragment
 import cz.kotox.dsp.ui.analyzer.result.AnalyzerResultListViewModel
-import cz.kotox.dsp.ui.analyzer.result.AnalyzerResultPlayerFragment
-import cz.kotox.dsp.ui.analyzer.result.AnalyzerResultPlayerViewModel
 import cz.kotox.dsp.ui.analyzer.result.AnalyzerResultViewModel
 import dagger.Binds
 import dagger.Module
@@ -65,13 +63,5 @@ abstract class MobileDspDaggerModule {
 	@IntoMap
 	@ViewModelKey(AnalyzerResultListViewModel::class)
 	abstract fun bindAnalyzerResultListViewModel(analyzerResultViewModel: AnalyzerResultListViewModel): ViewModel
-
-	@ContributesAndroidInjector
-	abstract fun contributeAnalyzerResultPlayerFragment(): AnalyzerResultPlayerFragment
-
-	@Binds
-	@IntoMap
-	@ViewModelKey(AnalyzerResultPlayerViewModel::class)
-	abstract fun bindAnalyzerResultPlayerViewModel(analyzerResultViewModel: AnalyzerResultPlayerViewModel): ViewModel
 
 }

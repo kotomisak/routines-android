@@ -3,6 +3,7 @@ apply from: "$project_directory/core/library.gradle"
 dependencies {
 	implementation fileTree(dir: 'libs', include: ['*.jar'])
 	implementation project(':core')
+	implementation project(':core-analytics')
 	implementation project(':core-arch-mvvm-databinding')
 
 	api files('libs/TarsosDSP-Android-2.4.jar')

@@ -15,6 +15,7 @@
  */
 
 include ':core',
+		':core-analytics',
         ':core-arch-mvvm-databinding',
 		':core-view',
 		':core-media',

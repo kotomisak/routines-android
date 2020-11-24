@@ -1,0 +1,11 @@
+apply from: "$project_directory/core/library.gradle"
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':core')
+
+    //Firebase analytics
+    api "com.google.firebase:firebase-analytics:${versions.firebase_analytics}"
+    api "com.google.firebase:firebase-analytics-ktx:${versions.firebase_analytics}"
+
+}

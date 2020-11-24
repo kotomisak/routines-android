@@ -14,6 +14,7 @@ import cz.kotox.core.arch.ktools.mutableLiveDataOf
 import cz.kotox.core.dsp.DspAnalyzerProvider
 import cz.kotox.core.dsp.DspAnalyzerResult
 import cz.kotox.core.dsp.model.PitchAlgorithm
+import cz.kotox.core.dsp.model.VoiceSample
 import cz.kotox.core.utility.FragmentPermissionManager
 import cz.kotox.core.utility.lazyUnsafe
 import cz.kotox.core.view.graph.WaveSample
@@ -21,12 +22,9 @@ import cz.kotox.dsp.R
 import cz.kotox.dsp.databinding.AnalyzerRecordFragmentBinding
 import cz.kotox.dsp.ui.analyzer.BaseAnalyzerFragment
 import cz.kotox.dsp.ui.analyzer.BaseAnalyzerViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.Job
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -143,7 +141,7 @@ class AnalyzerRecordViewModel @Inject constructor(val dspAnalyzer: DspAnalyzerPr
 	@OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
 	private fun testLifeCycleOnResume() {
 		launch {
-			pitchAlgorithm.value?.let { initRecording(requireNotNull(useProbability.value), pitchProbabilityThreshold, it) }
+			pitchAlgorithm.value?.let { initRecording(useProbability = false, probabilityThreshold = 0f, pitchAlgorithm = PitchAlgorithm.FFT_YIN) }
 		}
 	}
 
@@ -168,39 +166,40 @@ class AnalyzerRecordViewModel @Inject constructor(val dspAnalyzer: DspAnalyzerPr
 	private suspend fun initRecording(useProbability: Boolean, probabilityThreshold: Float, pitchAlgorithm: PitchAlgorithm) {
 		Timber.w(">>>X init recording")
 		dspAnalyzer.stopDispatch()
-		dspAnalyzer.runDispatch(useProbability, probabilityThreshold, pitchAlgorithm, mainViewModel.pitchList.toList())
-			//.onStart { delay(5000) } //just the test whether recording start when collect is invoked.
-			.flowOn(Dispatchers.IO)
-			.collect { dispatchResult ->
+		dspAnalyzer.runDispatch(useProbability = useProbability, probabilityThreshold = probabilityThreshold, pitchAlgorithm = pitchAlgorithm, currentPitchList = mainViewModel.pitchList.toList())
+				//.onStart { delay(5000) } //just the test whether recording start when collect is invoked.
+				.flowOn(Dispatchers.IO)
+				.collect { dispatchResult ->
 
-				when (dispatchResult) {
-					is DspAnalyzerResult.Error -> {
-						sendEvent(ShowToastEvent(dispatchResult.exception.message
-							?: "Unexpected issue!"))
-					}
-					is DspAnalyzerResult.Success -> {
-						val sample = dispatchResult.voiceSample
-						Timber.i(">>> FLOW pitch[$sample.pitch], min[${mainViewModel.pitchList.map { it.pitch }.min()}],max[${mainViewModel.pitchList.map { it.pitch }.max()}]")
+					when (dispatchResult) {
+						is DspAnalyzerResult.Error -> {
+							sendEvent(ShowToastEvent(dispatchResult.throwable.message
+									?: "Unexpected issue!"))
+						}
+						is DspAnalyzerResult.Data -> {
+							val sample = dispatchResult.voiceSample
+							Timber.i(">>> FLOW pitch[$sample.pitch], min[${mainViewModel.pitchList.map { it.pitch }.min()}],max[${mainViewModel.pitchList.map { it.pitch }.max()}]")
 
-						waveList.add(WaveSample(sample.time.toLong(), (sample.amplitude * 100).toInt()))
+							waveList.add(WaveSample(sample.time.toLong(), (sample.amplitude * 100).toInt()))
 
-						if (sample.pitch > 0) {
+							if (sample.pitch > 0) {
 
-							if (sample.pitch < mainViewModel.pitchList.map { it.pitch }.min() ?: sample.pitch) {
-								min.value = String.format("%.1f", sample.pitch)
+								if (sample.pitch < mainViewModel.pitchList.map { it.pitch }.min() ?: sample.pitch) {
+									min.value = String.format("%.1f", sample.pitch)
+								}
+								if (sample.pitch > mainViewModel.pitchList.map { it.pitch }.max() ?: sample.pitch) {
+									max.value = String.format("%.1f", sample.pitch)
+								}
+
+								mainViewModel.pitchList.add(sample)
+								frequency.value = String.format("%.1f", sample.frequency)
+								amplitude.value = String.format("%.3f", sample.amplitude)
 							}
-							if (sample.pitch > mainViewModel.pitchList.map { it.pitch }.max() ?: sample.pitch) {
-								max.value = String.format("%.1f", sample.pitch)
-							}
-
-							mainViewModel.pitchList.add(sample)
-							frequency.value = String.format("%.1f", sample.frequency)
-							amplitude.value = String.format("%.3f", sample.amplitude)
 						}
 					}
 				}
-			}
 	}
+
 
 }
 

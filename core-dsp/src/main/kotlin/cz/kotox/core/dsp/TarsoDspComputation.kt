@@ -1,4 +1,4 @@
-package cz.kotox.core.dsp
+package com.lightbrite.android.core.dsp
 
 import be.tarsos.dsp.AudioEvent
 import be.tarsos.dsp.EnvelopeFollower

@@ -14,7 +14,8 @@ object VideoUtils {
 		val mediaRetriever = MediaMetadataRetriever().apply { setDataSource(path) }
 		val durationString = mediaRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION)
 		mediaRetriever.release()
-		return durationString.toLong()
+		if (durationString == null) Log.e(VideoUtils.javaClass.name, "Unable to extract metadata MediaMetadataRetriever.METADATA_KEY_DURATION for path: $path")
+		return durationString?.toLong() ?: 0
 	}
 
 	/**
@@ -44,8 +45,8 @@ object VideoUtils {
 
 	fun getStabilizedPath(path: String) = path.replace(".mp4", "_stabilized.mp4")
 
-	fun getBitmapForThumbnail(videoPath: String, frameMs: Long = 0): Bitmap {
+	fun getBitmapForThumbnail(videoPath: String, frameMs: Long = 0): Bitmap? {
 		val mediaRetriever = MediaMetadataRetriever().apply { setDataSource(videoPath) }
-		return mediaRetriever.getFrameAtTime(frameMs*1000)
+		return mediaRetriever.getFrameAtTime(frameMs * 1000)
 	}
 }

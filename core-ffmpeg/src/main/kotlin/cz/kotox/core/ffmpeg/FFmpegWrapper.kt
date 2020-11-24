@@ -60,7 +60,7 @@ class FFmpegWrapper() {
 			check(videoPath.isNotBlank())
 
 			// get current rotation
-			val currentRotation = MediaMetadataRetriever().apply { setDataSource(videoPath) }.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_ROTATION).toInt()
+			val currentRotation = MediaMetadataRetriever().apply { setDataSource(videoPath) }.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_ROTATION)?.toInt()
 
 			// If you want to set 90° to metadata, you have to set 270° to ffmpeg and vice versa. 0° and 180° work correctly.
 			val newRotation = when (currentRotation) {
@@ -75,16 +75,16 @@ class FFmpegWrapper() {
 			val rotatedPath = videoPath.replace(".$fileType", "_rotated.$fileType")
 
 			val rotationCommandArray = arrayOf(
-				"-y",
-				"-i",
-				videoPath,
-				"-map_metadata",
-				"0",
-				"-metadata:s:v",
-				"rotate=$newRotation",
-				"-codec",
-				"copy",
-				rotatedPath
+					"-y",
+					"-i",
+					videoPath,
+					"-map_metadata",
+					"0",
+					"-metadata:s:v",
+					"rotate=$newRotation",
+					"-codec",
+					"copy",
+					rotatedPath
 			)
 
 			val result = executeFFmpegCommand(rotationCommandArray)
@@ -107,11 +107,11 @@ class FFmpegWrapper() {
 	 * https://trac.ffmpeg.org/wiki/Concatenate
 	 */
 	suspend fun requestVideoComposition(
-		inputItemsList: List<VideoCompositionItem>,
-		inputBackgroundMusic: BackgroundMusicItem?,
-		outputItem: VideoOutputItem,
-		progressCallback: (Float) -> Unit,
-		job: Job? = null
+			inputItemsList: List<VideoCompositionItem>,
+			inputBackgroundMusic: BackgroundMusicItem?,
+			outputItem: VideoOutputItem,
+			progressCallback: (Float) -> Unit,
+			job: Job? = null
 	): FFmpegResponse {
 		if (commandRunning) return FFmpegResponse.AlreadyRunning //Prevent wasting of time with data preparation when ffmpeg is already running.
 		return withContext(job?.let { Dispatchers.IO + it } ?: Dispatchers.IO) {
@@ -120,9 +120,9 @@ class FFmpegWrapper() {
 				val commandArray = getConcatFilterScaleCommand(inputItemsList, inputBackgroundMusic, outputItem.path, CanvasItem(outputItem.width, outputItem.height))
 				//Log.e(">>>:", commandArray.joinToString(separator = " "))
 				executeFFmpegCommand(
-					commandArray,
-					progressCallback,
-					inputItemsList.map { VideoDurationItem(it.videoPath, it.speedMultiplier, it.startTimeInMillis, it.endTimeInMillis) }.toTypedArray()
+						commandArray,
+						progressCallback,
+						inputItemsList.map { VideoDurationItem(it.videoPath, it.speedMultiplier, it.startTimeInMillis, it.endTimeInMillis) }.toTypedArray()
 				)
 			} catch (exception: RuntimeException) {
 				FFmpegResponse.Failure(exception)
@@ -143,9 +143,9 @@ class FFmpegWrapper() {
 	}
 
 	private fun executeFFmpegCommand(
-		ffmpegCommand: Array<String>,
-		progress: ((Float) -> Unit)? = null,
-		durationArray: Array<VideoDurationItem> = emptyArray()
+			ffmpegCommand: Array<String>,
+			progress: ((Float) -> Unit)? = null,
+			durationArray: Array<VideoDurationItem> = emptyArray()
 	): FFmpegResponse {
 		if (commandRunning) return FFmpegResponse.AlreadyRunning //Parallel execution is not supported
 		synchronized(commandRunning) {

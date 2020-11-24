@@ -126,7 +126,7 @@ class MobileDspApplication : BaseApplication() {
 	private fun initTimber() {
 		if (CoreConfig.IS_RELEASE_BUILD_TYPE) {
 			// Report crashes for productionRelease
-			if (CoreConfig.IS_PRODUCTION_FLAVOR_TYPE) {
+			if (CoreConfig.IS_PRODUCTION_FLAVOR) {
 				Timber.plant(CrashReportingTree())
 			} else {
 				// Log to console and report crashes for other release builds

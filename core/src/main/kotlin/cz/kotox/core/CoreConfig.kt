@@ -1,12 +1,18 @@
 package cz.kotox.core
 
+private const val FLAVOR_PRODUCTION = "production"
+private const val FLAVOR_STAGING = "staging"
+private const val FLAVOR_DEVELOP = "dev"
+
+private const val BUILD_TYPE_DEBUG = "debug"
+private const val BUILD_TYPE_RELEASE = "release"
+
 object CoreConfig {
-	const val LOGS = BuildConfig.LOGS
-	const val ENVIRONMENT_NAME = BuildConfig.FLAVOR
 
-	const val IS_PRODUCTION_FLAVOR_TYPE = ENVIRONMENT_NAME == "production"
-	const val IS_MOCK_FLAVOR_TYPE = ENVIRONMENT_NAME == "mock"
+	const val IS_PRODUCTION_FLAVOR = BuildConfig.FLAVOR == FLAVOR_PRODUCTION
+	const val IS_STAGING_FLAVOR = BuildConfig.FLAVOR == FLAVOR_STAGING
+	const val IS_DEVELOP_FLAVOR = BuildConfig.FLAVOR == FLAVOR_DEVELOP
 
-	const val IS_DEBUG_BUILD_TYPE = BuildConfig.BUILD_TYPE == "debug"
-	const val IS_RELEASE_BUILD_TYPE = BuildConfig.BUILD_TYPE == "release"
+	const val IS_DEBUG_BUILD_TYPE = BuildConfig.BUILD_TYPE == BUILD_TYPE_DEBUG
+	const val IS_RELEASE_BUILD_TYPE = BuildConfig.BUILD_TYPE == BUILD_TYPE_RELEASE
 }
