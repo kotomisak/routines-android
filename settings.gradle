@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-include ':module-core',
+include ':core',
 		':module-core-arch',
 		':module-core-view',
 		':module-core-media',

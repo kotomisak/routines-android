@@ -19,7 +19,7 @@ apply from: '../common-app.gradle'
 apply from: '../common.gradle'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-//apply from: '../jacoco.gradle' //since app module doesn't apply module-core/library.gradle, thus apply jacoco.gradle extra
+//apply from: '../jacoco.gradle' //since app module doesn't apply core/library.gradle, thus apply jacoco.gradle extra
 
 final APK_NAME = "ScreenNavigationTemplate"
 
@@ -84,7 +84,7 @@ android {
 
 dependencies {
 
-    implementation project(':module-core')
+    implementation project(':core')
     implementation project(':module-core-arch')
 
 }
