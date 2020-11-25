@@ -16,8 +16,8 @@ Practical guide first:
 
 | app or module name                                       | description                                                                                                                |
 |:---------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------|
-| **[mobile-dsp](./mobile-dsp/readme.md)**                 | Sample application showcase of digital sound processing without JNI requirement                                            |
-| **[mobiel-template](./mobile-template/readme.md)**       | Just dummy template to be used for new app                                                                                 |
+| **[mobile-dsp-mvvm-databinding](./mobile-dsp-mvvm-databinding/readme.md)**                 | Sample application showcase of digital sound processing without JNI requirement                                            |
+| **[mobiel-template-mvvm-databinding](./mobile-template-mvvm-databinding/readme.md)**       | Just dummy template to be used for new app                                                                                 |
 | **core**                                                 | The most core code to be available across all other modules                                                                |
 | **core-arch**                                            | All the boilerplate architectural code which could be extended in all other modules                                        |
 | **[core-dsp](./core-dsp/readme.md)**                     | Core module wrapping [TarsoDSP](https://github.com/JorenSix/TarsosDSP) library and offering functional API outside         |

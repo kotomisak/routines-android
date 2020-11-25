@@ -61,5 +61,5 @@ fastlane/readme.md
 
 # Extras
 /extras/keystore/*.*
-/mobile-dsp/extras/keystore/
-/mobile-template/extras/keystore/
+/mobile-dsp-mvvm-databinding/extras/keystore/
+/mobile-template-mvvm-databinding/extras/keystore/

@@ -1,6 +1,6 @@
 # Data sound processing sample application
 
-mobile-dsp is sample application of data sound processing.
+mobile-dsp-mvvm-databinding is sample application of data sound processing.
 
 ## Features
 

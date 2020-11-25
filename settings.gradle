@@ -21,6 +21,6 @@ include ':core',
 		':core-media',
 		':core-ffmpeg',
 		':core-dsp',
-		':mobile-template',
-		':mobile-dsp'
+		':mobile-template-mvvm-databinding',
+		':mobile-dsp-mvvm-databinding'
 
