@@ -17,10 +17,11 @@
 include ':core',
 		':core-analytics',
         ':core-arch-mvvm-databinding',
-		':core-view',
-		':core-media',
-		':core-ffmpeg',
 		':core-dsp',
+		':core-ffmpeg',
+		':core-media',
+		':core-webview',
+		':core-view',
 		':mobile-template-mvvm-databinding',
 		':mobile-dsp-mvvm-databinding'
 
