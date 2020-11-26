@@ -1,6 +1,6 @@
 # kotox-android
 
-Monorepo with Android constructs.  
+Monorepo with useful Android constructs (available/reusable as separated modules).  
 
 More about Monorepo idea is here https://jenicek.dev/2020/01/31/monorepo/     
 
