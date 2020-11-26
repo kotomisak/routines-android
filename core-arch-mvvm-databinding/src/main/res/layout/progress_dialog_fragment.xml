@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools">
+
+	<androidx.constraintlayout.widget.ConstraintLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:background="@android:color/transparent">
+
+		<com.google.android.material.card.MaterialCardView
+			android:id="@+id/progress_card"
+			android:layout_width="104dp"
+			android:layout_height="104dp"
+			android:layout_gravity="center_horizontal"
+			app:cardElevation="2dp"
+			app:cardCornerRadius="16dp"
+			app:layout_constraintBottom_toTopOf="@id/progress_title"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent"
+			app:layout_constraintVertical_chainStyle="packed">
+
+			<ProgressBar
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:progress="99" />
+
+		</com.google.android.material.card.MaterialCardView>
+
+		<androidx.appcompat.widget.AppCompatTextView
+			android:id="@+id/progress_title"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="28dp"
+			android:elevation="2dp"
+			android:fontFamily="@font/poppins_semibold"
+			android:gravity="center"
+			android:paddingStart="48dp"
+			android:paddingEnd="48dp"
+			android:textAppearance="?textAppearanceHeadline6"
+			android:textColor="@color/color_on_primary"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/progress_card"
+			tools:text="Progress" />
+
+	</androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

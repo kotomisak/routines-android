@@ -1,4 +1,8 @@
 <resources>
-	<string name="app_name">-</string>
-	<string name="message_not_implemented">Not implemented!</string>
+    <string name="app_name">-</string>
+    <string name="message_not_implemented">Not implemented!</string>
+
+    <string name="field_time_placeholder">Select a time</string>
+    <string name="field_time_suffix_am">AM</string>
+    <string name="field_time_suffix_pm">PM</string>
 </resources>

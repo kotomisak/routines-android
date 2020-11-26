@@ -1,72 +1,72 @@
 package cz.kotox.core.arch
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatDialogFragment
+import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.NavController
 import com.google.android.material.snackbar.Snackbar
-import cz.kotox.core.di.Injectable
-import dagger.android.support.AndroidSupportInjection
-import javax.inject.Inject
+import cz.kotox.core.arch.extension.materialDialog
+import cz.kotox.core.arch.extension.view
 
 abstract class BaseDialogFragment : AppCompatDialogFragment(), BaseUIScreen {
 	override val baseActivity
 		get() = activity as? BaseActivity
 			?: throw IllegalStateException("No activity in this fragment, can't finish")
 
+	override val navController: NavController
+		get() = baseActivity.navController
+
 	override var lastSnackbar: Snackbar? = null
+
+	open val cancelable = true
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		setStyle(DialogFragment.STYLE_NO_TITLE, R.style.Theme_Kotox_Light_Dialog_Alert)
+
+		isCancelable = cancelable
+		retainInstance = !cancelable
+	}
+
+	override fun onActivityCreated(savedInstanceState: Bundle?) {
+		super.onActivityCreated(savedInstanceState)
+
+		// cancelable on touch outside
+		if (dialog != null) requireNotNull(dialog).setCanceledOnTouchOutside(cancelable)
 	}
 
 	override fun onDestroyView() {
+		// http://code.google.com/p/android/issues/detail?id=17423
+		if (dialog != null && retainInstance) requireNotNull(dialog).setDismissMessage(null)
+
 		dismissLastSnackbar()
 		super.onDestroyView()
 	}
 }
 
-/**
- * When you need injecting, but not viewmodel
- */
-abstract class BaseDialogFragmentWithInject : BaseDialogFragment(), Injectable {
-	override fun onCreate(savedInstanceState: Bundle?) {
-		AndroidSupportInjection.inject(this)
-		super.onCreate(savedInstanceState)
-	}
-}
+abstract class BaseDialogFragmentWithBinding<B : ViewDataBinding>(@LayoutRes val layoutResId: Int) : BaseDialogFragment() {
 
-abstract class BaseDialogFragmentWithViewModel<V : BaseViewModel, B : ViewDataBinding> : BaseDialogFragmentWithInject(), ViewModelBinder<V, B> {
-	@Inject
-	lateinit var viewModelFactory: ViewModelProvider.Factory
-	override lateinit var viewModel: V
-	override lateinit var binding: B
-	override val currentFragmentManager: FragmentManager get() = requireFragmentManager()
-
-	inline fun <reified VM : V> findViewModel(ofLifecycleOwner: AppCompatDialogFragment = this, factory: ViewModelProvider.Factory = viewModelFactory) = ViewModelProviders.of(ofLifecycleOwner, factory).get(VM::class.java)
-	inline fun <reified VM : V> findViewModel(ofLifecycleOwner: FragmentActivity, factory: ViewModelProvider.Factory = viewModelFactory) = ViewModelProviders.of(ofLifecycleOwner, factory).get(VM::class.java)
-
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-		viewModel = setupViewModel()
+	val binding: B by lazy {
+		DataBindingUtil.inflate<B>(LayoutInflater.from(activity), layoutResId, null, false)
 	}
 
-	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-		super.onCreateView(inflater, container, savedInstanceState)
-		binding = setupBinding(inflater)
-		return binding.root
-	}
+	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? = binding.root
+
+	override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
+		requireContext().materialDialog {
+			this.view = binding.root
+		}
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
-		observeBaseEvents()
+
+		binding.lifecycleOwner = viewLifecycleOwner
+		binding.setVariable(BR.view, this@BaseDialogFragmentWithBinding)
 	}
+
 }

@@ -1,0 +1,15 @@
+apply from: "$project_directory/core/library.gradle"
+
+dependencies {
+	implementation fileTree(dir: 'libs', include: ['*.jar'])
+	implementation project(':core')
+
+	api "com.squareup.retrofit2:retrofit:${versions.retrofit}"
+	api "com.squareup.okhttp3:logging-interceptor:${versions.okhttp}"
+
+	//Moshi (general movement from gson to moshi)
+	api "com.squareup.moshi:moshi:${versions.moshi}"
+	api "com.squareup.moshi:moshi-adapters:${versions.moshi}"
+//	api "com.serjltt.moshi:moshi-lazy-adapters:2.2"
+	api "com.squareup.retrofit2:converter-moshi:${versions.moshi_converter}"
+}

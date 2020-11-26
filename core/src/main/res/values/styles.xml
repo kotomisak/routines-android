@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+	<!--Components-->
+
+	<!--Appbar-->
+	<style name="Widget.Soulvibe.AppBar" parent="Widget.MaterialComponents.AppBarLayout.Primary">
+		<item name="android:background">@android:color/transparent</item>
+		<item name="elevation">0dp</item>
+	</style>
+
+	<!--Toolbar-->
+	<style name="Widget.Soulvibe.Toolbar" parent="Widget.MaterialComponents.Toolbar.Primary">
+		<item name="android:background">@android:color/transparent</item>
+		<item name="android:elevation">0dp</item>
+		<item name="titleTextAppearance">@style/TextAppearance.Soulvibe.Toolbar</item>
+		<item name="titleTextColor">?colorOnBackground</item>
+		<!--        <item name="android:theme">@style/ThemeOverlay.AppCompat.Light</item>-->
+		<!--        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>-->
+	</style>
+
+
+	<!--Bottom Sheets-->
+	<style name="Widget.Soulvibe.BottomSheet.Modal" parent="Widget.MaterialComponents.BottomSheet.Modal">
+		<item name="shapeAppearanceOverlay">@style/Widget.Soulvibe.BottomSheet.Rounded</item>
+	</style>
+
+	<style name="Widget.Soulvibe.BottomSheet.Rounded" parent="">
+		<item name="cornerFamily">rounded</item>
+		<item name="cornerSizeTopRight">16dp</item>
+		<item name="cornerSizeTopLeft">16dp</item>
+		<item name="cornerSizeBottomRight">0dp</item>
+		<item name="cornerSizeBottomLeft">0dp</item>
+	</style>
+
+
+	<!--Navigation Drawer-->
+	<style name="Widget.Soulvibe.NavigationView" parent="Widget.MaterialComponents.NavigationView">
+		<item name="itemTextAppearance">?textAppearanceBody2</item>
+	</style>
+
+	<!--Button-->
+	<style name="Widget.Soulvibe.Button" parent="Widget.MaterialComponents.Button">
+		<item name="android:paddingBottom">16dp</item>
+		<item name="android:paddingTop">16dp</item>
+		<item name="android:fontFamily">@font/karla_bold</item>
+	</style>
+
+	<style name="Widget.Soulvibe.TextButton" parent="Widget.MaterialComponents.Button.TextButton">
+		<item name="android:paddingBottom">16dp</item>
+		<item name="android:paddingTop">16dp</item>
+		<item name="android:fontFamily">@font/karla_bold</item>
+	</style>
+
+	<style name="Widget.Soulvibe.Button.Outlined" parent="Widget.Soulvibe.Button">
+		<item name="materialButtonStyle">?materialButtonOutlinedStyle</item>
+		<item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Soulvibe.Button.RoundedCorners</item>
+	</style>
+
+	<style name="Widget.Soulvibe.Button.EditSquare" parent="Widget.MaterialComponents.Button">
+		<item name="materialButtonStyle">?materialButtonStyle</item>
+		<item name="android:fontFamily">@font/karla_bold</item>
+		<item name="android:textSize">12sp</item>
+		<item name="android:letterSpacing">0.08</item>
+		<item name="android:padding">0dp</item>
+		<item name="android:paddingRight">0dp</item>
+		<item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Soulvibe.Button.SquareCorners</item>
+	</style>
+
+	<!-- Using default button defined by style is somehow broken in bottom sheet dialog, therefore this style is for explicit definition in bottom sheet dialog -->
+	<style name="Widget.Soulvibe.Button.BottomDialog" parent="Widget.Soulvibe.Button">
+		<item name="materialButtonStyle">?materialButtonStyle</item>
+	</style>
+
+	<!--https://github.com/material-components/material-components-android/issues/272-->
+	<!--https://github.com/material-components/material-components-android/issues/1283-->
+	<style name="Widget.Soulvibe.Button.TextButton.IconOnly" parent="Widget.MaterialComponents.Button.TextButton.Icon">
+		<item name="android:minWidth">0dp</item>
+		<item name="android:insetLeft">0dp</item>
+		<item name="android:insetTop">0dp</item>
+		<item name="android:insetRight">0dp</item>
+		<item name="android:insetBottom">0dp</item>
+		<item name="iconGravity">textStart</item>
+		<item name="iconPadding">0dp</item>
+		<item name="rippleColor">?colorOnPrimary</item>
+		<item name="iconTint">?colorSurface</item>
+	</style>
+
+	<!--CarView-->
+	<style name="Widget.Soulvibe.CardView" parent="Widget.MaterialComponents.CardView">
+		<item name="cardBackgroundColor">?colorSurface</item>
+		<item name="cardCornerRadius">12dp</item>
+		<item name="cardElevation">1dp</item>
+	</style>
+
+	<!--ProgressBar-->
+	<style name="Widget.Soulvibe.ProgressBar" parent="Widget.AppCompat.ProgressBar">
+		<item name="android:minWidth">48dp</item>
+		<item name="android:minHeight">48dp</item>
+		<item name="android:indeterminateDuration">2000</item>
+		<item name="android:indeterminateDrawable">@drawable/shape_progress</item>
+	</style>
+
+	<!--Floating action button-->
+	<style name="Widget.Soulvibe.FloatingActionButton" parent="Widget.MaterialComponents.FloatingActionButton">
+		<item name="backgroundTint">@color/color_background</item>
+		<item name="tint">@color/color_primary</item>
+		<item name="rippleColor">@color/color_highlight</item>
+	</style>
+
+
+	<!--Theme Overlays-->
+
+	<style name="Widget.Soulvibe.Toolbar.Link" parent="ThemeOverlay.MaterialComponents.Toolbar.Primary">
+		<item name="colorOnPrimary">@color/color_dialog_positive</item><!-- change color of menu text-->
+		<item name="fontFamily">@font/karla_bold</item><!-- change font of menu text-->
+	</style>
+
+	<!--Dialog-->
+	<style name="Widget.Soulvibe.Dialog" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+		<item name="colorSurface">@color/color_surface</item>
+		<item name="buttonBarPositiveButtonStyle">@style/Widget.Dialog.Button.Positive</item>
+		<item name="buttonBarNegativeButtonStyle">@style/Widget.Dialog.Button.Negative</item>
+		<item name="materialAlertDialogBodyTextStyle">@style/Widget.Dialog.Body</item>
+		<item name="buttonBarStyle">@style/DialogButtonBar</item>
+		<item name="android:backgroundDimAmount">0.7</item>
+	</style>
+
+	<style name="DialogButtonBar">
+		<item name="android:paddingTop">24dp</item>
+	</style>
+
+	<style name="Widget.Dialog.Body" parent="MaterialAlertDialog.MaterialComponents.Body.Text">
+		<item name="android:textColor">@color/color_on_surface</item>
+		<item name="android:textSize">16sp</item>
+		<item name="android:fontFamily">@font/karla_bold</item>
+		<item name="fontFamily">@font/karla_bold</item>
+	</style>
+
+	<style name="Widget.Dialog.Button.Positive" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+		<item name="android:textColor">@color/color_dialog_positive</item>
+		<item name="android:textSize">16sp</item>
+		<item name="android:fontFamily">@font/karla_bold</item>
+	</style>
+
+	<style name="Widget.Dialog.Button.Negative" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+		<item name="android:textColor">@color/color_dialog_negative</item>
+		<item name="android:textSize">16sp</item>
+		<item name="android:fontFamily">@font/karla_bold</item>
+	</style>
+
+	<!--Bottom Sheets-->
+	<!-- adjustResize is a must for CONFIRM button to be shown above the keyboard! -->
+	<style name="ThemeOverlay.Soulvibe.BottomSheetDialog" parent="ThemeOverlay.MaterialComponents.Dialog">
+		<item name="android:windowIsFloating">false</item>
+		<item name="android:windowSoftInputMode">adjustResize|stateAlwaysHidden</item>
+		<item name="android:windowBackground">@android:color/transparent</item>
+		<item name="android:windowAnimationStyle">@style/Animation.MyTheme.BottomSheet.Modal</item>
+		<item name="android:statusBarColor">@android:color/transparent</item>
+		<item name="bottomSheetStyle">@style/Widget.Soulvibe.BottomSheet.Modal</item>
+		<item name="android:navigationBarColor">?colorSurface</item>
+		<item name="android:navigationBarDividerColor" tools:ignore="NewApi">@android:color/transparent</item>
+	</style>
+
+	<!--	<style name="CustomBottomSheetDialog" parent="@style/ThemeOverlay.MaterialComponents.BottomSheetDialog">-->
+	<!--		<item name="bottomSheetStyle">@style/CustomBottomSheet</item>-->
+	<!--	</style>-->
+
+	<!--	<style name="CustomBottomSheet" parent="Widget.MaterialComponents.BottomSheet">-->
+	<!--		<item name="shapeAppearanceOverlay">@style/CustomShapeAppearanceBottomSheetDialog</item>-->
+	<!--	</style>-->
+
+	<!--	<style name="CustomShapeAppearanceBottomSheetDialog" parent="">-->
+	<!--		<item name="cornerFamily">rounded</item>-->
+	<!--		<item name="cornerSizeTopRight">16dp</item>-->
+	<!--		<item name="cornerSizeTopLeft">16dp</item>-->
+	<!--		<item name="cornerSizeBottomRight">0dp</item>-->
+	<!--		<item name="cornerSizeBottomLeft">0dp</item>-->
+	<!--	</style>-->
+
+	<!-- Button inverse bg -->
+	<style name="ThemeOverlay.Soulvibe.Button.Inverse" parent="ThemeOverlay.MaterialComponents.Light">
+		<item name="android:backgroundTint">@color/color_background</item>
+		<item name="colorOnPrimary">@color/color_on_background</item>
+	</style>
+
+	<style name="ThemeOverlay.Soulvibe.Button.Inverse.Left" parent="ThemeOverlay.Soulvibe.Button.Inverse">
+		<item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Soulvibe.Button.RoundedCorners.Left</item>
+	</style>
+
+	<style name="ThemeOverlay.Soulvibe.Button.Inverse.Right" parent="ThemeOverlay.Soulvibe.Button.Inverse">
+		<item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Soulvibe.Button.RoundedCorners.Right</item>
+	</style>
+
+	<style name="ThemeOverlay.Soulvibe.Button.Link" parent="ThemeOverlay.MaterialComponents.Light">
+		<item name="android:backgroundTint">@color/color_background</item>
+		<item name="colorOnPrimary">@color/color_on_background</item>
+	</style>
+
+	<!-- TextInputLayout -->
+	<style name="Widget.Soulvibe.TextInputLayout.FilledBox" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+		<item name="shapeAppearance">@style/ShapeAppearance.Soulvibe.TextInputLayout</item>
+		<item name="boxBackgroundColor">@color/color_surface_gray</item>
+		<item name="boxStrokeWidth">0dp</item>
+		<item name="hintTextAppearance">@style/TextAppearance.Soulvibe.TextInputLayout.Hint</item>
+		<item name="hintTextColor">@color/color_primary</item>
+		<item name="android:textColorHint">@color/color_primary</item>
+	</style>
+
+	<!-- TextInputLayout DropBox Input-->
+	<style name="Widget.Soulvibe.TextInputLayout.ExposedDropdownMenu" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu">
+		<item name="shapeAppearance">@style/ShapeAppearance.Soulvibe.TextInputLayout</item>
+		<item name="boxBackgroundColor">@color/color_surface_gray</item>
+		<item name="boxStrokeWidth">0dp</item>
+		<item name="hintTextAppearance">@style/TextAppearance.Soulvibe.TextInputLayout.Hint</item>
+		<item name="hintTextColor">@color/color_primary</item>
+		<item name="android:textColorHint">@color/color_primary</item>
+	</style>
+
+	<!-- TextInputLayout DropBox Button-->
+	<style name="Widget.Soulvibe.TextInputLayout.ExposedDropdownMenu.Button" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu">
+		<item name="shapeAppearance">@style/ShapeAppearance.Soulvibe.TextInputLayout</item>
+		<item name="boxBackgroundColor">@color/color_surface_gray</item>
+		<item name="boxStrokeWidth">0dp</item>
+		<item name="boxStrokeWidthFocused">0dp</item>
+		<item name="hintTextAppearance">@style/TextAppearance.Soulvibe.TextInputLayout.Hint</item>
+		<item name="hintTextColor">@color/color_primary</item>
+		<item name="android:textColorHint">@color/color_primary</item>
+	</style>
+
+</resources>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<!--Top level DayNight theme to be used in AndroidManifest.xml-->
+	<style name="Soulvibe.Default" parent="Base.Soulvibe" />
+
+	<!-- Launcher theme -->
+	<style name="Soulvibe.Launcher" parent="Base.Soulvibe">
+		<item name="android:windowBackground">@drawable/bg_launch_screen</item>
+		<item name="android:navigationBarColor">@color/color_navigation_bar_launch</item>
+	</style>
+
+	<!--Base custom theme which will be shared between both light and dark theme variants-->
+	<style name="Base.Soulvibe" parent="Base.MaterialThemeBuilder">
+		<!--Material color attributes -->
+		<item name="colorPrimary">@color/color_primary</item>
+		<item name="colorPrimaryVariant">@color/color_primary_variant</item>
+		<item name="colorSecondary">@color/color_secondary</item>
+		<item name="colorSecondaryVariant">@color/color_secondary_variant</item>
+
+		<item name="android:colorBackground">@color/color_background</item>
+		<item name="colorSurface">@color/color_surface</item>
+		<item name="colorError">@color/color_error</item>
+
+		<item name="colorOnPrimary">@color/color_on_primary</item>
+		<item name="colorOnSecondary">@color/color_on_secondary</item>
+		<item name="colorOnBackground">@color/color_on_background</item>
+		<item name="colorOnSurface">@color/color_on_surface</item>
+		<item name="colorOnError">@color/color_on_error</item>
+		<item name="android:textColorHint">@color/color_hint</item>
+
+		<!--Material type attributes-->
+		<item name="textAppearanceHeadline1">@style/TextAppearance.Soulvibe.Headline1</item>
+		<item name="textAppearanceHeadline2">@style/TextAppearance.Soulvibe.Headline2</item>
+		<item name="textAppearanceHeadline3">@style/TextAppearance.Soulvibe.Headline3</item>
+		<item name="textAppearanceHeadline4">@style/TextAppearance.Soulvibe.Headline4</item>
+		<item name="textAppearanceHeadline5">@style/TextAppearance.Soulvibe.Headline5</item>
+		<item name="textAppearanceHeadline6">@style/TextAppearance.Soulvibe.Headline6</item>
+		<item name="textAppearanceSubtitle1">@style/TextAppearance.Soulvibe.Subtitle1</item>
+		<item name="textAppearanceSubtitle2">@style/TextAppearance.Soulvibe.Subtitle2</item>
+		<item name="textAppearanceBody1">@style/TextAppearance.Soulvibe.Body1</item>
+		<item name="textAppearanceBody2">@style/TextAppearance.Soulvibe.Body2</item>
+		<item name="textAppearanceButton">@style/TextAppearance.Soulvibe.Button</item>
+		<item name="textAppearanceCaption">@style/TextAppearance.Soulvibe.Caption</item>
+		<item name="textAppearanceOverline">@style/TextAppearance.Soulvibe.Overline</item>
+
+		<item name="android:fontFamily">@font/karla</item>
+
+		<!-- legacy text color  PROBABLY not needed, will see-->
+		<item name="android:textColorPrimary">?colorOnSurface</item>
+		<item name="android:textColorSecondary">?colorOnSurface</item>
+		<item name="android:textColorHighlight">?colorPrimary</item>
+
+		<!--Material shape attributes-->
+		<item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Soulvibe.SmallComponent</item>
+		<item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Soulvibe.MediumComponent</item>
+		<item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.Soulvibe.LargeComponent</item>
+
+		<!--Component styles-->
+		<item name="materialAlertDialogTheme">@style/Widget.Soulvibe.Dialog</item>
+		<item name="bottomSheetDialogTheme">@style/ThemeOverlay.Soulvibe.BottomSheetDialog</item>
+		<item name="navigationViewStyle">@style/Widget.Soulvibe.NavigationView</item>
+		<item name="toolbarStyle">@style/Widget.Soulvibe.Toolbar</item>
+		<item name="appBarLayoutStyle">@style/Widget.Soulvibe.AppBar</item>
+		<item name="buttonStyle">@style/Widget.Soulvibe.Button</item>
+		<item name="materialButtonStyle">@style/Widget.Soulvibe.Button</item>
+		<item name="materialCardViewStyle">@style/Widget.Soulvibe.CardView</item>
+		<item name="android:progressBarStyle">@style/Widget.Soulvibe.ProgressBar</item>
+		<item name="floatingActionButtonStyle">@style/Widget.Soulvibe.FloatingActionButton</item>
+		<item name="textInputStyle">@style/Widget.Soulvibe.TextInputLayout.FilledBox</item>
+
+	</style>
+
+	<style name="Base.MaterialThemeBuilder" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+		<item name="alphaEmphasisHigh">@dimen/alpha_emphasis_high</item>
+		<item name="alphaEmphasisMedium">@dimen/alpha_emphasis_medium</item>
+		<item name="alphaEmphasisDisabled">@dimen/alpha_emphasis_disabled</item>
+
+		<item name="android:statusBarColor">@android:color/transparent</item>
+		<item name="android:windowTranslucentStatus">true</item>
+		<!--		<item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>-->
+		<item name="android:navigationBarColor">@android:color/transparent</item>
+		<item name="android:windowTranslucentNavigation">true</item>
+		<!--		<item name="android:windowLightNavigationBar" tools:ignore="NewApi">true</item>-->
+		<!--		<item name="android:navigationBarDividerColor" tools:ignore="NewApi">@color/color_navigation_bar</item>-->
+
+		<!--Remap legacy AppCompat attributes to MaterialComponent attributes-->
+		<item name="colorPrimaryDark">?colorPrimaryVariant</item>
+		<item name="colorAccent">?colorSecondary</item>
+		<item name="colorControlHighlight">@color/color_highlight</item>
+		<item name="android:colorEdgeEffect">@color/color_highlight</item>
+	</style>
+
+</resources>

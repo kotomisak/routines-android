@@ -26,22 +26,26 @@ buildscript {
                 'sdk'                      : 30,
                 'kotlin'                   : '1.4.20',
                 'android_gradle'           : '4.1.1',
+				'play_services_gradle'     : '4.3.3',
+				'crashlytics_gradle'       : '2.2.0',
 
-                'android_play_services'    : '11.0.1',
-                'android_navigation'       : '2.3.0',
-                'material_design'          : '1.2.1',
-                'androidx_appcompat'       : '1.1.0-rc01',
-                'androidx_cardview'        : '1.0.0',
-                'androidx_constraintlayout': '2.0.1',
-                'androidx_recyclerview'    : '1.1.0-beta01',
-                'androidx_gridlayout'      : '1.0.0',
-                'androidx_browser'         : '1.2.0',
-				'androidx_media'           : '1.2.0-alpha01',
+				'android_play_services'    : '11.0.1',
+				'android_navigation'       : '2.3.0',
+				'material_design'          : '1.2.1', //ATTENTION 1.3.0-alpha01 makes bottom sheet on VibeResultFragment not collapse fully
+				'androidx_appcompat'       : '1.2.0',
+				'androidx_cardview'        : '1.0.0',
+				'androidx_constraintlayout': '2.0.1',
+				'androidx_recyclerview'    : '1.1.0-beta01',
+				'androidx_gridlayout'      : '1.0.0',
+				'androidx_browser'         : '1.2.0',
+				'androidx_media'           : '1.2.0',
 				'androidx_lifecycle'       : '2.2.0',
 				'androidx_core_testing'    : '2.1.0-rc01',
 				'androidx_biometric'       : '1.0.0-beta01',
-				'androidx_preference'      : "1.1.0",
+				'androidx_preference'      : "1.1.1",
 				'androidx_databinding'     : '4.2.0-alpha12',
+				'androidx_animation'       : '1.0.0-alpha02',
+				'android_billing'          : '3.0.0',
 
 				'ktx_core'                 : '1.3.0',
 				'ktx_fragment'             : '1.2.5',
@@ -71,10 +75,11 @@ buildscript {
 				'junit5'                   : '5.5.1',
 				'mockito'                  : '3.0.0',
 				'powermock'                : '2.0.2',    //https://github.com/powermock/powermock/wiki/Mockito#supported-versions
-				'glide'                    : '4.9.0',
+				'glide'                    : '4.11.0',
 				'crashlytics'              : '2.10.1',
 				'jacoco'                   : '0.8.4',
 				'timber'                   : '4.7.1',
+				'exo_player'               : '2.11.4',
 
 				'google_places'            : '2.4.0'
 		]
@@ -96,7 +101,8 @@ buildscript {
 		classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
 		classpath "org.jetbrains.kotlin:kotlin-allopen:${versions.kotlin}"
 		classpath "androidx.navigation:navigation-safe-args-gradle-plugin:${versions.android_navigation}"
-		classpath "com.android.tools.build.jetifier:jetifier-processor:${versions.androidx_jetifier}"
+		classpath "com.google.gms:google-services:${versions.play_services_gradle}"
+		classpath "com.google.firebase:firebase-crashlytics-gradle:${versions.crashlytics_gradle}"
 		// NOTE: Do not place your application dependencies here; they belong
 		// in the individual module build.gradle files
 	}
@@ -107,6 +113,7 @@ allprojects {
 		google()
 		maven {url 'https://maven.fabric.io/public'}
 		jcenter()
+		maven {url "https://jitpack.io"} //Temporarily because of com.github.davidliu.AssistedInject
 	}
 }
 

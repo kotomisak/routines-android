@@ -1,44 +1,65 @@
 package cz.kotox.dsp.ui.analyzer
 
 import android.os.Bundle
-import android.view.LayoutInflater
+import androidx.activity.viewModels
+import androidx.annotation.LayoutRes
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.ViewDataBinding
-import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
+import com.squareup.inject.assisted.Assisted
+import com.squareup.inject.assisted.AssistedInject
 import cz.kotox.core.arch.BaseActivityViewModel
-import cz.kotox.core.arch.BaseFragmentViewModel
+import cz.kotox.core.arch.BasePermissionFragmentViewModel
 import cz.kotox.core.arch.BaseViewModel
-import cz.kotox.core.database.PreferencesCommon
+import cz.kotox.core.arch.NavigationType
+import cz.kotox.core.arch.di.viewModel.AssistedSavedStateViewModelFactory
+import cz.kotox.core.arch.di.viewModel.ViewModelArgs
 import cz.kotox.core.dsp.model.VoiceSample
-import cz.kotox.core.entity.AppVersion
 import cz.kotox.dsp.R
+import cz.kotox.dsp.app.AppNavigator
 import cz.kotox.dsp.databinding.AnalyzerActivityBinding
+import cz.kotox.dsp.di.injector
+import cz.kotox.dsp.ui.MainViewModel
 import timber.log.Timber
 import javax.inject.Inject
 
-class AnalyzerActivity : BaseActivityViewModel<AnalyzerViewModel, AnalyzerActivityBinding>() {
+class AnalyzerActivity : BaseActivityViewModel<AnalyzerViewModel, AnalyzerActivityBinding>(R.layout.analyzer_activity, R.id.main_nav_host_fragment, R.navigation.analyzer_navigation) {
 
 	@Inject
-	lateinit var preferencesCommon: PreferencesCommon
+	lateinit var navigator: AppNavigator
 
-	override fun inflateBindingLayout(inflater: LayoutInflater) = AnalyzerActivityBinding.inflate(inflater)
+	override val viewModel: AnalyzerViewModel by viewModels()
 
-	override fun setupViewModel() = findViewModel<AnalyzerViewModel>()
 
 	override fun onCreate(savedInstanceState: Bundle?) {
+		injector.inject(this)
+
+		AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)//Explicitly disable night mode for Xiaomi(MIUI)
+		setTheme(R.style.Soulvibe_Default) //Switch from splash screen
+
 		super.onCreate(savedInstanceState)
 
-		Navigation.findNavController(this, R.id.analyzer_nav_host_fragment)
-			.setGraph(R.navigation.analyzer_navigation, intent.extras)
 
+	}
+
+	override fun onStart() {
+		super.onStart()
+		//Setup controller for AppNavigator
+		navigator.bind(Navigation.findNavController(this, navHostFragmentId))
 	}
 
 }
 
-class AnalyzerViewModel @Inject constructor(appVersion: AppVersion) : BaseViewModel(), LifecycleObserver {
+class AnalyzerViewModel @AssistedInject constructor(
+		@Assisted private val savedStateHandle: SavedStateHandle,
+		@Assisted private val args: ViewModelArgs
+) : BaseViewModel() {
+
+	@AssistedInject.Factory
+	interface Factory : AssistedSavedStateViewModelFactory<AnalyzerViewModel>
 
 	val pitchList = mutableListOf<VoiceSample>()
 
@@ -52,25 +73,18 @@ class AnalyzerViewModel @Inject constructor(appVersion: AppVersion) : BaseViewMo
 	}
 }
 
-abstract class BaseAnalyzerFragment<V : BaseAnalyzerViewModel, B : ViewDataBinding> : BaseFragmentViewModel<V, B>() {
-	companion object {
-		fun getCreateConsultationViewModel(activity: FragmentActivity, viewModelFactory: ViewModelProvider.Factory) =
-			ViewModelProviders.of(activity, viewModelFactory).get(AnalyzerViewModel::class.java)
+abstract class BaseAnalyzerFragment<V : BaseAnalyzerViewModel, B : ViewDataBinding>(
+		@LayoutRes layoutResId: Int,
+		navigationType: NavigationType
+) : BasePermissionFragmentViewModel<V, B>(layoutResId, navigationType) {
+
+	override fun onCreate(savedInstanceState: Bundle?) {
+		super.onCreate(savedInstanceState)
+
+		viewModel.mainViewModel = ViewModelProvider(requireActivity(), requireActivity().defaultViewModelProviderFactory)[AnalyzerViewModel::class.java]
+
 	}
 
-	/**
-	 * Different abstract class, so that every wizard fragment has main view model set
-	 */
-	abstract fun setupWizardViewModel(): V
-
-	/**
-	 * For wizard screens this is final, so that we can ensure, every screen has mainViewModel initialized
-	 */
-	final override fun setupViewModel(): V {
-		val currentViewModel = setupWizardViewModel()
-		currentViewModel.mainViewModel = getCreateConsultationViewModel(baseActivity, viewModelFactory)
-		return currentViewModel
-	}
 }
 
 abstract class BaseAnalyzerViewModel : BaseViewModel(), LifecycleObserver {

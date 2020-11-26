@@ -1,35 +1,17 @@
 package cz.kotox.core.arch
 
-import android.annotation.SuppressLint
-import android.content.Context
-import androidx.databinding.BaseObservable
-import androidx.databinding.Observable
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
-import cz.kotox.core.OpenForMocking
-import cz.kotox.core.arch.liveevent.Event
-import cz.kotox.core.arch.liveevent.LiveBus
-import cz.kotox.core.utility.isOnline
-import cz.kotox.core.utility.logWithTag
-import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.rxkotlin.plusAssign
+import cz.kotox.core.liveevent.Event
+import cz.kotox.core.liveevent.LiveBus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
-import java.util.concurrent.TimeUnit
-import javax.inject.Inject
+import timber.log.Timber
 import kotlin.coroutines.CoroutineContext
 
-@OpenForMocking
-abstract class BaseViewModel : ViewModel(), CoroutineScope, NotifyObservable by BaseViewObservable() {
-	val compositeDisposable = CompositeDisposable()
-
-	@SuppressLint("StaticFieldLeak")
-	@Inject
-	open lateinit var appContext: Context
+abstract class BaseViewModel : ViewModel(), CoroutineScope {
 
 	private val liveEventsBus = LiveBus()
 
@@ -39,42 +21,14 @@ abstract class BaseViewModel : ViewModel(), CoroutineScope, NotifyObservable by 
 		get() = Dispatchers.Main + job
 
 	init {
-		logWithTag(javaClass.simpleName, "init")
+		Timber.v(this.javaClass.simpleName)
 	}
 
 	override fun onCleared() {
 		job.cancel()
-		logWithTag(javaClass.simpleName, "onCleared")
-		compositeDisposable.dispose()
+		Timber.v(this.javaClass.simpleName)
 		super.onCleared()
 	}
-
-	/**
-	 * This method runs [doBefore] action immediately and then after [delayMillis] runs [doAfter] action.
-	 * All actions are stored in [compositeDisposable] and disposed when [onCleared].
-	 *
-	 * Return the disposable here and dispose it manually before each call if we need only one action at a time.
-	 */
-	fun runAfterDelay(delayMillis: Long = 1500, doBefore: (() -> Unit)? = null, doAfter: () -> Unit) {
-		compositeDisposable += Single.just(true)
-			.delay(delayMillis, TimeUnit.MILLISECONDS)
-			.observeOn(AndroidSchedulers.mainThread())
-			.doOnSubscribe { doBefore?.invoke() }
-			.doOnSuccess { doAfter() }
-			.subscribe()
-	}
-
-	open fun isOnline(): Boolean = isOnline(appContext)
-
-	open fun isOnlineShowDialog(): Boolean {
-		if (!isOnline()) {
-			sendEvent(ShowNoConnectionDialog())
-			return false
-		}
-		return true
-	}
-
-	open val statefulTrackingScreens: Map<Int, String> = emptyMap()
 
 	fun sendEvent(event: Event) {
 		liveEventsBus.send(event)
@@ -84,14 +38,3 @@ abstract class BaseViewModel : ViewModel(), CoroutineScope, NotifyObservable by 
 		liveEventsBus.observe(owner, eventClass, observer)
 	}
 }
-
-interface NotifyObservable : Observable {
-	fun notifyChange()
-	fun notifyPropertyChanged(fieldId: Int)
-}
-
-/**
- * Must be done this way with intermediary interface [NotifyObservable] because [Observable] interface
- * doesn't cover [notifyPropertyChanged] and [notifyChange] methods.
- */
-class BaseViewObservable : BaseObservable(), NotifyObservable

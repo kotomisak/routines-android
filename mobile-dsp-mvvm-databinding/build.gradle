@@ -1,49 +1,36 @@
-/*
- * Copyright 2017, The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-apply plugin: 'com.android.application'
 apply from: '../common-app.gradle'
 apply from: '../common.gradle'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
-//apply from: '../jacoco.gradle' //since app module doesn't apply core/library.gradle, thus apply jacoco.gradle extra
+//apply from: '../jacoco.gradle' //since app module doesn't apply module-core/library.gradle, thus apply jacoco.gradle extra
 
-final APK_NAME = "ScreenNavigationTemplate"
+def versionNameParam = "git describe --tags --abbrev=0".execute().text.trim()
+def versionCodeParam = "git tag --list".execute().text.split("\n").size()
+def todayParam = new Date().format('yyyyMMdd')
 
 android {
+
     compileSdkVersion versions.sdk
     defaultConfig {
         applicationId 'cz.kotox.dsp'
         minSdkVersion versions.min_sdk
         targetSdkVersion versions.sdk
-        versionCode 1
-        versionName "1.0"
+        versionCode versionCodeParam
+        versionName versionNameParam
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         resValue "string", "app_name", "DSP"
+        setProperty("archivesBaseName", "DSP-${versionNameParam}-${versionCodeParam}-${todayParam}")
+        buildConfigField "int", "DSP_VERSION_CODE", "${versionCodeParam}"
+        buildConfigField "String", "DSP_VERSION_NAME", "\"${versionNameParam}\""
     }
 
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            ext.enableCrashlytics = true
+            resValue("bool", "firebase_analytics_deactivated", "false")
+            signingConfig signingConfigs.release
         }
         debug {
-            minifyEnabled false
-            ext.enableCrashlytics = false
+            resValue("bool", "firebase_analytics_deactivated", "true")
+            signingConfig signingConfigs.debug
+            ext.alwaysUpdateBuildId = false
         }
     }
     dataBinding {
@@ -54,25 +41,20 @@ android {
     productFlavors {
         mock {
             dimension = "env"
-            versionNameSuffix "-mock"
             applicationIdSuffix ".mock"
             resValue "string", "app_name", "DSP-M"
-            ext.enableCrashlytics = false
         }
 
         dev {
             dimension = "env"
-            versionNameSuffix "-dev"
             applicationIdSuffix ".dev"
             resValue "string", "app_name", "DSP-D"
-            ext.enableCrashlytics = true
         }
 
         production {
             dimension = "env"
             applicationIdSuffix ".prod"
             resValue "string", "app_name", "DSP"
-            ext.enableCrashlytics = true
         }
     }
 
@@ -88,6 +70,8 @@ dependencies {
     implementation project(':core-analytics')
     implementation project(':core-arch-mvvm-databinding')
     implementation project(':core-dsp')
+    implementation project(':core-rest')
+    implementation project(':core-media')
 
     implementation project(':core-view')
 

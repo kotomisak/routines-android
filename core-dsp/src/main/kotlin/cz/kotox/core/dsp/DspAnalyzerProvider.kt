@@ -5,9 +5,8 @@ import be.tarsos.dsp.EnvelopeFollower
 import be.tarsos.dsp.io.android.AudioDispatcherFactory
 import be.tarsos.dsp.pitch.PitchDetectionHandler
 import be.tarsos.dsp.pitch.PitchProcessor
-import com.lightbrite.android.core.dsp.TarsoDspComputation.computeAmplitude
-import com.lightbrite.android.core.dsp.TarsoDspComputation.computeFrequency
-import com.lightbrite.android.core.dsp.VoiceAnalysisSettings
+import cz.kotox.core.dsp.TarsoDspComputation.computeAmplitude
+import cz.kotox.core.dsp.TarsoDspComputation.computeFrequency
 import cz.kotox.core.dsp.model.PitchAlgorithm
 import cz.kotox.core.dsp.model.VoiceSample
 import cz.kotox.core.dsp.model.toPitchEstimationAlgorithm

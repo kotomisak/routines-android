@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
+import timber.log.Timber
 
 open class DataBoundAdapter<T>(
 	private val lifecycleOwner: LifecycleOwner,
@@ -31,6 +32,8 @@ open class DataBoundAdapter<T>(
 	) : this(lifecycleOwner, { itemLayoutId }, bindingVariableId, diffCallback)
 
 	private val extras = hashMapOf<Int, Any>()
+
+	private var dataSetIncreasedChangeCallback: (difference: Int) -> Unit = {}
 
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataBoundViewHolder {
 		val layoutInflater = LayoutInflater.from(parent.context)
@@ -50,12 +53,27 @@ open class DataBoundAdapter<T>(
 	fun bindExtra(bindingVariableId: Int, extra: Any) = this.also {
 		extras.put(bindingVariableId, extra)
 	}
+
+	fun setDataSetSizeIncreasedCallback(callback: (difference: Int) -> Unit) = this.also {
+		dataSetIncreasedChangeCallback = callback
+	}
+
+	override fun onCurrentListChanged(previousList: MutableList<T>, currentList: MutableList<T>) {
+		super.onCurrentListChanged(previousList, currentList)
+		Timber.d(">>>_F preSize=${previousList.size} vs. currSize=${currentList.size}")
+		if (previousList.size < currentList.size) {
+			Timber.d(">>>_F new item available")
+			dataSetIncreasedChangeCallback.invoke(currentList.size - previousList.size)
+		}
+	}
+
 }
 
 class DataBoundViewHolder constructor(val binding: ViewDataBinding) : ViewHolder(binding.root)
 
 fun <T> defaultComparatorCallback() = object : DiffUtil.ItemCallback<T>() {
 	override fun areItemsTheSame(oldItem: T, newItem: T) = oldItem == newItem
+
 	// annoying https://issuetracker.google.com/issues/116789824
 	override fun areContentsTheSame(oldItem: T, newItem: T) = oldItem == newItem
 }
@@ -209,3 +227,4 @@ fun <T : Any> RecyclerView.setPagedAdapter(adapter: PagedAdapter<T>?, items: Pag
 	}
 
 }
+

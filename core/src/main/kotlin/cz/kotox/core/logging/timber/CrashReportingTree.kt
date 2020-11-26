@@ -1,10 +1,14 @@
 package cz.kotox.core.logging.timber
 
+import com.google.firebase.crashlytics.FirebaseCrashlytics
+import com.google.firebase.crashlytics.internal.common.CommonUtils
 import timber.log.Timber
 import java.net.ConnectException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 import java.util.Locale
+
+private const val CALL_STACK_INDEX = 5
 
 /** A tree which logs important information for crash reporting.  */
 class CrashReportingTree : Timber.Tree() {
@@ -14,13 +18,22 @@ class CrashReportingTree : Timber.Tree() {
 	}
 
 	override fun log(priority: Int, tag: String?, message: String, throwable: Throwable?) {
-		//val priorityString = CommonUtils.logPriorityToString(priority)
-		//val messageWithPrefix = "| $priorityString/$tag: $message"
+		val stackTrace = Throwable().stackTrace
+		val customTag =  if(stackTrace.size > CALL_STACK_INDEX) {
+			val element = stackTrace[CALL_STACK_INDEX]
 
-		//Crashlytics.log(messageWithPrefix)
+			"Soulvibe:(${element.fileName}:${element.lineNumber})#${element.methodName}"
+		} else {
+			tag
+		}
+
+		val priorityString = CommonUtils.logPriorityToString(priority)
+		val messageWithPrefix = "| $priorityString/$customTag: $message"
+
+		FirebaseCrashlytics.getInstance().log(messageWithPrefix)
 
 		if (throwable != null) {
-			//logCrashlyticsError(throwable)
+			logCrashlyticsError(throwable)
 		}
 	}
 
@@ -29,9 +42,9 @@ class CrashReportingTree : Timber.Tree() {
 	 */
 	private fun logCrashlyticsError(error: Throwable) {
 		if (error.isIgnored || error.cause.isIgnored) {
-			//Crashlytics.log(error.message)
+			error.message?.let { FirebaseCrashlytics.getInstance().log(it) }
 		} else {
-			//Crashlytics.logException(error)
+			FirebaseCrashlytics.getInstance().recordException(error)
 		}
 	}
 
@@ -40,8 +53,6 @@ class CrashReportingTree : Timber.Tree() {
 			is ConnectException,
 			is SocketTimeoutException,
 			is UnknownHostException -> true
-//			is RestHttpException,
-//			is NetworkNotAvailableException -> true
 			else -> false
 		}
 }

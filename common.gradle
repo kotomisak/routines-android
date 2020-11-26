@@ -1,22 +1,13 @@
-/**
- * Contains directories for mocking responses (should be in all tests + mock version of app)
- */
-def mock_files = ['src/mock/resources', '../mock_data/configs', '../mock_data/responses']
-
 allprojects {
 	apply plugin: 'kotlin-android'
 	apply plugin: 'kotlin-kapt'
 	apply plugin: 'kotlin-android-extensions'
-	apply plugin: 'androidx.navigation.safeargs'
-
-	apply plugin: 'kotlin-allopen'
-	allOpen {
-		annotation('cz.kotox.routines.core.OpenForMocking')
-	}
+	apply plugin: 'androidx.navigation.safeargs.kotlin'
 
 	kapt {
 		useBuildCache = true
-		correctErrorTypes = true // avoid unknown type replacing with NonExistentClass
+		correctErrorTypes = true
+		// avoid unknown type replacing with NonExistentClass
 	}
 
 	androidExtensions {
@@ -29,37 +20,26 @@ allprojects {
 			targetCompatibility JavaVersion.VERSION_1_8
 		}
 
+		kotlinOptions {
+			jvmTarget = JavaVersion.VERSION_1_8
+			freeCompilerArgs = ["-XXLanguage:+InlineClasses"]
+		}
+
 		compileSdkVersion versions.sdk
 		dataBinding.enabled true
-		flavorDimensions "env"
 
 		defaultConfig {
 			minSdkVersion versions.min_sdk
 			targetSdkVersion versions.sdk
 			testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 			vectorDrawables.useSupportLibrary = true
+			manifestPlaceholders += [screenOrientation: "portrait"]
 		}
-
-//		signingConfigs {
-//			release {
-//				// passwords and alias are obtained via askForPasswords task
-//				storeFile file("../${project.property('keystore.file')}")
-//				storePassword ""
-//				keyAlias ""
-//				keyPassword ""
-//			}
-//			debug {
-//				// passwords and alias are obtained via askForPasswords task
-//				storeFile file("../${project.property('keystore.file')}")
-//				storePassword ""
-//				keyAlias ""
-//				keyPassword ""
-//			}
-//		}
 
 		flavorDimensions "env"
 
 		productFlavors {
+
 			mock {
 				dimension = "env"
 			}
@@ -77,40 +57,27 @@ allprojects {
 			main.java.srcDirs += 'src/main/kotlin'
 			test.java.srcDirs += 'src/test/kotlin'
 			androidTest.java.srcDirs += 'src/androidTest/kotlin'
-
-			dev {
-				java.srcDirs += 'src/server/kotlin'
-			}
-			production {
-				java.srcDirs += 'src/server/kotlin'
-			}
-			mock {
-				java.srcDirs += 'src/mock/kotlin'
-			}
 		}
 
 		buildTypes {
 			debug {
-				buildConfigField "boolean", "LOGS", "true"
+				zipAlignEnabled false
+				minifyEnabled false
 			}
 
 			release {
-				buildConfigField "boolean", "LOGS", "false"
-
 				zipAlignEnabled true
 				minifyEnabled true
 
-				proguardFile '../proguard-rules/proguard-square-retrofit2.pro'
-				proguardFile '../proguard-rules/proguard-square-leakcanary.pro'
-				proguardFile '../proguard-rules/proguard-square-okio.pro'
+				proguardFile '../proguard-rules/proguard-awsappsync.pro'
 				proguardFile '../proguard-rules/proguard-glide.pro'
-				proguardFile '../proguard-rules/proguard-gson.pro'
 				proguardFile '../proguard-rules/proguard-square-okhttp3.pro'
-				proguardFile '../proguard-rules/proguard-support-design.pro'
-				proguardFile '../proguard-rules/proguard-support-v7-appcompat.pro'
-				proguardFile '../proguard-rules/proguard-support-v7-cardview.pro'
-				proguardFile '../proguard-rules/proguard-realm.pro'
-				proguardFile '../proguard-rules/proguard-reactive.pro'
+				proguardFile '../proguard-rules/proguard-square-okio.pro'
+				proguardFile '../proguard-rules/proguard-square-retrofit2.pro'
+				proguardFile '../proguard-rules/proguard-crashlytics.pro'
+				proguardFile "../proguard-rules/proguard-realm.pro"
+				proguardFile "../proguard-rules/proguard-slf4j.pro"
+				proguardFile "../proguard-rules/proguard-jbox2d.pro"
 				proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 			}
 		}
@@ -121,23 +88,12 @@ allprojects {
 			unitTests.all {
 				testLogging {
 					events "passed", "skipped", "failed", "standardOut", "standardError"
-					outputs.upToDateWhen {false}
+					outputs.upToDateWhen {
+						false
+					}
 					showStandardStreams = true
 				}
 				maxParallelForks = 8
-			}
-		}
-
-		configurations.all {
-			resolutionStrategy {
-				//TODO force androix packages instead
-//				force "com.android.support:support-v4:$android_support_version"
-//				force "com.android.support:appcompat-v7:$android_support_version"
-//				force "com.android.support:cardview-v7:$android_support_version"
-//				force "com.android.support:design:$android_support_version"
-//				force "com.android.support:recyclerview-v7:$android_support_version"
-//				force "com.android.support:gridlayout-v7:$android_support_version"
-//				force "com.android.support:customtabs:$android_support_version"
 			}
 		}
 
@@ -152,43 +108,28 @@ allprojects {
 	 * [tests] 		- becasuse dependencies in tests don't work :(
 	 */
 	dependencies {
-		// Jetifier
-		kapt "com.android.tools.build.jetifier:jetifier-core:${versions.androidx_jetifier}"
-
-		// Common Navigation
-		// Don't forget to apply plugin androidx.navigation.safeargs for every module with navigation (solved in common too)
-		implementation "androidx.navigation:navigation-fragment-ktx:${versions.android_navigation}"
-		implementation "androidx.navigation:navigation-ui-ktx:${versions.android_navigation}"
 
 		// Common Dagger (minimal dagger dependency to generate classes across all modules)
 		kapt "com.google.dagger:dagger-compiler:${versions.dagger}"
-		kapt "com.google.dagger:dagger-android-processor:${versions.dagger}"
 
-		//Logging
-		implementation "com.jakewharton.timber:timber:${versions.timber}"
+//		compileOnly 'com.squareup.inject:assisted-inject-annotations-dagger2:0.5.2'
+//		kapt 'com.squareup.inject:assisted-inject-processor-dagger2:0.5.2'
+		//Temporarily workaround because of: https://github.com/square/AssistedInject/issues/81
+		compileOnly 'com.github.davidliu.AssistedInject:assisted-inject-annotations-dagger2:268bff6'
+		kapt 'com.github.davidliu.AssistedInject:assisted-inject-processor-dagger2:268bff6'
+
+		//Moshi (minimal moshi dependency to generate classes across all modules)
+		kapt "com.squareup.moshi:moshi-kotlin-codegen:${versions.moshi}"
+		implementation "com.squareup.moshi:moshi-kotlin:${versions.moshi}"
 
 		/* TEST DEPENDENCIES BASICS FOR EVERY MODULE - for ability to test modules with lower dependency than module-test-utils */
-
-		// Common AndroidJUnitRunner and JUnit Rules
-//		androidTestImplementation "com.android.support.test:runner:$android_support_test_version"
-//		androidTestImplementation "com.android.support.test:rules:$android_support_test_version"
-
 		//Common unit test
-		testImplementation "junit:junit:${versions.junit}"
+		testImplementation "org.junit.jupiter:junit-jupiter:${versions.junit5}"
+		testImplementation "org.mockito:mockito-core:${versions.mockito}"
 
 		//Common UI test
 		androidTestImplementation "org.mockito:mockito-android:${versions.mockito}"
 
-		// Common test objects
-//		testImplementation project(':module-test-utils')
-
 	}
 }
 
-//ext.renameArtifact = {variant, apkName ->
-//	variant.outputs.all {
-//		output ->
-//			def date = new Date().format('yyyyMMdd')
-//			outputFileName = "${apkName}-${project.name}-${variant.versionName}-${variant.versionCode}-${date}-${variant.name}.apk"
-//	}
-//}

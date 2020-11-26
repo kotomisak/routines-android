@@ -6,7 +6,7 @@ import io.reactivex.plugins.RxJavaPlugins
 import timber.log.Timber
 import javax.inject.Inject
 
-class AppInitializer @Inject constructor(private val appContext: Context) {
+class AppInitializer @Inject constructor(private val appContext: Application) {
 
 	/**
 	 * Should be called in application onCreate method

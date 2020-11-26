@@ -9,7 +9,7 @@
 		android:orientation="vertical">
 
 		<androidx.appcompat.widget.Toolbar
-			android:id="@+id/toolbar"
+			android:id="@+id/web_view_toolbar"
 			android:layout_width="match_parent"
 			android:layout_height="?actionBarSize"
 			app:navigationIcon="@drawable/abc_ic_ab_back_material" />

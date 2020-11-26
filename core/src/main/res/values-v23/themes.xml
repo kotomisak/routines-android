@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<!--Top level DayNight theme to be used in AndroidManifest.xml-->
+	<style name="Soulvibe.Default" parent="Base.Soulvibe">
+		<item name="android:windowLightStatusBar">true</item>
+		<item name="android:windowTranslucentStatus">false</item>
+	</style>
+
+	<!-- Launcher theme -->
+	<style name="Soulvibe.Launcher" parent="Base.Soulvibe">
+		<item name="android:windowBackground">@drawable/bg_launch_screen</item>
+		<item name="android:navigationBarColor">@color/color_navigation_bar_launch</item>
+		<item name="android:windowLightStatusBar">false</item>
+		<item name="android:windowTranslucentStatus">false</item>
+	</style>
+
+</resources>

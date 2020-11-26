@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--DARK COLOR THEME-->
+    <!--The same color values are defined for dark theme, but with values more appropriate for -->
+    <!--low-luminance UIs. These colors will be used by night/themes.xml.-->
+
+</resources>

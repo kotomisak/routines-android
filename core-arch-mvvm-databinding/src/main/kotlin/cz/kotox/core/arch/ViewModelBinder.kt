@@ -3,46 +3,59 @@ package cz.kotox.core.arch
 import android.view.LayoutInflater
 import android.view.View
 import androidx.annotation.CallSuper
+import androidx.annotation.LayoutRes
+import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
-import cz.kotox.core.arch.liveevent.Event
-import cz.kotox.core.di.Injectable
+import cz.kotox.core.arch.extension.hideKeyboard
+import cz.kotox.core.arch.*
+import cz.kotox.core.liveevent.Event
 
-interface ViewModelBinder<V : BaseViewModel, B : ViewDataBinding> : LifecycleOwner, BaseUIScreen, Injectable {
+interface ViewModelBinder<V : BaseViewModel, B : ViewDataBinding> : LifecycleOwner, BaseUIScreen {
 	var binding: B
-	var viewModel: V
+	val viewModel: V
 	val currentFragmentManager: FragmentManager
 
-	fun inflateBindingLayout(inflater: LayoutInflater): B
-	fun setupViewModel(): V
 	fun getViewLifecycleOwner(): LifecycleOwner
 
-	fun setupBinding(inflater: LayoutInflater): B = inflateBindingLayout(inflater).apply {
-		lifecycleOwner = getViewLifecycleOwner()
+	fun observe()
 
-		setVariable(BR.view, this@ViewModelBinder)
-		setVariable(BR.viewModel, viewModel)
+	fun setupBinding(layoutInflater: LayoutInflater, @LayoutRes layoutResId: Int): B {
+		val resultBinding: B = DataBindingUtil.inflate(layoutInflater, layoutResId, null, false)
+
+		resultBinding.apply {
+			lifecycleOwner = getViewLifecycleOwner()
+			setVariable(BR.view, this@ViewModelBinder)
+			setVariable(BR.viewModel, viewModel)
+		}
+
+		return resultBinding
 	}
 
 	@CallSuper
 	fun observeBaseEvents() {
-		observeEvent<ShowToastEvent> { showToast(it.message) }
-		observeEvent<FinishEvent> { finish() }
-		observeSnackbarEvent(binding.root)
-		observeEvent<HideSnackbarEvent> { dismissLastSnackbar() }
-		observeEvent<ShowNoConnectionDialog> { TODO("showNoConnectionDialog not implemented yet!") }
+		observeEvent<HideKeyboard> { baseActivity.hideKeyboard() }
+		observeEvent<Finish> { finish() }
+		observeShowEvents(binding.root)
+
 	}
 
 	/**
 	 * Specified this way, so that children may override which view will be used to show the snackbar
 	 * @param view to show snackbar
 	 */
-	fun observeSnackbarEvent(view: View) {
-		observeEvent<ShowSnackbarEvent> { snackbarEvent ->
-			showSnackbar(view, snackbarEvent.message, snackbarEvent.length, snackbarEvent.maxLines) {
-				snackbarEvent.action?.let { (actionName, action) ->
+	fun observeShowEvents(view: View) {
+		observeEvent<ShowError> { errorEvent ->
+			val message = when {
+				errorEvent.message != null -> errorEvent.message
+				errorEvent.messageResId != null -> view.context.getString(errorEvent.messageResId)
+				else -> throw IllegalArgumentException("One of 'message' or 'messageResId is required!")
+			}
+
+			showSnackbar(view, message, errorEvent.length, errorEvent.maxLines) {
+				errorEvent.action?.let { (actionName, action) ->
 					this@showSnackbar.setAction(actionName) { action(); lastSnackbar = null }
 				}
 			}

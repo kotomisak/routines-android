@@ -1,3 +1,6 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.firebase.crashlytics' //FIXME extract firebase dependency to analytics module if possible somehow
+
 android {
 	signingConfigs {
 		release {
@@ -68,14 +71,6 @@ task askForPasswords {
 	}
 }
 
-ext.renameArtifact = {variant, apkName ->
-	variant.outputs.all {
-		output ->
-			def date = new Date().format('yyyyMMdd')
-			outputFileName = "${apkName}-${variant.versionName}-${variant.versionCode}-${date}-${variant.name}.apk"
-			//outputFileName = "${apkName}-${project.name}-${variant.versionName}-${variant.versionCode}-${date}-${variant.name}.apk"
-	}
-}
 
 tasks.whenTaskAdded {
 	theTask ->

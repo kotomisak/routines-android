@@ -1,27 +1,27 @@
 package cz.kotox.dsp.ui.analyzer.result
 
-import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.lifecycle.LifecycleObserver
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
-import cz.kotox.core.PreferencesCore
+import cz.kotox.core.arch.NavigationType
 import cz.kotox.core.entity.AppVersion
+import cz.kotox.dsp.R
 import cz.kotox.dsp.databinding.AnalyzerResultFragmentBinding
 import cz.kotox.dsp.ui.analyzer.BaseAnalyzerFragment
 import cz.kotox.dsp.ui.analyzer.BaseAnalyzerViewModel
 import timber.log.Timber
 import javax.inject.Inject
 
-class AnalyzerResultFragment : BaseAnalyzerFragment<AnalyzerResultViewModel, AnalyzerResultFragmentBinding>() {
+class AnalyzerResultFragment  @Inject constructor() : BaseAnalyzerFragment<AnalyzerResultViewModel, AnalyzerResultFragmentBinding>(
+		R.layout.analyzer_result_fragment,
+		NavigationType.CLOSE
+) {
 
-	override fun inflateBindingLayout(inflater: LayoutInflater) = AnalyzerResultFragmentBinding.inflate(inflater)
-
-	override fun setupWizardViewModel() = findViewModel<AnalyzerResultViewModel>()
+	override val viewModel: AnalyzerResultViewModel by viewModels()
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -31,7 +31,7 @@ class AnalyzerResultFragment : BaseAnalyzerFragment<AnalyzerResultViewModel, Ana
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 
-		binding.analyzerViewpager.adapter = AnalyzerResultPagerAdapter(requireActivity().supportFragmentManager, context)
+		binding.analyzerViewpager.adapter = AnalyzerResultPagerAdapter(requireActivity().supportFragmentManager)
 		binding.analyzerTabs.setupWithViewPager(binding.analyzerViewpager)
 
 		binding.navigateFinishAnalyzerBt.setOnClickListener {
@@ -40,13 +40,11 @@ class AnalyzerResultFragment : BaseAnalyzerFragment<AnalyzerResultViewModel, Ana
 	}
 }
 
-class AnalyzerResultViewModel @Inject constructor(appVersion: AppVersion) : BaseAnalyzerViewModel(), LifecycleObserver {
+class AnalyzerResultViewModel @Inject constructor(appVersion: AppVersion) : BaseAnalyzerViewModel() {
 
 //	@Inject
 //	lateinit var appVersion: AppVersion
 
-	@Inject
-	lateinit var preferencesCore: PreferencesCore
 
 	val token: MutableLiveData<String> = MutableLiveData()
 
@@ -61,8 +59,7 @@ class AnalyzerResultViewModel @Inject constructor(appVersion: AppVersion) : Base
 }
 
 class AnalyzerResultPagerAdapter(
-	fragmentManager: FragmentManager,
-	context: Context
+	fragmentManager: FragmentManager
 ) : FragmentPagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
 	private val fragments: List<Pair<String, () -> Fragment>> = listOf(

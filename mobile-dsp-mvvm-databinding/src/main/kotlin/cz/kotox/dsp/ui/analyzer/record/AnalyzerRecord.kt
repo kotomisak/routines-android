@@ -4,22 +4,26 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import androidx.activity.viewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.OnLifecycleEvent
 import androidx.navigation.Navigation
-import cz.kotox.core.arch.ShowToastEvent
-import cz.kotox.core.arch.ktools.mutableLiveDataOf
+import cz.kotox.core.arch.NavigationType
+import cz.kotox.core.database.AppPreferences
 import cz.kotox.core.dsp.DspAnalyzerProvider
 import cz.kotox.core.dsp.DspAnalyzerResult
 import cz.kotox.core.dsp.model.PitchAlgorithm
 import cz.kotox.core.dsp.model.VoiceSample
+import cz.kotox.core.ktools.mutableLiveDataOf
 import cz.kotox.core.utility.FragmentPermissionManager
 import cz.kotox.core.utility.lazyUnsafe
 import cz.kotox.core.view.graph.WaveSample
 import cz.kotox.dsp.R
 import cz.kotox.dsp.databinding.AnalyzerRecordFragmentBinding
+import cz.kotox.dsp.ui.analyzer.AnalyzerViewModel
 import cz.kotox.dsp.ui.analyzer.BaseAnalyzerFragment
 import cz.kotox.dsp.ui.analyzer.BaseAnalyzerViewModel
 import kotlinx.coroutines.*
@@ -28,33 +32,40 @@ import kotlinx.coroutines.flow.flowOn
 import timber.log.Timber
 import javax.inject.Inject
 
-class AnalyzerRecordFragment : BaseAnalyzerFragment<AnalyzerRecordViewModel, AnalyzerRecordFragmentBinding>() {
+class AnalyzerRecordFragment @Inject constructor(
+		private val appPreferences: AppPreferences
+) : BaseAnalyzerFragment<AnalyzerRecordViewModel, AnalyzerRecordFragmentBinding>(
+		R.layout.analyzer_record_fragment,
+		NavigationType.CLOSE
+) {
 
-	val permissionManager: FragmentPermissionManager by lazyUnsafe {
-		FragmentPermissionManager(this)
-	}
+	override val viewModel: AnalyzerRecordViewModel by viewModels()
 
-	override fun inflateBindingLayout(inflater: LayoutInflater) = AnalyzerRecordFragmentBinding.inflate(inflater)
-
-	override fun setupWizardViewModel() = findViewModel<AnalyzerRecordViewModel>()
-
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-		lifecycle.addObserver(viewModel)
-		verifyPermissions()
-	}
+	private val permissionManager: FragmentPermissionManager by lazyUnsafe { FragmentPermissionManager(this, appPreferences) }
 
 	override fun onResume() {
 		super.onResume()
-		verifyPermissions()
+		checkVoiceRecordingPermission()
 	}
 
-	private fun verifyPermissions() {
+
+//	private fun verifyPermissions() {
+//		if (!permissionManager.checkRecordAudioPermission()) {
+//			permissionManager.requestRecordAudioPermissions({}, {
+//				showToast("RecordAudio permissions is required for audio analysis")
+//				activity?.finish()
+//			})
+//		}
+//	}
+
+	private fun checkVoiceRecordingPermission() {
 		if (!permissionManager.checkRecordAudioPermission()) {
-			permissionManager.requestRecordAudioPermissions({}, {
-				showToast("RecordAudio permissions is required for audio analysis")
-				activity?.finish()
-			})
+
+			TODO("No Mic screen is not implemented")
+			//navController.navigate(VoiceRecordingFragmentDirections.navigateToNoMicQuestion())
+
+		} else /*if (permissionManager.checkRecordAudioPermission())*/ {
+			//navController.navigate(NoMicFragmentDirections.navigateToVoiceRecording())
 		}
 	}
 
@@ -95,7 +106,9 @@ class AnalyzerRecordFragment : BaseAnalyzerFragment<AnalyzerRecordViewModel, Ana
 	}
 }
 
-class AnalyzerRecordViewModel @Inject constructor(val dspAnalyzer: DspAnalyzerProvider) : BaseAnalyzerViewModel(), LifecycleObserver {
+class AnalyzerRecordViewModel @Inject constructor(
+		val dspAnalyzer: DspAnalyzerProvider
+) : BaseAnalyzerViewModel() {
 
 	val min: MutableLiveData<String> = mutableLiveDataOf("0")
 	val max: MutableLiveData<String> = mutableLiveDataOf("0")
@@ -173,8 +186,9 @@ class AnalyzerRecordViewModel @Inject constructor(val dspAnalyzer: DspAnalyzerPr
 
 					when (dispatchResult) {
 						is DspAnalyzerResult.Error -> {
-							sendEvent(ShowToastEvent(dispatchResult.throwable.message
-									?: "Unexpected issue!"))
+							TODO("Show toast error event not implemented")
+//							sendEvent(ShowToastEvent(dispatchResult.throwable.message
+//									?: "Unexpected issue!"))
 						}
 						is DspAnalyzerResult.Data -> {
 							val sample = dispatchResult.voiceSample
@@ -202,5 +216,6 @@ class AnalyzerRecordViewModel @Inject constructor(val dspAnalyzer: DspAnalyzerPr
 
 
 }
+
 
 

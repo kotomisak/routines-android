@@ -9,7 +9,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.MutableLiveData
-import cz.kotox.core.PreferencesCore
 import cz.kotox.core.entity.AppVersion
 import cz.kotox.template.databinding.WizardSecondFragmentBinding
 import cz.kotox.template.ui.wizard.BaseWizardFragment
@@ -45,8 +44,6 @@ class WizardSecondViewModel @Inject constructor(appVersion: AppVersion) : BaseWi
 //	@Inject
 //	lateinit var appVersion: AppVersion
 
-	@Inject
-	lateinit var preferencesCore: PreferencesCore
 
 	val token: MutableLiveData<String> = MutableLiveData()
 

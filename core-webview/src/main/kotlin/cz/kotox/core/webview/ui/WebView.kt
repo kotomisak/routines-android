@@ -17,8 +17,8 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import com.lightbrite.android.soulvibe.webview.databinding.WebViewActivityBinding
 import cz.kotox.core.webview.R
+import cz.kotox.core.webview.databinding.WebViewActivityBinding
 import timber.log.Timber
 
 fun Fragment.showWeb(url: String) = startActivity(WebViewActivity.newIntent(requireContext(), url))
@@ -96,8 +96,8 @@ class WebViewActivity : AppCompatActivity() {
 	}
 
 	private fun setupToolbar() {
-		setSupportActionBar(binding.toolbar)
-		binding.toolbar.navigationIcon =
+		setSupportActionBar(binding.webViewToolbar)
+		binding.webViewToolbar.navigationIcon =
 			AppCompatResources.getDrawable(this@WebViewActivity, R.drawable.abc_ic_ab_back_material)?.apply {
 				DrawableCompat.setTint(this, ContextCompat.getColor(this@WebViewActivity, /*R.color.color_on_background - temporarily commented out until styles/colors will be refactored*/R.color.global_primary ))
 			}

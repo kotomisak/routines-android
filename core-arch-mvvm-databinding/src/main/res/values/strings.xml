@@ -1,3 +1,24 @@
 <resources>
 	<string name="message_not_implemented">Not implemented!</string>
+
+	<string name="form_error_empty">This field cannot be empty</string>
+	<string name="form_error_invalid_email">Invalid Email Address</string>
+	<string name="form_error_invalid_phone">Invalid Phone Number</string>
+	<string name="form_error_invalid_url">Invalid URL</string>
+	<string name="form_error_invalid_password">Invalid password</string>
+	<string name="form_error_invalid_length">Out of range</string>
+	<string name="form_error_invalid_characters">Invalid characters</string>
+	<string name="form_error_no_change">No change</string>
+
+	<string name="offline_dialog_title">Your internet connection seems off</string>
+	<string name="offline_dialog_bt_title">Retry</string>
+
+	<string name="info_popup_dialog_title">Learn more about your experience at any time.</string>
+	<string name="info_popup_dialog_description">Info guides are all through the app to help you along your way.</string>
+	<string name="info_popup_dialog_bt_title">Got it!</string>
+	<string name="info_popup_dialog_close_description">Close info dialog</string>
+
+	<string name="settings_dialog_title">Permission needed</string>
+	<string name="settings_dialog_bt_cancel">Cancel</string>
+	<string name="settings_dialog_bt_settings">Open setting</string>
 </resources>

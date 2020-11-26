@@ -1,34 +1,20 @@
-apply from: "../core/library.gradle"
+apply from: "$project_directory/core/library.gradle"
 
 android {
 
 	defaultConfig {
 		testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
 	}
-
-	flavorDimensions "env"
-
-	productFlavors {
-		mock {
-			dimension = "env"
-		}
-
-		dev {
-			dimension = "env"
-		}
-
-		production {
-			dimension = "env"
-		}
-	}
-
 }
 
 dependencies {
 	implementation fileTree(dir: 'libs', include: ['*.jar'])
 
 	api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${versions.kotlin}"
+
+	api "org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions.kotlin_coroutines}"
+	api "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.kotlin_coroutines}"
+
 
 	// androidx
 	api "androidx.constraintlayout:constraintlayout:${versions.androidx_constraintlayout}"
@@ -39,14 +25,18 @@ dependencies {
 	api "androidx.browser:browser:${versions.androidx_browser}"
 	api "androidx.media:media:${versions.androidx_media}"
 	api "androidx.lifecycle:lifecycle-extensions:${versions.androidx_lifecycle}"
-	kapt "androidx.lifecycle:lifecycle-compiler:${versions.androidx_lifecycle}"
+	api "androidx.lifecycle:lifecycle-common-java8:${versions.androidx_lifecycle}"
+	//usage @OnLifecycleEvent without reflection
 
 	api "androidx.core:core-ktx:${versions.ktx_core}"
 	api "androidx.fragment:fragment-ktx:${versions.ktx_fragment}"
+	api "androidx.activity:activity-ktx:${versions.ktx_activity}"
 	api "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.ktx_lifecycle}"
 	api "androidx.lifecycle:lifecycle-reactivestreams-ktx:${versions.ktx_lifecycle}"
 	api "androidx.collection:collection-ktx:${versions.ktx_collection}"
 	api "androidx.paging:paging-runtime-ktx:${versions.ktx_paging}"
+
+	api "androidx.core:core-animation:${versions.androidx_animation}"
 
 	api "com.google.android.material:material:${versions.material_design}"
 
@@ -55,20 +45,39 @@ dependencies {
 	api "androidx.databinding:databinding-runtime:${versions.androidx_databinding}"
 	api "androidx.databinding:databinding-adapters:${versions.androidx_databinding}"
 
+	// Common Navigation
+	// Don't forget to apply plugin androidx.navigation.safeargs for every module with navigation (solved in common too)
+	api "androidx.navigation:navigation-fragment-ktx:${versions.android_navigation}"
+	api "androidx.navigation:navigation-ui-ktx:${versions.android_navigation}"
+
+	// Dagger (extended dependency on top of minimal dependency from common.gradle)
+	// Dagger
+	api "com.google.dagger:dagger:${versions.dagger}"
+	compileOnly 'javax.annotation:jsr250-api:1.0'
+
+	//Moshi (general movement from gson to moshi)
+	api "com.squareup.moshi:moshi:${versions.moshi}"
+	api "com.squareup.moshi:moshi-adapters:${versions.moshi}"
+//	api "com.serjltt.moshi:moshi-lazy-adapters:2.2"
+	api "com.squareup.retrofit2:converter-moshi:${versions.moshi_converter}"
+
+	//Logging
+	api "com.jakewharton.timber:timber:${versions.timber}"
+
+	//Firebase
+	api "com.google.firebase:firebase-crashlytics:${versions.firebase_crashlytics}"
+
+	//Moshi (general movement from gson to moshi)
+	testImplementation "com.squareup.moshi:moshi:${versions.moshi}"
+	testImplementation "com.squareup.moshi:moshi-adapters:${versions.moshi}"
+	testImplementation "com.squareup.retrofit2:converter-moshi:${versions.moshi_converter}"
+
+
 	// rxjava
 	api "io.reactivex.rxjava2:rxkotlin:${versions.rx_rxkotlin}"
 	api "io.reactivex.rxjava2:rxandroid:${versions.rx_rxandroid}"
 	api "io.reactivex.rxjava2:rxjava:${versions.rx_rxjava}"
 	api "com.jakewharton.rxrelay2:rxrelay:${versions.rx_rxrelay}"
 
-	// Dagger (extended dependency on top of minimal dependency from common.gradle)
-	// Dagger
-	api "com.google.dagger:dagger:${versions.dagger}"
-	api "com.google.dagger:dagger-android:${versions.dagger}"
-	api "com.google.dagger:dagger-android-support:${versions.dagger}"
-	compileOnly 'javax.annotation:jsr250-api:1.0'
 
-	//Moshi (general movement from gson to moshi)
-	implementation "com.squareup.moshi:moshi:${versions.moshi}"
-	implementation "com.squareup.retrofit2:converter-moshi:${versions.moshi_converter}"
 }

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<string name="error_general">Something went wrong, please try again later.</string>
+	<string name="error_no_internet">No internet connection.</string>
+
+
+</resources>
