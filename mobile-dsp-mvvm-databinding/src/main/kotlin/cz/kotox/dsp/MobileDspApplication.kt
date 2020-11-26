@@ -10,13 +10,16 @@ import cz.kotox.core.database.InstallPreferences
 import cz.kotox.core.entity.AppId
 import cz.kotox.core.entity.AppName
 import cz.kotox.core.entity.AppVersion
+import cz.kotox.core.rest.RestContract
 import cz.kotox.dsp.app.AppLifecycle
 import cz.kotox.dsp.di.AppComponentProvider
 import cz.kotox.dsp.di.DaggerApplicationComponent
 import timber.log.Timber
 import javax.inject.Inject
 
-class MobileDspApplication : Application(), AppComponentProvider {
+class MobileDspApplication : Application(),
+		AppComponentProvider,
+		RestContract {
 
 	@Inject
 	lateinit var appPreferences: AppPreferences
@@ -34,6 +37,7 @@ class MobileDspApplication : Application(), AppComponentProvider {
 				.appVersion(AppVersion(BuildConfig.DSP_VERSION_CODE, BuildConfig.DSP_VERSION_NAME))
 				.appId(AppId(BuildConfig.APPLICATION_ID))
 				.appName(AppName(getString(R.string.app_name)))
+				.restContract(this)
 				.build()
 	}
 
@@ -52,6 +56,10 @@ class MobileDspApplication : Application(), AppComponentProvider {
 		ProcessLifecycleOwner.get().lifecycle.addObserver(AppLifecycle(component.activityLifecycleCallbacks/*, component.eventTracker*/))
 
 
+	}
+
+	override fun sessionExpired() {
+		//userRepository.singOut()
 	}
 
 	@Suppress("ConstantConditionIf")

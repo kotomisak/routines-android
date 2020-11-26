@@ -21,8 +21,8 @@
 		android:label="@string/analyzer"
 		tools:layout="@layout/analyzer_activity">
 
-		<argument
-			android:name="user_id" app:argType="integer" />
+<!--		<argument-->
+<!--			android:name="user_id" app:argType="integer" />-->
 
 	</activity>
 

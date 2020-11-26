@@ -1,7 +1,11 @@
 package cz.kotox.dsp.app
 
 import android.app.Application
+import android.content.Intent
+import androidx.navigation.ActivityNavigator
 import androidx.navigation.NavController
+import cz.kotox.dsp.ui.MainFragmentDirections
+import cz.kotox.dsp.ui.analyzer.AnalyzerActivity
 import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -33,20 +37,20 @@ class AppNavigator @Inject constructor(private val application: Application) {
 	}
 
 
-//	/**
-//	 * 	Navigation from any activity to the root of specific navigation.
-//	 */
-//
-//	fun startPlayer(meditationEntity: MeditationEntity, savedMeditation: Boolean) {
+	/**
+	 * 	Navigation from any activity to the root of specific navigation.
+	 */
+
+//	fun startAnalyzer() {
 //		// Navigate to different activity must be done like this if you are navigating from different activity than MainActivity, because navController is binded in the MainActivity.
 //		// It means that navController is null when the system kills the process and the main activity was not last one.
 //		// It's not the best looking solution, but it keeps SaveArgs at least.
 //
-//		val navDirections = MainNavigationDirections.navigateToPlayer(meditationEntity, savedMeditation)
+//		val navDirections = MainFragmentDirections.navigateToAnalyzer()
 //
 //		ActivityNavigator(application).apply {
 //			navigate(
-//				createDestination().setIntent(Intent(application, MeditationPlayerActivity::class.java)),
+//				createDestination().setIntent(Intent(application, AnalyzerActivity::class.java)),
 //				navDirections.arguments,
 //				null,
 //				null)

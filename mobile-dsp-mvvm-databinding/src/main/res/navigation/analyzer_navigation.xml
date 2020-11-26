@@ -11,8 +11,7 @@
 		android:name="cz.kotox.dsp.ui.analyzer.record.AnalyzerRecordFragment"
 		android:label="@string/analyzer"
 		tools:layout="@layout/analyzer_record_fragment">
-		<argument
-			android:name="user_id" app:argType="integer" />
+
 		<action
 			android:id="@+id/navigate_to_processing"
 			app:destination="@id/analyzer_result"

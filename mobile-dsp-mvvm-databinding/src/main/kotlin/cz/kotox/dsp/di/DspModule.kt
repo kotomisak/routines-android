@@ -11,8 +11,6 @@ import cz.kotox.dsp.ui.analyzer.AnalyzerViewModel
 import cz.kotox.dsp.ui.analyzer.record.AnalyzerRecordFragment
 import cz.kotox.dsp.ui.analyzer.record.AnalyzerRecordViewModel
 import cz.kotox.dsp.ui.analyzer.result.AnalyzerResultFragment
-import cz.kotox.dsp.ui.analyzer.result.AnalyzerResultListFragment
-import cz.kotox.dsp.ui.analyzer.result.AnalyzerResultListViewModel
 import cz.kotox.dsp.ui.analyzer.result.AnalyzerResultViewModel
 import dagger.Binds
 import dagger.Module
@@ -62,18 +60,6 @@ abstract class DspModuleBuilder {
 	@IntoMap
 	@ViewModelKey(AnalyzerResultViewModel::class)
 	abstract fun bindAnalyzerResultViewModel(viewModel: AnalyzerResultViewModel): ViewModel
-
-
-	@Binds
-	@IntoMap
-	@FragmentKey(AnalyzerResultListFragment::class)
-	abstract fun contributeAnalyzerResultListFragment(fragment: AnalyzerResultListFragment): Fragment
-
-
-	@Binds
-	@IntoMap
-	@ViewModelKey(AnalyzerResultListViewModel::class)
-	abstract fun bindAnalyzerResultListViewModel(viewModel: AnalyzerResultListViewModel): ViewModel
 }
 
 @Module(includes = [DspModuleBuilder::class])

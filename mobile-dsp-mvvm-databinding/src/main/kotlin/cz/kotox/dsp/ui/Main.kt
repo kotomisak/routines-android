@@ -1,5 +1,6 @@
 package cz.kotox.dsp.ui
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatDelegate
@@ -7,6 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.SavedStateHandle
+import androidx.navigation.ActivityNavigator
 import androidx.navigation.Navigation
 import cz.kotox.core.entity.AppVersion
 import com.squareup.inject.assisted.Assisted
@@ -22,6 +24,7 @@ import cz.kotox.dsp.app.AppNavigator
 import cz.kotox.dsp.databinding.AnalyzerActivityBinding
 import cz.kotox.dsp.databinding.MainFragmentBinding
 import cz.kotox.dsp.di.injector
+import cz.kotox.dsp.ui.analyzer.AnalyzerActivity
 import cz.kotox.dsp.ui.analyzer.AnalyzerViewModel
 import javax.inject.Inject
 
@@ -78,10 +81,11 @@ class MainViewModel @AssistedInject constructor(
 }
 
 interface MainFragmentView {
-
+	fun onStartVoiceAnalysis()
 }
 
-class MainFragment  @Inject constructor(
+class MainFragment @Inject constructor(
+		val appNavigator: AppNavigator
 ) : BaseFragmentViewModel<MainViewModel,MainFragmentBinding>(
 		R.layout.main_fragment,
 		NavigationType.CLOSE
@@ -89,4 +93,8 @@ class MainFragment  @Inject constructor(
 
 	override val viewModel: MainViewModel by viewModels()
 
+	override fun onStartVoiceAnalysis() {
+		navController.navigate(MainFragmentDirections.navigateToAnalyzer())
+		//appNavigator.startAnalyzer()
+	}
 }

@@ -5,6 +5,10 @@
 	<data>
 
 		<variable
+			name="view"
+			type="cz.kotox.dsp.ui.analyzer.result.AnalyzerResultView" />
+
+		<variable
 			name="viewModel"
 			type="cz.kotox.dsp.ui.analyzer.result.AnalyzerResultViewModel" />
 	</data>
@@ -37,7 +41,17 @@
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toTopOf="parent" />
 
-		<androidx.viewpager.widget.ViewPager
+<!--		<androidx.viewpager.widget.ViewPager-->
+<!--			android:id="@+id/analyzer_viewpager"-->
+<!--			android:layout_width="0dp"-->
+<!--			android:layout_height="0dp"-->
+<!--			android:layout_marginBottom="24dp"-->
+<!--			app:layout_constraintBottom_toTopOf="@+id/navigate_finish_analyzer_bt"-->
+<!--			app:layout_constraintEnd_toEndOf="parent"-->
+<!--			app:layout_constraintStart_toStartOf="parent"-->
+<!--			app:layout_constraintTop_toBottomOf="@+id/analyzer_tabs" />-->
+
+		<androidx.recyclerview.widget.RecyclerView
 			android:id="@+id/analyzer_viewpager"
 			android:layout_width="0dp"
 			android:layout_height="0dp"
@@ -45,7 +59,11 @@
 			app:layout_constraintBottom_toTopOf="@+id/navigate_finish_analyzer_bt"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@+id/analyzer_tabs" />
+			app:layout_constraintTop_toBottomOf="@+id/analyzer_tabs"
+			app:adapter="@{view.resultListAdapter}"
+			app:items="@{viewModel.analyzerViewModel.pitchList}"
+			app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+			tools:listitem="@layout/item_audio_sample" />
 
 
 		<com.google.android.material.floatingactionbutton.FloatingActionButton

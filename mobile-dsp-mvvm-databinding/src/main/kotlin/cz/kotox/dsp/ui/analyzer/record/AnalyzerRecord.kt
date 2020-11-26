@@ -2,12 +2,9 @@ package cz.kotox.dsp.ui.analyzer.record
 
 import android.graphics.Color
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.OnLifecycleEvent
 import androidx.navigation.Navigation
@@ -16,14 +13,12 @@ import cz.kotox.core.database.AppPreferences
 import cz.kotox.core.dsp.DspAnalyzerProvider
 import cz.kotox.core.dsp.DspAnalyzerResult
 import cz.kotox.core.dsp.model.PitchAlgorithm
-import cz.kotox.core.dsp.model.VoiceSample
 import cz.kotox.core.ktools.mutableLiveDataOf
 import cz.kotox.core.utility.FragmentPermissionManager
 import cz.kotox.core.utility.lazyUnsafe
 import cz.kotox.core.view.graph.WaveSample
 import cz.kotox.dsp.R
 import cz.kotox.dsp.databinding.AnalyzerRecordFragmentBinding
-import cz.kotox.dsp.ui.analyzer.AnalyzerViewModel
 import cz.kotox.dsp.ui.analyzer.BaseAnalyzerFragment
 import cz.kotox.dsp.ui.analyzer.BaseAnalyzerViewModel
 import kotlinx.coroutines.*
@@ -33,7 +28,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 class AnalyzerRecordFragment @Inject constructor(
-		private val appPreferences: AppPreferences
+		//private val appPreferences: AppPreferences
 ) : BaseAnalyzerFragment<AnalyzerRecordViewModel, AnalyzerRecordFragmentBinding>(
 		R.layout.analyzer_record_fragment,
 		NavigationType.CLOSE
@@ -96,6 +91,18 @@ class AnalyzerRecordFragment @Inject constructor(
 		}
 	}
 
+	@ExperimentalCoroutinesApi
+	override fun onStart() {
+		super.onStart()
+		viewModel.startRecording()
+	}
+
+	override fun onPause() {
+		viewModel.stopRecording()
+		super.onPause()
+	}
+
+
 	override fun onDestroyView() {
 		binding.graphView.stopPlotting()
 		super.onDestroyView()
@@ -150,17 +157,12 @@ class AnalyzerRecordViewModel @Inject constructor(
 //		launch(recordingJob) { initRecording(useProbability, pitchProbabilityThreshold, requireNotNull(pitchAlgorithm.value)) }
 	}
 
+
 	@ExperimentalCoroutinesApi
-	@OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-	private fun testLifeCycleOnResume() {
+	fun startRecording() {
 		launch {
 			pitchAlgorithm.value?.let { initRecording(useProbability = false, probabilityThreshold = 0f, pitchAlgorithm = PitchAlgorithm.FFT_YIN) }
 		}
-	}
-
-	@OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
-	private fun testLifeCycleOnPause() {
-		stopRecording()
 	}
 
 	fun stopRecording() {
@@ -168,7 +170,7 @@ class AnalyzerRecordViewModel @Inject constructor(
 	}
 
 	private fun cleanUpMeasurement() {
-		mainViewModel.pitchList.clear()
+		analyzerViewModel.pitchList.clear()
 		min.value = "0"
 		max.value = "0"
 		frequency.value = "0"
@@ -179,7 +181,7 @@ class AnalyzerRecordViewModel @Inject constructor(
 	private suspend fun initRecording(useProbability: Boolean, probabilityThreshold: Float, pitchAlgorithm: PitchAlgorithm) {
 		Timber.w(">>>X init recording")
 		dspAnalyzer.stopDispatch()
-		dspAnalyzer.runDispatch(useProbability = useProbability, probabilityThreshold = probabilityThreshold, pitchAlgorithm = pitchAlgorithm, currentPitchList = mainViewModel.pitchList.toList())
+		dspAnalyzer.runDispatch(useProbability = useProbability, probabilityThreshold = probabilityThreshold, pitchAlgorithm = pitchAlgorithm, currentPitchList = analyzerViewModel.pitchList.toList())
 				//.onStart { delay(5000) } //just the test whether recording start when collect is invoked.
 				.flowOn(Dispatchers.IO)
 				.collect { dispatchResult ->
@@ -192,20 +194,20 @@ class AnalyzerRecordViewModel @Inject constructor(
 						}
 						is DspAnalyzerResult.Data -> {
 							val sample = dispatchResult.voiceSample
-							Timber.i(">>> FLOW pitch[$sample.pitch], min[${mainViewModel.pitchList.map { it.pitch }.min()}],max[${mainViewModel.pitchList.map { it.pitch }.max()}]")
+							Timber.i(">>> FLOW pitch[$sample.pitch], min[${analyzerViewModel.pitchList.map { it.pitch }.min()}],max[${analyzerViewModel.pitchList.map { it.pitch }.max()}]")
 
 							waveList.add(WaveSample(sample.time.toLong(), (sample.amplitude * 100).toInt()))
 
 							if (sample.pitch > 0) {
 
-								if (sample.pitch < mainViewModel.pitchList.map { it.pitch }.min() ?: sample.pitch) {
+								if (sample.pitch < analyzerViewModel.pitchList.map { it.pitch }.min() ?: sample.pitch) {
 									min.value = String.format("%.1f", sample.pitch)
 								}
-								if (sample.pitch > mainViewModel.pitchList.map { it.pitch }.max() ?: sample.pitch) {
+								if (sample.pitch > analyzerViewModel.pitchList.map { it.pitch }.max() ?: sample.pitch) {
 									max.value = String.format("%.1f", sample.pitch)
 								}
 
-								mainViewModel.pitchList.add(sample)
+								analyzerViewModel.pitchList.add(sample)
 								frequency.value = String.format("%.1f", sample.frequency)
 								amplitude.value = String.format("%.3f", sample.amplitude)
 							}
