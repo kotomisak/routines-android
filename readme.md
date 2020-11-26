@@ -1,7 +1,6 @@
 # kotox-android
-Monorepo with all MJ's apps and ideas.  
 
-
+Monorepo with Android constructs.  
 
 More about Monorepo idea is here https://jenicek.dev/2020/01/31/monorepo/     
 
