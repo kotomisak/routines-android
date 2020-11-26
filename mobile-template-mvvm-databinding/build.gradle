@@ -85,6 +85,6 @@ android {
 dependencies {
 
     implementation project(':core')
-    implementation project(':core-arch-mvvm-databinding')
+    implementation project(':core-arch-mvvm-databinding-nav')
 
 }

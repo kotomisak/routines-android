@@ -68,11 +68,10 @@ dependencies {
 
     implementation project(':core')
     implementation project(':core-analytics')
-    implementation project(':core-arch-mvvm-databinding')
+    implementation project(':core-arch-mvvm-databinding-nav')
     implementation project(':core-dsp')
     implementation project(':core-rest')
     implementation project(':core-media')
-
     implementation project(':core-view')
 
 

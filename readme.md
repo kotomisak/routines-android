@@ -16,15 +16,17 @@ Practical guide first:
 # 1. Content
 
 | app or module name                                                                         | description                                                                                                                |
-|:-------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------|
-| **[mobile-dsp-mvvm-databinding](./mobile-dsp-mvvm-databinding/readme.md)**                 | Sample application showcase of digital sound processing without JNI requirement          |                                                                              
+|:-------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------|                                                                            
 | **core**                                                                                   | The most core code to be available across all other modules                                                                |
-| **core-arch**                                                                              | All the boilerplate architectural code which could be extended in all other modules                                        |
+| **core-analytics**                                                                         | Core module with analytics tracking feature                                                                                |
+| **core-arch-mvvm-databinding-nav**                                                         | Core module to be used when using MVVM architecture with databinging and navigation component                              |
 | **[core-dsp](./core-dsp/readme.md)**                                                       | Core module wrapping [TarsoDSP](https://github.com/JorenSix/TarsosDSP) library and offering functional API outside         |
 | **[core-ffmpeg](./core-ffmpeg/readme.md)**                                                 | Core module wrapping [Tenersener](https://github.com/tanersener/mobile-ffmpeg) library and offering functional API outside |
-| **core-media**                                                                             | Core media handling module                                                                                                 |
-
-
+| **core-media**                                                                             | Core media (glide/exoplayer/openGl) handling module                                                                        |
+| **core-rest**                                                                              | Core module when handling REST API's (currently based on RETROFIT)                                                         |
+| **core-view**                                                                              | Core module with custom views                                                                                              |
+| **core-webview**                                                                           | Core module with generic webView to be used anywhere in any app                                                            |
+| **[mobile-dsp-mvvm-databinding](./mobile-dsp-mvvm-databinding/readme.md)**                 | Sample application showcase of digital sound processing without JNI requirement                                            |  
 
 
 # 2. Structure

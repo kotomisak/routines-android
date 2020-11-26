@@ -4,7 +4,7 @@ dependencies {
 	implementation fileTree(dir: 'libs', include: ['*.jar'])
 	implementation project(':core')
 	implementation project(':core-analytics')
-	implementation project(':core-arch-mvvm-databinding')
+	implementation project(':core-arch-mvvm-databinding-nav')
 
 	api files('libs/TarsosDSP-Android-2.4.jar')
 }
