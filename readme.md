@@ -28,7 +28,7 @@ Practical guide first:
 | **core-media-image-databinding**                                                           | Core image loading module extension for databinding                                                                        |
 | **core-rest**                                                                              | Core module when handling REST API's (currently based on RETROFIT)                                                         |
 | **core-view**                                                                              | Core module with custom views                                                                                              |
-| **core-webview**                                                                           | Core module with generic webView to be used anywhere in any app                                                            |
+| **core-webview-databinding**                                                               | Core module with generic webView to be used anywhere in any app  (databinding variant)                                     |
 | **[mobile-dsp-mvvm-databinding](./mobile-dsp-mvvm-databinding/readme.md)**                 | Sample application showcase of digital sound processing without JNI requirement                                            |  
 
 
