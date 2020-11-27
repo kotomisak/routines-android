@@ -17,7 +17,8 @@ Practical guide first:
 
 | app or module name                                                                         | description                                                                                                                |
 |:-------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------|                                                                            
-| **core**                                                                                   | The most core code to be available across all other modules                                                                |
+| **core**                                                                                   | The most core code to be available across all other modules/apps                                                               |
+| **core-databinding**                                                                       | Core module for databinding based apps                                                                                     |
 | **core-analytics**                                                                         | Core module with analytics tracking feature                                                                                |
 | **core-arch-mvvm-databinding-nav**                                                         | Core module to be used when using MVVM architecture with databinging and navigation component                              |
 | **[core-dsp](./core-dsp/readme.md)**                                                       | Core module wrapping [TarsoDSP](https://github.com/JorenSix/TarsosDSP) library and offering functional API outside         |
