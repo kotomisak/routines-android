@@ -24,7 +24,7 @@ include ':core',
 		':core-media-image',
 		':core-media-image-databinding',
 		':core-rest',
-		':core-webview',
+		':core-webview-databinding',
 		':core-view',
 		//':mobile-template-mvvm-databinding',
 		':mobile-dsp-mvvm-databinding'
