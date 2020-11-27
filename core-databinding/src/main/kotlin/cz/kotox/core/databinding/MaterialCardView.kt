@@ -1,4 +1,4 @@
-package cz.kotox.core.extension
+package cz.kotox.core.databinding
 
 import androidx.databinding.BindingAdapter
 import com.google.android.material.card.MaterialCardView

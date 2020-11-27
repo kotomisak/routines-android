@@ -26,7 +26,6 @@ allprojects {
 		}
 
 		compileSdkVersion versions.sdk
-		dataBinding.enabled true
 
 		defaultConfig {
 			minSdkVersion versions.min_sdk

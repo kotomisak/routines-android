@@ -42,9 +42,6 @@ dependencies {
 
 	api "androidx.preference:preference:${versions.androidx_preference}"
 
-	api "androidx.databinding:databinding-runtime:${versions.androidx_databinding}"
-	api "androidx.databinding:databinding-adapters:${versions.androidx_databinding}"
-
 	// Common Navigation
 	// Don't forget to apply plugin androidx.navigation.safeargs for every module with navigation (solved in common too)
 	api "androidx.navigation:navigation-fragment-ktx:${versions.android_navigation}"

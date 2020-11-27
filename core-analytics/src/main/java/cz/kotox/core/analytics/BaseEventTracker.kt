@@ -43,18 +43,4 @@ abstract class BaseEventTracker(
 			Timber.d("ACTION EVENT: ${actionEventName} with params ${actionEventParams}")
 		}
 	}
-
-	@Deprecated("Use trackScreenView or trackAction instead.")
-	protected fun trackSimple(eventName: String) {
-		if (CoreConfig.IS_RELEASE_BUILD_TYPE) {
-			firebase.trackSimple(eventName)
-		}
-	}
-
-	@Deprecated("Use trackActionWithParams or trackScreenViewWithParams instead.")
-	protected fun trackParams(eventName: String, params: EventParams) {
-		if (CoreConfig.IS_RELEASE_BUILD_TYPE) {
-			firebase.trackParams(eventName, params)
-		}
-	}
 }

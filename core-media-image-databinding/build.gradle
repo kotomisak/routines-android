@@ -1,5 +1,9 @@
 apply from: "$project_directory/core/library.gradle"
 
+android {
+	dataBinding.enabled true
+}
+
 dependencies {
 	implementation fileTree(dir: 'libs', include: ['*.jar'])
 
