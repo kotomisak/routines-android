@@ -17,6 +17,7 @@
 include ':core',
 		':core-analytics',
         ':core-arch-mvvm-databinding-nav',
+		':core-databinding',
 		':core-dsp',
 		':core-ffmpeg',
 		':core-media',

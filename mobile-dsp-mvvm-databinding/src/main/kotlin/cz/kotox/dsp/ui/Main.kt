@@ -13,10 +13,7 @@ import androidx.navigation.Navigation
 import cz.kotox.core.entity.AppVersion
 import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
-import cz.kotox.core.arch.BaseActivityViewModel
-import cz.kotox.core.arch.BaseFragmentViewModel
-import cz.kotox.core.arch.BaseViewModel
-import cz.kotox.core.arch.NavigationType
+import cz.kotox.core.arch.*
 import cz.kotox.core.arch.di.viewModel.AssistedSavedStateViewModelFactory
 import cz.kotox.core.arch.di.viewModel.ViewModelArgs
 import cz.kotox.dsp.R
@@ -65,17 +62,17 @@ class MainViewModel @AssistedInject constructor(
 	interface Factory : AssistedSavedStateViewModelFactory<MainViewModel>
 
 	@OnLifecycleEvent(Lifecycle.Event.ON_START)
-	fun testLifeCycleOnStart(){
+	fun testLifeCycleOnStart() {
 		//Timber.e(">>> MainViewModel ON_START")
 	}
 
 	@OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-	fun testLifeCycleOnResume(){
+	fun testLifeCycleOnResume() {
 		//Timber.e(">>> MainViewModel ON_RESUME")
 	}
 
 	@OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
-	fun testLifeCycleOnPause(){
+	fun testLifeCycleOnPause() {
 		//Timber.e(">>> MainViewModel ON_PAUSE")
 	}
 }
@@ -86,7 +83,7 @@ interface MainFragmentView {
 
 class MainFragment @Inject constructor(
 		val appNavigator: AppNavigator
-) : BaseFragmentViewModel<MainViewModel,MainFragmentBinding>(
+) : BasePermissionFragmentViewModel<MainViewModel, MainFragmentBinding>(
 		R.layout.main_fragment,
 		NavigationType.CLOSE
 ), MainFragmentView {
@@ -94,7 +91,6 @@ class MainFragment @Inject constructor(
 	override val viewModel: MainViewModel by viewModels()
 
 	override fun onStartVoiceAnalysis() {
-		navController.navigate(MainFragmentDirections.navigateToAnalyzer())
-		//appNavigator.startAnalyzer()
+		checkAudioRecordingPermission { navController.navigate(MainFragmentDirections.navigateToAnalyzer()) }
 	}
 }

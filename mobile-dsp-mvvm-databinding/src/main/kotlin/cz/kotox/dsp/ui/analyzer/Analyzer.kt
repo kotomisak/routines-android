@@ -9,18 +9,19 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModelProvider
 import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
-import cz.kotox.core.arch.BaseActivityViewModel
-import cz.kotox.core.arch.BasePermissionFragmentViewModel
-import cz.kotox.core.arch.BaseViewModel
-import cz.kotox.core.arch.NavigationType
+import cz.kotox.core.arch.*
 import cz.kotox.core.arch.di.viewModel.AssistedSavedStateViewModelFactory
 import cz.kotox.core.arch.di.viewModel.ViewModelArgs
 import cz.kotox.core.database.AppPreferences
 import cz.kotox.core.dsp.model.VoiceSample
+import cz.kotox.core.utility.ActivityPermissionManager
+import cz.kotox.core.utility.lazyUnsafe
 import cz.kotox.dsp.R
 import cz.kotox.dsp.app.AppNavigator
 import cz.kotox.dsp.databinding.AnalyzerActivityBinding
 import cz.kotox.dsp.di.injector
+import cz.kotox.dsp.ui.analyzer.record.AnalyzerRecordFragmentDirections
+import cz.kotox.dsp.ui.analyzer.record.NoMicFragmentDirections
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -33,12 +34,30 @@ class AnalyzerActivity : BaseActivityViewModel<AnalyzerViewModel, AnalyzerActivi
 	@Inject
 	lateinit var navigator: AppNavigator
 
+	@Inject
+	lateinit var appPreferences: AppPreferences
+
+	private val permissionManager: ActivityPermissionManager by lazyUnsafe { ActivityPermissionManager(this, appPreferences) }
+
 	override val viewModel: AnalyzerViewModel by viewModels()
 
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		injector.inject(this)
 		super.onCreate(savedInstanceState)
+	}
+
+	override fun onResume() {
+		super.onResume()
+		checkVoiceRecordingPermission()
+	}
+
+	private fun checkVoiceRecordingPermission() {
+		if (!permissionManager.checkRecordAudioPermission() && navController.currentDestination?.id == R.id.analyzer_process) {
+			navController.navigate(AnalyzerRecordFragmentDirections.navigateToNoMicScreen())
+		} else if (permissionManager.checkRecordAudioPermission() && navController.currentDestination?.id == R.id.no_mic) {
+			navController.navigate(NoMicFragmentDirections.navigateToVoiceRecording())
+		}
 	}
 
 }
@@ -66,7 +85,7 @@ class AnalyzerViewModel @AssistedInject constructor(
 abstract class BaseAnalyzerFragment<V : BaseAnalyzerViewModel, B : ViewDataBinding>(
 		@LayoutRes layoutResId: Int,
 		navigationType: NavigationType
-) : BasePermissionFragmentViewModel<V, B>(layoutResId, navigationType) {
+) : BaseFragmentViewModel<V, B>(layoutResId, navigationType) {
 
 	/**
 	 * IMPORTANT! keep at least one field injection in this abstract class, since it solves known MembersInjector multiple issue

@@ -37,4 +37,9 @@
 	<string name="result_amplitude">Ampl.</string>
 	<string name="result_time">Time (sec)</string>
 
+	<string name="no_mic_title">Your microphone is required to realize voice analysis.</string>
+	<string name="no_mic_description">We can\'t analyze your current voice characteristic without your voice input.</string>
+	<string name="no_mic_btn">Allow mic access</string>
+	<string name="no_mic_permission_denied_message">Microphone permission is required to realize voice analysis.</string>
+
 </resources>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto">
+	<data>
+
+		<variable
+			name="view"
+			type="cz.kotox.dsp.ui.analyzer.record.NoMicrophoneView" />
+
+		<variable
+			name="viewModel"
+			type="cz.kotox.dsp.ui.analyzer.record.NoMicrophoneViewModel" />
+	</data>
+
+	<androidx.constraintlayout.widget.ConstraintLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		app:fitSystemWindowInsets="@{true}">
+
+		<androidx.constraintlayout.widget.Guideline
+			android:id="@+id/keyline_toolbar"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal"
+			app:layout_constraintGuide_begin="?actionBarSize" />
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/icon"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			app:layout_constraintBottom_toTopOf="@id/title"
+			app:layout_constraintEnd_toEndOf="@id/keyline_end"
+			app:layout_constraintStart_toStartOf="@id/keyline_start"
+			app:layout_constraintTop_toTopOf="@id/keyline_toolbar"
+			app:layout_constraintVertical_chainStyle="packed"
+			app:srcCompat="@drawable/ic_mic_meditation" />
+
+		<androidx.appcompat.widget.AppCompatTextView
+			android:id="@+id/title"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="16dp"
+			android:layout_marginTop="32dp"
+			android:layout_marginEnd="16dp"
+			android:fontFamily="@font/poppins_semibold"
+			android:gravity="center"
+			android:text="@string/no_mic_title"
+			android:textAppearance="?textAppearanceHeadline5"
+			app:layout_constraintBottom_toTopOf="@id/description"
+			app:layout_constraintEnd_toEndOf="@id/keyline_end"
+			app:layout_constraintStart_toStartOf="@id/keyline_start"
+			app:layout_constraintTop_toBottomOf="@id/icon" />
+
+		<androidx.appcompat.widget.AppCompatTextView
+			android:id="@+id/description"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="16dp"
+			android:layout_marginTop="12dp"
+			android:layout_marginEnd="16dp"
+			android:gravity="center"
+			android:textColor="@color/color_on_surface_secondary"
+			android:textAppearance="?textAppearanceBody2"
+			android:text="@string/no_mic_description"
+			app:layout_constraintBottom_toTopOf="@id/btn"
+			app:layout_constraintEnd_toEndOf="@id/keyline_end"
+			app:layout_constraintStart_toStartOf="@id/keyline_start"
+			app:layout_constraintTop_toBottomOf="@id/title" />
+
+		<com.google.android.material.button.MaterialButton
+			android:id="@+id/btn"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="24dp"
+			android:onClick="@{() -> view.allowMicAccess()}"
+			android:text="@string/no_mic_btn"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="@id/keyline_end"
+			app:layout_constraintStart_toStartOf="@id/keyline_start" />
+
+		<androidx.constraintlayout.widget.Guideline
+			android:id="@+id/keyline_start"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:orientation="vertical"
+			app:layout_constraintGuide_begin="24dp" />
+
+		<androidx.constraintlayout.widget.Guideline
+			android:id="@+id/keyline_end"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:orientation="vertical"
+			app:layout_constraintGuide_end="24dp" />
+
+	</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

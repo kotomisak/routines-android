@@ -18,6 +18,8 @@ import dagger.multibindings.IntoMap
 import cz.kotox.core.arch.di.annotation.mapKey.FragmentKey
 import cz.kotox.core.arch.di.annotation.mapKey.ViewModelKey
 import cz.kotox.core.arch.di.viewModel.AssistedSavedStateViewModelFactory
+import cz.kotox.dsp.ui.analyzer.record.NoMicFragment
+import cz.kotox.dsp.ui.analyzer.record.NoMicrophoneViewModel
 
 @AssistedModule
 @Module(includes = [AssistedInject_DspModuleBuilder::class])
@@ -60,6 +62,16 @@ abstract class DspModuleBuilder {
 	@IntoMap
 	@ViewModelKey(AnalyzerResultViewModel::class)
 	abstract fun bindAnalyzerResultViewModel(viewModel: AnalyzerResultViewModel): ViewModel
+
+	@Binds
+	@IntoMap
+	@FragmentKey(NoMicFragment::class)
+	abstract fun contributeNoMicFragment(fragment: NoMicFragment): Fragment
+
+	@Binds
+	@IntoMap
+	@ViewModelKey(NoMicrophoneViewModel::class)
+	abstract fun bindNoMicrophoneViewModel(viewModel: NoMicrophoneViewModel): ViewModel
 }
 
 @Module(includes = [DspModuleBuilder::class])

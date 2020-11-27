@@ -28,41 +28,12 @@ import timber.log.Timber
 import javax.inject.Inject
 
 class AnalyzerRecordFragment @Inject constructor(
-		//private val appPreferences: AppPreferences
 ) : BaseAnalyzerFragment<AnalyzerRecordViewModel, AnalyzerRecordFragmentBinding>(
 		R.layout.analyzer_record_fragment,
 		NavigationType.CLOSE
 ) {
 
 	override val viewModel: AnalyzerRecordViewModel by viewModels()
-
-	private val permissionManager: FragmentPermissionManager by lazyUnsafe { FragmentPermissionManager(this, appPreferences) }
-
-	override fun onResume() {
-		super.onResume()
-		checkVoiceRecordingPermission()
-	}
-
-
-//	private fun verifyPermissions() {
-//		if (!permissionManager.checkRecordAudioPermission()) {
-//			permissionManager.requestRecordAudioPermissions({}, {
-//				showToast("RecordAudio permissions is required for audio analysis")
-//				activity?.finish()
-//			})
-//		}
-//	}
-
-	private fun checkVoiceRecordingPermission() {
-		if (!permissionManager.checkRecordAudioPermission()) {
-
-			TODO("No Mic screen is not implemented")
-			//navController.navigate(VoiceRecordingFragmentDirections.navigateToNoMicQuestion())
-
-		} else /*if (permissionManager.checkRecordAudioPermission())*/ {
-			//navController.navigate(NoMicFragmentDirections.navigateToVoiceRecording())
-		}
-	}
 
 	@ExperimentalCoroutinesApi
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -106,10 +77,6 @@ class AnalyzerRecordFragment @Inject constructor(
 	override fun onDestroyView() {
 		binding.graphView.stopPlotting()
 		super.onDestroyView()
-	}
-
-	override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-		permissionManager.onPermissionResult(requestCode, permissions, grantResults)
 	}
 }
 

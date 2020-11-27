@@ -13,12 +13,32 @@
 		tools:layout="@layout/analyzer_record_fragment">
 
 		<action
+			android:id="@+id/navigate_to_no_mic_screen"
+			app:destination="@id/no_mic"
+			app:popUpTo="@id/analyzer_process"
+			app:popUpToInclusive="true" />
+
+		<action
 			android:id="@+id/navigate_to_processing"
 			app:destination="@id/analyzer_result"
 			app:enterAnim="@anim/slide_in_right"
 			app:exitAnim="@anim/slide_out_left"
 			app:popEnterAnim="@anim/slide_in_left"
 			app:popExitAnim="@anim/slide_out_right" />
+	</fragment>
+
+	<fragment
+		android:id="@+id/no_mic"
+		android:name="cz.kotox.dsp.ui.analyzer.record.NoMicFragment"
+		android:label=" "
+		tools:layout="@layout/no_microphone_fragment">
+
+		<action
+			android:id="@+id/navigate_to_voice_recording"
+			app:destination="@id/analyzer_process"
+			app:popUpTo="@id/no_mic"
+			app:popUpToInclusive="true" />
+
 	</fragment>
 
 	<fragment
