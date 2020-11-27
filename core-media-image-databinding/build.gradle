@@ -4,9 +4,6 @@ dependencies {
 	implementation fileTree(dir: 'libs', include: ['*.jar'])
 
 	implementation project(':core')
-
-	api "com.google.android.exoplayer:exoplayer:${versions.exo_player}"
-
-	api "com.google.android.exoplayer:exoplayer:${versions.exo_player}"
+	implementation project(':core-media-image')
 
 }

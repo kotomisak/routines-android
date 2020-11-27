@@ -1,4 +1,4 @@
-package cz.kotox.core.media.binding
+package cz.kotox.core.media.image.binding
 
 import android.graphics.drawable.Drawable
 import android.net.Uri
@@ -10,9 +10,9 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withC
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.transition.DrawableCrossFadeFactory
 import com.bumptech.glide.signature.ObjectKey
-import cz.kotox.core.media.glide.GlideApp
-import cz.kotox.core.media.glide.GlideDynamicUrl
-import cz.kotox.core.media.R
+import cz.kotox.core.media.image.glide.GlideApp
+import cz.kotox.core.media.image.glide.GlideDynamicUrl
+import cz.kotox.core.media.image.R
 import timber.log.Timber
 
 var factory: DrawableCrossFadeFactory = DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build()

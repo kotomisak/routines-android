@@ -1,4 +1,4 @@
-package cz.kotox.core.media.glide
+package cz.kotox.core.media.image.glide
 
 import android.content.Context
 import com.bumptech.glide.GlideBuilder
