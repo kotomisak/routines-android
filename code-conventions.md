@@ -1,7 +1,7 @@
-# What I follow in development
+# Conventions/thoughts in Android development
 
 Diversity of approaches in Android development is awesome.
-There is many different architectures with their pros and cons.
+There is many different architectures and approaches with their pros and cons.
 Let's mention just those of them, which are closest to my mind.
 
 ## 1.1 Architecture
