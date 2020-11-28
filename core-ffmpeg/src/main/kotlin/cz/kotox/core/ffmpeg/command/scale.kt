@@ -1,7 +1,7 @@
 package cz.kotox.core.ffmpeg.command
 
 import cz.kotox.core.ffmpeg.model.CanvasItem
-import cz.kotox.core.media.model.VideoDimensions
+import cz.kotox.core.media.video.model.VideoDimensions
 
 enum class ScaleType() {
 	FIT,

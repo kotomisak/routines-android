@@ -1,4 +1,4 @@
-package cz.kotox.core.media.di
+package cz.kotox.core.media.video.di
 
 import android.app.Application
 import com.google.android.exoplayer2.C
@@ -6,11 +6,12 @@ import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.audio.AudioAttributes
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.util.Util
+import cz.kotox.core.entity.AppId
 import dagger.Module
 import dagger.Provides
 
 @Module
-object MediaModule {
+object VideoModule {
 
 	@Provides
 	@JvmStatic
@@ -19,8 +20,9 @@ object MediaModule {
 	@Provides
 	@JvmStatic
 	fun provideDefaultDataSourceFactory(
-		application: Application
-	): DefaultDataSourceFactory = DefaultDataSourceFactory(application, Util.getUserAgent(application, "soulvibe")) //TODO get applicationName proper way
+		application: Application,
+		appId: AppId
+	): DefaultDataSourceFactory = DefaultDataSourceFactory(application, Util.getUserAgent(application, appId.value)) //TODO verify if this is ok to use appId here
 
 	@Provides
 	@JvmStatic

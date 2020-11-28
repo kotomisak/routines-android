@@ -1,9 +1,9 @@
-package cz.kotox.core.media
+package cz.kotox.core.media.video
 
 import android.graphics.Bitmap
 import android.media.MediaMetadataRetriever
 import android.util.Log
-import cz.kotox.core.media.model.VideoDimensions
+import cz.kotox.core.media.video.model.VideoDimensions
 import kotlin.math.ceil
 import kotlin.math.cos
 import kotlin.math.sin

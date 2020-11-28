@@ -1,4 +1,4 @@
-package cz.kotox.core.media.utility
+package cz.kotox.core.media.opengl.utility
 
 import android.app.ActivityManager
 import android.content.Context

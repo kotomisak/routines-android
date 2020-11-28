@@ -12,7 +12,7 @@ import cz.kotox.core.ffmpeg.model.CanvasItem
 import cz.kotox.core.ffmpeg.model.VideoCompositionItem
 import cz.kotox.core.ffmpeg.model.VideoDurationItem
 import cz.kotox.core.ffmpeg.model.VideoOutputItem
-import cz.kotox.core.media.VideoUtils
+import cz.kotox.core.media.video.VideoUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.withContext

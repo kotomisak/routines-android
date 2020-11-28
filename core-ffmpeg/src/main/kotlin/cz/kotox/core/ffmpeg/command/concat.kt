@@ -4,7 +4,7 @@ import cz.kotox.core.ffmpeg.model.BackgroundMusicItem
 import cz.kotox.core.ffmpeg.model.CanvasItem
 import cz.kotox.core.ffmpeg.model.FFMPEGVideoEncoder
 import cz.kotox.core.ffmpeg.model.VideoCompositionItem
-import cz.kotox.core.media.VideoUtils.getVideoDimensions
+import cz.kotox.core.media.video.VideoUtils.getVideoDimensions
 import java.io.File
 
 private const val VIDEO_REFERENCE = "video"

@@ -1,4 +1,4 @@
-package cz.kotox.core.media.utility
+package cz.kotox.core.media.video.utility
 
 import android.content.res.AssetFileDescriptor
 import android.media.MediaMetadataRetriever

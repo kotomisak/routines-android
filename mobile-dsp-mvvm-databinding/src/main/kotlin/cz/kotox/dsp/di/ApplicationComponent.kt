@@ -3,7 +3,7 @@ package cz.kotox.dsp.di
 import android.app.Application
 import cz.kotox.core.entity.AppName
 import cz.kotox.core.entity.AppVersion
-import cz.kotox.core.media.di.MediaModule
+import cz.kotox.core.media.video.di.VideoModule
 import cz.kotox.core.arch.di.BaseArchModule
 import cz.kotox.core.arch.di.activity.SoulvibeActivityLifecycleCallbacks
 import cz.kotox.core.dsp.DspEventTracker
@@ -22,7 +22,7 @@ import javax.inject.Singleton
 	modules = [
 		BaseArchModule::class,
 		CoreRestModule::class,
-		MediaModule::class,
+		VideoModule::class,
 		DspModule::class
 	]
 )

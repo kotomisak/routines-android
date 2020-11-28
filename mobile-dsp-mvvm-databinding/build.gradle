@@ -71,9 +71,10 @@ dependencies {
     implementation project(':core-databinding')
     implementation project(':core-dsp')
     implementation project(':core-rest')
-    implementation project(':core-media')
+    implementation project(':core-media-opengl')
     implementation project(':core-media-image')
     implementation project(':core-media-image-databinding')
+    implementation project(':core-media-video')
     implementation project(':core-view')
 
 

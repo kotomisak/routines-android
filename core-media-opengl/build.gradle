@@ -4,7 +4,5 @@ dependencies {
 	implementation fileTree(dir: 'libs', include: ['*.jar'])
 
 	implementation project(':core')
-	implementation project(':core-media-video')
 
-	implementation "com.arthenica:mobile-ffmpeg-https-gpl:4.3.1.LTS"
 }
