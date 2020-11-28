@@ -9,24 +9,24 @@ MVx approach is good way how to achieve app closest to clean architecture.
 Apps are thus build from decoupled blocks and nicely unit testable.  
 
 ### 1.1.1 MVP
-I found this approach bit noisy and don't much like this unidirectional relationship between VIEW and PRESENTER.  
-It's also too much interface'ish.
-Anyway, it's one of those good options, I would not have a problem to work with. 
+MVP well known from enterprise java development seems to me a bit obsolete in Android world. 
+That's the reason I don't follow this approach.
 
 ### 1.1.2 MVVM
 I have  been using this approach for years. I know it's pros and cons.
 I prefer to use this for apps where state of the app is not composed by many actions at one time.
-When using MVVM I try NOT to use databinding (code in XML), but just generated binding itself.
+When using MVVM there is several options how to implement the app (databinding/viewbinding/...)
 
 ### 1.1.3 MVI
-I like this style of writing unidirectional event based app flow.
-I prefer to use this for apps where there is a lot of external events/inputs updating the state of the app.
+This approach seems to be good option in case application should express state based on many parallel events.
+This approach also tends to be overcomplicated in most implementations.
 
 ## 1.2 Dependency injection
 Even though there is bunch of nice looking service locators **Koin**, **Kodein**, **...** I still prefer to use full dependency injection 
 framework **Dagger 2**.  
 Despite on what kind of DI to use, just use dependency injection from day zero on the project!
 This will help to decouple code blocks and really help with unit testing.
+Quite important movement is not to use DaggerAndroid, but keep with pure dagger implementation.
 
 ## 1.3 Project structure
 Package by feature over package by type is the way.  
