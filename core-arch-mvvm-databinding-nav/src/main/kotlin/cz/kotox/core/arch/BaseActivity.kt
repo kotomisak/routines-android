@@ -82,57 +82,52 @@ abstract class BaseActivity(
 			setGraph(navGraphResourceId, intent.extras)
 			val appBarConfiguration = AppBarConfiguration.Builder(this.graph).build()
 
-			//Fixme add toolbars
-//			findViewById<Toolbar>(R.id.toolbar)?.let {
-//				it.setupWithNavController(this, appBarConfiguration)
-//				setSupportActionBar(it)
-//			}
+			findViewById<Toolbar>(R.id.toolbar)?.let {
+				it.setupWithNavController(this, appBarConfiguration)
+				setSupportActionBar(it)
+			}
 		}
 	}
 
 	fun setToolbarTitleColor(@ColorRes color: Int) {
 
-		//Fixme add toolbars
-//		findViewById<Toolbar>(R.id.toolbar)?.apply {
-//			setTitleTextColor(ContextCompat.getColor(this@BaseActivity, color))
-//		}
+		findViewById<Toolbar>(R.id.toolbar)?.apply {
+			setTitleTextColor(ContextCompat.getColor(this@BaseActivity, color))
+		}
 	}
 
 	fun setToolbarTitle(@StringRes titleResId: Int, vararg formatArgs: Any?) {
 
-		//Fixme add toolbars
-//		findViewById<Toolbar>(R.id.toolbar)?.apply {
-//			title = getString(titleResId, *formatArgs)
-//		}
+		findViewById<Toolbar>(R.id.toolbar)?.apply {
+			title = getString(titleResId, *formatArgs)
+		}
 	}
 
 	fun setNavigationType(navigationType: NavigationType, @ColorRes color: Int? = null) {
 
-		//Fixme add toolbars
-//		findViewById<Toolbar>(R.id.toolbar)?.apply {
-//			navigationIcon = when (navigationType) {
-//				NavigationType.CLOSE -> {
-//					AppCompatResources.getDrawable(baseActivity, R.drawable.abc_ic_clear_material)?.apply {
-//						DrawableCompat.setTint(this, ContextCompat.getColor(baseActivity, color ?: R.color.color_on_background))
-//					}
-//				}
-//				NavigationType.UP -> {
-//					AppCompatResources.getDrawable(baseActivity, R.drawable.abc_ic_ab_back_material)?.apply {
-//						DrawableCompat.setTint(this, ContextCompat.getColor(baseActivity, color ?: R.color.color_on_background))
-//					}
-//				}
-//				NavigationType.NONE -> {
-//					null
-//				}
-//			}
-//		}
+		findViewById<Toolbar>(R.id.toolbar)?.apply {
+			navigationIcon = when (navigationType) {
+				NavigationType.CLOSE -> {
+					AppCompatResources.getDrawable(baseActivity, R.drawable.abc_ic_clear_material)?.apply {
+						DrawableCompat.setTint(this, ContextCompat.getColor(baseActivity, color ?: R.color.color_on_background))
+					}
+				}
+				NavigationType.UP -> {
+					AppCompatResources.getDrawable(baseActivity, R.drawable.abc_ic_ab_back_material)?.apply {
+						DrawableCompat.setTint(this, ContextCompat.getColor(baseActivity, color ?: R.color.color_on_background))
+					}
+				}
+				NavigationType.NONE -> {
+					null
+				}
+			}
+		}
 	}
 
 	fun showToolbar(show: Boolean) {
-		//Fixme add toolbars
-//		findViewById<Toolbar>(R.id.toolbar)?.apply {
-//			visibility = if(show) View.VISIBLE else View.GONE
-//		}
+		findViewById<Toolbar>(R.id.toolbar)?.apply {
+			visibility = if(show) View.VISIBLE else View.GONE
+		}
 	}
 
 	fun setDefaultSystemBars(darkStatusBar: Boolean) {

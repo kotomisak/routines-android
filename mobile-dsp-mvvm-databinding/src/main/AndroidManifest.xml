@@ -26,9 +26,13 @@
 		android:icon="@mipmap/ic_launcher"
 		android:label="@string/app_name"
 		android:supportsRtl="true"
-		android:theme="@style/AppTheme"
+		android:theme="@style/Soulvibe.Default"
 		tools:ignore="GoogleAppIndexingWarning">
-		<activity android:name=".ui.MainActivity">
+		<activity
+			android:name=".ui.MainActivity"
+			android:screenOrientation="${screenOrientation}"
+			android:theme="@style/Soulvibe.Launcher"
+			>
 			<nav-graph android:value="@navigation/dsp_main_navigation" />
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
@@ -38,7 +42,13 @@
 			</intent-filter>
 		</activity>
 
-		<activity android:name=".ui.analyzer.AnalyzerActivity">
+		<meta-data
+			android:name="preloaded_fonts"
+			android:resource="@array/preloaded_fonts" />
+
+		<activity
+			android:name=".ui.analyzer.AnalyzerActivity"
+			android:screenOrientation="${screenOrientation}">
 			<nav-graph android:value="@navigation/analyzer_navigation" />
 		</activity>
 

@@ -30,6 +30,7 @@
 	<string name="record_time">Time</string>
 
 
+	<string name="result">analyzer result</string>
 	<string name="result_finish">Finish</string>
 	<string name="result_sample_item_frequency">%.3f</string>
 	<string name="result_sample_item_time">%.17f</string>

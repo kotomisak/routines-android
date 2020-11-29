@@ -30,7 +30,7 @@
 	<fragment
 		android:id="@+id/no_mic"
 		android:name="cz.kotox.dsp.ui.analyzer.record.NoMicFragment"
-		android:label=" "
+		android:label="@string/result"
 		tools:layout="@layout/no_microphone_fragment">
 
 		<action

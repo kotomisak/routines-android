@@ -26,7 +26,7 @@ interface AnalyzerResultView {
 
 class AnalyzerResultFragment  @Inject constructor() : BaseAnalyzerFragment<AnalyzerResultViewModel, AnalyzerResultFragmentBinding>(
 		R.layout.analyzer_result_fragment,
-		NavigationType.CLOSE
+		NavigationType.UP
 ), AnalyzerResultView {
 
 	override val resultListAdapter: DataBoundAdapter<VoiceSample> = DataBoundAdapter(this, R.layout.item_audio_sample, BR.item, object : DiffUtil.ItemCallback<VoiceSample>() {

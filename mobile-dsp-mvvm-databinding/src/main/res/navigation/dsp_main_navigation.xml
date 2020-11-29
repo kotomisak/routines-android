@@ -8,7 +8,6 @@
 	<fragment
 		android:id="@+id/dsp_home"
 		android:name="cz.kotox.dsp.ui.MainFragment"
-		android:label="@string/home"
 		tools:layout="@layout/main_fragment">
 		<action
 			android:id="@+id/navigate_to_analyzer"

@@ -17,6 +17,8 @@
 		android:id="@+id/linearLayout"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
+		android:paddingTop="?actionBarSize"
+		app:fitSystemWindowInsets="@{true}"
 		tools:ignore="MissingDefaultResource"
 		tools:layout_editor_absoluteY="25dp">
 
@@ -32,10 +34,10 @@
 			app:layout_constraintStart_toStartOf="@id/keyline_start"
 			app:layout_constraintTop_toTopOf="parent" />
 
-		<Button
+		<com.google.android.material.button.MaterialButton
 			android:id="@+id/navigate_analyze_bt"
 			android:layout_width="0dp"
-			android:layout_height="0dp"
+			android:layout_height="wrap_content"
 			android:layout_marginBottom="@dimen/global_keyline_horizontal"
 			android:text="@string/analyze_action"
 			android:onClick="@{() -> view.onStartVoiceAnalysis()}"
@@ -49,14 +51,14 @@
 			android:layout_width="wrap_content"
 			android:layout_height="match_parent"
 			android:orientation="vertical"
-			app:layout_constraintGuide_begin="@dimen/global_keyline_horizontal" />
+			app:layout_constraintGuide_begin="32dp" />
 
 		<androidx.constraintlayout.widget.Guideline
 			android:id="@+id/keyline_end"
 			android:layout_width="wrap_content"
 			android:layout_height="match_parent"
 			android:orientation="vertical"
-			app:layout_constraintGuide_end="@dimen/global_keyline_horizontal" />
+			app:layout_constraintGuide_end="32dp" />
 
 		<androidx.constraintlayout.widget.Guideline
 			android:id="@+id/keyline_two_quarters_vertical"

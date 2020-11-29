@@ -85,7 +85,7 @@ class MainFragment @Inject constructor(
 		val appNavigator: AppNavigator
 ) : BasePermissionFragmentViewModel<MainViewModel, MainFragmentBinding>(
 		R.layout.main_fragment,
-		NavigationType.CLOSE
+		NavigationType.NONE
 ), MainFragmentView {
 
 	override val viewModel: MainViewModel by viewModels()
